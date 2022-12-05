@@ -1,10 +1,11 @@
 package view;
 
-import style.MyBorderFactory;
+import controller.LogonRegisterCtrl;
 import style.StyleCtrl;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class RegisterFrm extends MyBootFrame{
 
@@ -21,7 +22,13 @@ public class RegisterFrm extends MyBootFrame{
         new JLabel("密码"),
         new JLabel("确认密码"),
     };
-    private JLabel[] errorLabels = new JLabel[5];
+    private JLabel[] errorLabels = new JLabel[] {
+            new JLabel("姓名不合法"),
+            new JLabel("学工号不合法"),
+            new JLabel("邮箱不合法"),
+            new JLabel("密码不合法"),
+            new JLabel("两次输入密码不一致"),
+    };
     private JTextField[] textFields = new JTextField[]{
         new JTextField(),
         new JTextField(),
@@ -48,18 +55,44 @@ public class RegisterFrm extends MyBootFrame{
             y += WIDGET_GAP;
         }
 
-        int fieldWidth = this.getWidth() - 2 * WIDGET_X - 5;
+        int fieldWidth = this.getWidth() - 2 * WIDGET_X - 3;
         y = WIDGET_Y + 30;
         for(JTextField textField : textFields) {
             //textField.setBorder(BorderFactory.createTitledBorder(MyBorderFactory.createRectBorder(), "姓名"));
-            textField.setBounds(WIDGET_X - 5, y, fieldWidth, FIELD_HEIGHT);
+            textField.setBounds(WIDGET_X - 3, y, fieldWidth, FIELD_HEIGHT);
             container.add(textField);
             y += WIDGET_GAP;
         }
 
+        y = WIDGET_Y;
+        fieldWidth -= 5;
+        for(JLabel label : errorLabels) {
+            label.setBounds(WIDGET_X, y, fieldWidth, 30);
+            label.setVerticalAlignment(JLabel.BOTTOM);
+            label.setHorizontalAlignment(JLabel.RIGHT);
+            label.setForeground(Color.RED);
+            label.setVisible(false);
+            container.add(label);
+            y += WIDGET_GAP;
+        }
 
+        JButton buttonRegister = new JButton("注册");
+        buttonRegister.addActionListener(activeEvent -> {
+            this.enWaitMode();
+            LogonRegisterCtrl.timeoutWakeupTest(RegisterFrm.this);
+        });
+        buttonRegister.setBounds(WIDGET_X - 3, WIDGET_Y + textLabels.length * WIDGET_GAP + 50, fieldWidth + 5, 30);
+        container.add(buttonRegister);
+    }
 
+    @Override
+    public void enWaitMode() {
+        this.setEnabled(false);
+    }
 
+    @Override
+    public void disWaitMode() {
+        this.setEnabled(true);
     }
 
     public static void main(String[] args) {
