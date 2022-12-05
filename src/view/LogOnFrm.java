@@ -118,4 +118,14 @@ public class LogOnFrm extends MyBootFrame {
             }
         });
     }
+
+    @Override
+    public void enWaitMode() {
+        this.setEnabled(false);
+    }
+
+    @Override
+    public void disWaitMode() {
+        this.setEnabled(true);
+    }
 }
