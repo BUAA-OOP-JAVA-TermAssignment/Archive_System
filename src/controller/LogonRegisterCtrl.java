@@ -8,13 +8,15 @@ import view.RegisterFrm;
 import javax.swing.*;
 
 public class LogonRegisterCtrl {
+    static {
+        StyleCtrl.init();
+    }
     private final static LogOnFrm logOnFrm = new LogOnFrm();
     private final static RegisterFrm registerFrm = new RegisterFrm();
     public static final int LOGON = 0, REGISTER = 1, RUNNING = 2;
 
     private static int status = 0;
     public static void main(String[] args) {
-        StyleCtrl.setStyle(StyleCtrl.DARK);
         logOnFrm.setVisible(true);
     }
 

@@ -1,5 +1,6 @@
 package view;
 
+import controller.Closer;
 import style.StyleCtrl;
 
 
@@ -18,8 +19,9 @@ abstract public class MyFrame extends JFrame {
         this.setResizable(true);
         this.setMinimumSize(new Dimension(500, 500));
 
-        // 因为设置了点叉关闭，所以页面必须要有返回键。
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        // 使用关闭器关闭
+        this.addWindowListener(Closer.getConfirmCloser());
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
 
         // 设置菜单栏

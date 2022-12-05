@@ -1,5 +1,6 @@
 package view;
 
+import controller.Closer;
 import controller.LogonRegisterCtrl;
 import style.StyleCtrl;
 
@@ -27,6 +28,8 @@ public class LogOnFrm extends MyBootFrame {
     }
 
     private void initComponents() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         JPanel jPanelSelectUserType = new JPanel();
         JComboBox<String> jComboBoxSelectUserType = new JComboBox<String>();
         // 登陆界面输入用户名字的label
