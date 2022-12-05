@@ -1,13 +1,20 @@
 package view;
 
+import style.StyleCtrl;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LogOnFrm {
-    // todo: 登录不需要继承MyFrame
+public class LogOnFrm extends MyBootFrame {
+    private static final int FRAME_WIDTH = 450;
+    private static final int FRAME_HEIGHT = 350;
+    private static final int WIDGET_X = 80;
+    private static final int WIDGET_Y = 50;
+    private static final int WIDGET_GAP = 60;
+    private static final int FIELD_HEIGHT = 30;
     public LogOnFrm() {
         Font font = new Font("Dialog", Font.PLAIN, 12);
         java.util.Enumeration keys = UIManager.getDefaults().keys();
@@ -22,77 +29,93 @@ public class LogOnFrm {
     }
 
     private void initComponents() {
-        //todo：注释先不管，一些变量没加进来，主要看看后续能否简化
-        javax.swing.ButtonGroup buttonGroup1 = new javax.swing.ButtonGroup();
-        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
-        userNameTxt = new javax.swing.JFormattedTextField();
-        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
-        jrb_student = new javax.swing.JRadioButton();
-        jrb_admin = new javax.swing.JRadioButton();
-        javax.swing.JButton jb_logOn = new javax.swing.JButton();
-        javax.swing.JButton jb_reset = new javax.swing.JButton();
-        passwordTxt = new javax.swing.JPasswordField();
-//        //todo：离谱缩进前面都懂了
-//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-//        setTitle("\u7528\u6237\u767b\u5f55");
-//        setResizable(false);
+        JPanel jPanelSelectUserType = new JPanel();
+        JComboBox<String> jComboBoxSelectUserType = new JComboBox<String>();
+        // 登陆界面输入用户名字的label
+        JLabel jLabelOfUserName = new JLabel();
+        // 登陆界面输入用户密码的label
+        JLabel jLabelOfPassword = new JLabel();
 
-        //todo：以下的路径都需要重新配图片
-        jLabel1.setFont(new java.awt.Font("隶书", 1, 24));
-        jLabel1
-                .setIcon(new javax.swing.ImageIcon(
-                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\sys.png")); // NOI18N
-        jLabel1.setText("\u5b66\u751f\u9009\u8bfe\u7cfb\u7edf");
+        JTextField jTextField = new JTextField();
+        JPasswordField jPasswordField = new JPasswordField();
+        JLabel jLabelOfUserType = new JLabel();
+        JButton jButtonLogOn = new JButton();
+        JButton jButtonReset = new JButton();
 
-        jLabel2
-                .setIcon(new javax.swing.ImageIcon(
-                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\userName.png")); // NOI18N
-        jLabel2.setText("\u8d26\u53f7");
 
-        jLabel3
-                .setIcon(new javax.swing.ImageIcon(
-                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\password.png")); // NOI18N
-        jLabel3.setText("\u5bc6\u7801");
+    //todo：以下的路径都需要重新配图片
 
-        buttonGroup1.add(jrb_student);
-        jrb_student.setText("\u5b66\u751f");
-        jrb_student
-                .setIcon(new javax.swing.ImageIcon(
-                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\student.png")); // NOI18N
+        jLabelOfUserName.setIcon(new ImageIcon("XXX")); // NOI18N
+        jLabelOfUserName.setText("用户");
 
-        buttonGroup1.add(jrb_admin);
-        jrb_admin.setText("\u7ba1\u7406\u5458");
-        jrb_admin
-                .setIcon(new javax.swing.ImageIcon(
-                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\admin.png")); // NOI18N
+        jLabelOfPassword.setIcon(new ImageIcon("XXX")); // NOI18N
+        jLabelOfPassword.setText("密码");
 
-//        jb_logOn
-//                .setIcon(new javax.swing.ImageIcon(
-//                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\login.png")); // NOI18N
-//        jb_logOn.setText("\u767b\u5f55");
-//        jb_logOn.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jb_logOnActionPerformed(evt);
-//            }
-//        });
-//
-//        jb_reset
-//                .setIcon(new javax.swing.ImageIcon(
-//                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\reset.png")); // NOI18N
-//        jb_reset.setText("\u91cd\u7f6e");
-//        jb_reset.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jb_resetActionPerformed(evt);
-//            }
-//        });
+        jLabelOfUserType.setIcon(new ImageIcon("XXX"));
+        jLabelOfUserType.setText("用户类型");
+        jComboBoxSelectUserType.addItem("-请选择-");
+        jComboBoxSelectUserType.addItem("访客");
+        jComboBoxSelectUserType.addItem("管理员");
+
+        jPanelSelectUserType.add(jLabelOfUserType);
+        jPanelSelectUserType.add(jComboBoxSelectUserType);
+
+
+        jButtonLogOn.setIcon(new ImageIcon("XXX")); // NOI18N
+        jButtonLogOn.setText("登录");
+        jButtonLogOn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                System.out.println("Click log on button");
+            }
+        });
+
+        jButtonReset.setIcon(new ImageIcon("XXX")); // NOI18N
+        jButtonReset.setText("重置");
+        jButtonReset.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                System.out.println("LogOn:Click reset button");
+            }
+        });
+
+        this.setTitle("用户登录");
+        this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        this.setLocationRelativeTo(null);
+
+        Container container = this.getContentPane();
+        addLabels(jLabelOfUserName,container,WIDGET_GAP);
+        addLabels(jLabelOfPassword,container,2*WIDGET_GAP);
+        addLabels(jLabelOfUserType,container,3*WIDGET_GAP);
+        addContent(jTextField,container,this.getWidth() - 2 * WIDGET_X - 5,WIDGET_GAP+30);
+        addContent(jPasswordField,container,this.getWidth() - 2 * WIDGET_X - 5,2*WIDGET_GAP+30);
+        jComboBoxSelectUserType.setBounds(WIDGET_X-5,3*WIDGET_GAP+30,this.getWidth() - 2 * WIDGET_X - 5,FIELD_HEIGHT);
+        this.add(jComboBoxSelectUserType);
+
+        jButtonLogOn.setBounds(WIDGET_X - 5,4*WIDGET_GAP+30,this.getWidth() - 4 * WIDGET_X - 5, FIELD_HEIGHT);
+        jButtonReset.setBounds(FRAME_WIDTH/2 + 5,4*WIDGET_GAP+30,this.getWidth() - 4 * WIDGET_X - 5, FIELD_HEIGHT);
+        this.add(jButtonReset);
+        this.add(jButtonLogOn);
+
 
     }
-//    private void jb_resetActionPerformed(java.awt.event.ActionEvent evt) {
-//        this.resetValue();
-//    }
-    private javax.swing.JRadioButton jrb_admin;
-    private javax.swing.JRadioButton jrb_student;
-    private javax.swing.JPasswordField passwordTxt;
-    private javax.swing.JFormattedTextField userNameTxt;
+
+    private void addLabels(JLabel label, Container container, int y){
+        label.setBounds(WIDGET_X, y, 100, 30);
+        label.setVerticalAlignment(JLabel.BOTTOM);
+        label.setHorizontalAlignment(JLabel.LEFT);
+        container.add(label);
+    }
+
+    private void addContent(JTextField textField, Container container,int x,int y){
+        textField.setBounds(WIDGET_X - 5, y, x, FIELD_HEIGHT);
+        container.add(textField);
+    }
+
+    public static void main(String[] args) {
+        StyleCtrl.setStyle(StyleCtrl.DARCULA);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LogOnFrm().setVisible(true);
+            }
+        });
+    }
 }
