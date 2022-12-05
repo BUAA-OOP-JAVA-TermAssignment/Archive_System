@@ -1,4 +1,4 @@
-package controller;
+package style;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -6,6 +6,8 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 
 // 程序启动即工作，类方法
 public class StyleCtrl {

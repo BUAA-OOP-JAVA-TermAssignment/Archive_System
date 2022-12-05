@@ -1,6 +1,6 @@
 package view;
 
-import controller.StyleCtrl;
+import style.StyleCtrl;
 
 
 import javax.swing.*;
