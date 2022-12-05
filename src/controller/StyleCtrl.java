@@ -7,6 +7,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 
+// 程序启动即工作，类方法
 public class StyleCtrl {
     final public static int LIGHT = 0;
     final public static int INTELLIJ = 1;
@@ -18,7 +19,7 @@ public class StyleCtrl {
     private static FlatDarculaLaf flatDarculaLaf = null;
 
     public static void init() {
-        setStyle(DARCULA);
+        setStyle(INTELLIJ);
     }
 
     public static void setStyle(int styleType) {
