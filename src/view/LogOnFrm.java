@@ -11,8 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LogOnFrm extends MyBootFrame {
-    private static final int FRAME_WIDTH = 450;
-    private static final int FRAME_HEIGHT = 550;
+    private static final int FRAME_WIDTH = 350;
+    private static final int FRAME_HEIGHT = 450;
     private static final int WIDGET_X = 40;
     private static final int WIDGET_Y = 60;
     private static final int WIDGET_GAP = 60;
@@ -88,11 +88,11 @@ public class LogOnFrm extends MyBootFrame {
         addLabels(jLabelOfUserType,container,3*WIDGET_GAP);
         addContent(jTextField,container,fieldWidth,WIDGET_GAP+30);
         addContent(jPasswordField,container,fieldWidth,2*WIDGET_GAP+30);
-        jComboBoxSelectUserType.setBounds(WIDGET_X-3,3*WIDGET_GAP+30,fieldWidth,FIELD_HEIGHT);
+        jComboBoxSelectUserType.setBounds(WIDGET_X,3*WIDGET_GAP+30,fieldWidth,FIELD_HEIGHT);
         this.add(jComboBoxSelectUserType);
 
-        jButtonLogOn.setBounds(FRAME_WIDTH/2 + 5,4*WIDGET_GAP+30,fieldWidth-2*WIDGET_X-3, FIELD_HEIGHT);
-        jButtonRegister.setBounds(WIDGET_X - 5,4*WIDGET_GAP+30,fieldWidth-2*WIDGET_X-3, FIELD_HEIGHT);
+        jButtonRegister.setBounds(FRAME_WIDTH/2 + 5,4*WIDGET_GAP+30,(FRAME_WIDTH-2*WIDGET_X)/2-8, FIELD_HEIGHT);
+        jButtonLogOn.setBounds(WIDGET_X - 5,4*WIDGET_GAP+30,(FRAME_WIDTH-2*WIDGET_X)/2-8, FIELD_HEIGHT);
         this.add(jButtonRegister);
         this.add(jButtonLogOn);
 
@@ -119,7 +119,7 @@ public class LogOnFrm extends MyBootFrame {
     }
 
     private void addContent(JTextField textField, Container container,int x,int y){
-        textField.setBounds(WIDGET_X - 5, y, x, FIELD_HEIGHT);
+        textField.setBounds(WIDGET_X, y, x, FIELD_HEIGHT);
         container.add(textField);
     }
 
@@ -135,12 +135,9 @@ public class LogOnFrm extends MyBootFrame {
 
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARK);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LogOnFrm().setVisible(true);
-            }
-        });
-    }
 
+        LogOnFrm LogOnFrmTest = new LogOnFrm();
+        LogOnFrmTest.setVisible(true);
+    }
 
 }
