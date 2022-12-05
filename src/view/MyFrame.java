@@ -1,15 +1,11 @@
 package view;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
 import controller.StyleCtrl;
-import jdk.jfr.Event;
 
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 abstract public class MyFrame extends JFrame {
     final private JPanel panel = new JPanel();
@@ -29,7 +25,7 @@ abstract public class MyFrame extends JFrame {
         // 设置菜单栏
         this.setJMenuBar(menuBar);
 
-        JMenu menuAccount = new JMenu("账户");
+        JMenu menuAccount = new JMenu("个人账户");
         menuBar.add(menuAccount);
 
         JMenuItem menuItemSelfCentre = new JMenuItem("个人中心", null);
@@ -38,6 +34,7 @@ abstract public class MyFrame extends JFrame {
             System.out.println("Menu Clicked");
             //TODO:添加打开个人中心的逻辑；
         });
+        // 菜单快捷键
         menuItemSelfCentre.setAccelerator(KeyStroke.getKeyStroke('a'));
 
 
