@@ -7,11 +7,8 @@ public class HelloWorld {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("127.0.0.1", 8888);
         OutputStream os = socket.getOutputStream();
-        os.write("Hello?".getBytes());
-        InputStream is = socket.getInputStream();
-        byte[] bytes = new byte[1024];
-        int len = is.read(bytes);
-        System.out.println(new String(bytes, 0, len));
+        os.write("pcpa\n".getBytes());
+        os.write("123456\n".getBytes());
         socket.close();
     }
 }
