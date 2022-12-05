@@ -22,7 +22,7 @@ public class LogOnFrm {
     }
 
     private void initComponents() {
-        //todo：爆红先不管，一些变量没加进来，主要看看后续能否简化
+        //todo：注释先不管，一些变量没加进来，主要看看后续能否简化
         javax.swing.ButtonGroup buttonGroup1 = new javax.swing.ButtonGroup();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
@@ -33,10 +33,10 @@ public class LogOnFrm {
         javax.swing.JButton jb_logOn = new javax.swing.JButton();
         javax.swing.JButton jb_reset = new javax.swing.JButton();
         passwordTxt = new javax.swing.JPasswordField();
-        //todo：离谱缩进前面都懂了
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("\u7528\u6237\u767b\u5f55");
-        setResizable(false);
+//        //todo：离谱缩进前面都懂了
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//        setTitle("\u7528\u6237\u767b\u5f55");
+//        setResizable(false);
 
         //todo：以下的路径都需要重新配图片
         jLabel1.setFont(new java.awt.Font("隶书", 1, 24));
@@ -67,24 +67,32 @@ public class LogOnFrm {
                 .setIcon(new javax.swing.ImageIcon(
                         "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\admin.png")); // NOI18N
 
-        jb_logOn
-                .setIcon(new javax.swing.ImageIcon(
-                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\login.png")); // NOI18N
-        jb_logOn.setText("\u767b\u5f55");
-        jb_logOn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_logOnActionPerformed(evt);
-            }
-        });
+//        jb_logOn
+//                .setIcon(new javax.swing.ImageIcon(
+//                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\login.png")); // NOI18N
+//        jb_logOn.setText("\u767b\u5f55");
+//        jb_logOn.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jb_logOnActionPerformed(evt);
+//            }
+//        });
+//
+//        jb_reset
+//                .setIcon(new javax.swing.ImageIcon(
+//                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\reset.png")); // NOI18N
+//        jb_reset.setText("\u91cd\u7f6e");
+//        jb_reset.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jb_resetActionPerformed(evt);
+//            }
+//        });
 
-        jb_reset
-                .setIcon(new javax.swing.ImageIcon(
-                        "D:\\Workspaces\\MyEclipse 8.5\\CourseSys\\src\\com\\jakey\\view\\image\\reset.png")); // NOI18N
-        jb_reset.setText("\u91cd\u7f6e");
-        jb_reset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_resetActionPerformed(evt);
-            }
-        });
     }
+//    private void jb_resetActionPerformed(java.awt.event.ActionEvent evt) {
+//        this.resetValue();
+//    }
+    private javax.swing.JRadioButton jrb_admin;
+    private javax.swing.JRadioButton jrb_student;
+    private javax.swing.JPasswordField passwordTxt;
+    private javax.swing.JFormattedTextField userNameTxt;
 }
