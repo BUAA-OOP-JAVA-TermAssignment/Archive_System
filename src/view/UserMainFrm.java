@@ -1,5 +1,6 @@
 package view;
 
+import controller.UserData;
 import style.StyleCtrl;
 
 import javax.swing.*;
@@ -9,7 +10,17 @@ public class UserMainFrm extends MyFrame{
     private String id;
     private String email;
     private String password;
+    private String downloadNum;
 
+    public UserMainFrm(){
+        UserData userData = UserData.getInstance();
+        String[] info = userData.getInfo();
+        this.userName = info[0];
+        this.id = info[1];
+        this.email = info[2];
+        this.password = info[3];
+        this.downloadNum = info[4];
+    }
 
     private JLabel[] textLabels = new JLabel[]{
             new JLabel("姓名"),
@@ -26,6 +37,9 @@ public class UserMainFrm extends MyFrame{
             new JPasswordField(),
             new JPasswordField(),
     };
+
+
+
 
 
     public static void main(String[] args){
