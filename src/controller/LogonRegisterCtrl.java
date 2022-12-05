@@ -36,14 +36,5 @@ public class LogonRegisterCtrl {
         status = LOGON;
     }
 
-    public static void timeoutWakeupTest(MyBootFrame sourceFrame) {
-        new Thread(() -> {
-            try {
-                Thread.sleep(3000);
-            }catch (Exception e) {
-                System.out.println("!!! LogonRegisterCtrl : Thread sleep error");
-            }
-            sourceFrame.disWaitMode();
-        }).start();
-    }
+
 }

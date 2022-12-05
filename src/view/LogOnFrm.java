@@ -2,6 +2,7 @@ package view;
 
 import controller.Closer;
 import controller.LogonRegisterCtrl;
+import controller.NetworkCtrl;
 import style.StyleCtrl;
 
 import javax.swing.*;
@@ -65,7 +66,7 @@ public class LogOnFrm extends MyBootFrame {
         jButtonLogOn.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click log on button");
             this.enWaitMode();
-            LogonRegisterCtrl.timeoutWakeupTest(LogOnFrm.this);
+            NetworkCtrl.timeoutWakeupTest(LogOnFrm.this);
         });
 
         jButtonRegister.setIcon(new ImageIcon("XXX")); // NOI18N

@@ -5,7 +5,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Closer {
-    //TODO:记得把初始值改回false
+    //TODO:把这一项移入到UserData中
     private static boolean hasUserInfoChange = true;
 
     private final static WindowAdapter confirmCloser = new WindowAdapter() {

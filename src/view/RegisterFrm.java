@@ -1,6 +1,7 @@
 package view;
 
 import controller.LogonRegisterCtrl;
+import controller.NetworkCtrl;
 import style.StyleCtrl;
 
 import javax.swing.*;
@@ -89,7 +90,7 @@ public class RegisterFrm extends MyBootFrame{
         JButton buttonRegister = new JButton("注册");
         buttonRegister.addActionListener(activeEvent -> {
             this.enWaitMode();
-            LogonRegisterCtrl.timeoutWakeupTest(RegisterFrm.this);
+            NetworkCtrl.timeoutWakeupTest(RegisterFrm.this);
         });
         buttonRegister.setBounds(WIDGET_X - 3, WIDGET_Y + textLabels.length * WIDGET_GAP + 50, fieldWidth + 5, 30);
         container.add(buttonRegister);
