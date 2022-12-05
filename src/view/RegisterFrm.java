@@ -6,6 +6,9 @@ import style.StyleCtrl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class RegisterFrm extends MyBootFrame{
 
@@ -40,6 +43,13 @@ public class RegisterFrm extends MyBootFrame{
         this.setTitle("用户注册");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                LogonRegisterCtrl.changeRegToLog();
+            }
+        });
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         int y = WIDGET_Y;
 
@@ -96,8 +106,7 @@ public class RegisterFrm extends MyBootFrame{
     }
 
     public static void main(String[] args) {
-        StyleCtrl.setStyle(StyleCtrl.DARCULA);
-
+        StyleCtrl.setStyle(StyleCtrl.DARK);
         RegisterFrm registerFrmTest = new RegisterFrm();
         registerFrmTest.setVisible(true);
     }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.LogonRegisterCtrl;
 import style.StyleCtrl;
 
 import javax.swing.*;
@@ -10,9 +11,9 @@ import java.awt.event.ActionListener;
 
 public class LogOnFrm extends MyBootFrame {
     private static final int FRAME_WIDTH = 450;
-    private static final int FRAME_HEIGHT = 400;
-    private static final int WIDGET_X = 80;
-    private static final int WIDGET_Y = 50;
+    private static final int FRAME_HEIGHT = 550;
+    private static final int WIDGET_X = 40;
+    private static final int WIDGET_Y = 60;
     private static final int WIDGET_GAP = 60;
     private static final int FIELD_HEIGHT = 30;
 
@@ -58,19 +59,17 @@ public class LogOnFrm extends MyBootFrame {
 
         jButtonLogOn.setIcon(new ImageIcon("XXX")); // NOI18N
         jButtonLogOn.setText("登录");
-        jButtonLogOn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                System.out.println("LogOnFrm : Click log on button");
-            }
+        jButtonLogOn.addActionListener(evt -> {
+            System.out.println("LogOnFrm : Click log on button");
+            this.enWaitMode();
+            LogonRegisterCtrl.timeoutWakeupTest(LogOnFrm.this);
         });
 
         jButtonRegister.setIcon(new ImageIcon("XXX")); // NOI18N
         jButtonRegister.setText("注册");
-        jButtonRegister.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                System.out.println("LogOn:Click register button");
-
-            }
+        jButtonRegister.addActionListener(evt -> {
+            System.out.println("LogOnFrm : Click register button");
+            LogonRegisterCtrl.changeLogToReg();
         });
 
         this.setTitle("用户登录");
@@ -132,7 +131,7 @@ public class LogOnFrm extends MyBootFrame {
     }
 
     public static void main(String[] args) {
-        StyleCtrl.setStyle(StyleCtrl.DARCULA);
+        StyleCtrl.setStyle(StyleCtrl.DARK);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LogOnFrm().setVisible(true);

@@ -28,7 +28,6 @@ public abstract class MyInterFrame extends JInternalFrame {
     }
 
     public static void main(String[] args) {
-        StyleCtrl.setStyle(StyleCtrl.DARK);
         MyFrame testFrame = new MyFrame() {
         };
         MyInterFrame testInterFrame = new MyInterFrame() {

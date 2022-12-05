@@ -21,7 +21,7 @@ public class StyleCtrl {
     private static FlatDarculaLaf flatDarculaLaf = null;
 
     public static void init() {
-        setStyle(INTELLIJ);
+        setStyle(DARK);
     }
 
     public static void setStyle(int styleType) {
