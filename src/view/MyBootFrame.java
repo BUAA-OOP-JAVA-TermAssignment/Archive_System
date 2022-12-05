@@ -2,12 +2,10 @@ package view;
 
 import javax.swing.*;
 
-abstract public class MyBootFrame extends JFrame {
+abstract public class MyBootFrame extends JFrame implements WaitModeAble{
     public MyBootFrame(){
         super();
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setResizable(false);
-
     }
 }
