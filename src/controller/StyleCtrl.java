@@ -8,16 +8,30 @@ import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.*;
 
 public class StyleCtrl {
+    final public static int LIGHT = 0;
+    final public static int INTELLIJ = 1;
+    final public static int DARK = 2;
+    final public static int DARCULA = 4;
     private static FlatLightLaf flatLightLaf = null;
     private static FlatIntelliJLaf flatIntelliJLaf = null;
     private static FlatDarkLaf flatDarkLaf = null;
     private static FlatDarculaLaf flatDarculaLaf = null;
 
     public static void init() {
-        applyDark();
+        setStyle(DARCULA);
     }
 
-    public static void applyLight() {
+    public static void setStyle(int styleType) {
+        switch (styleType) {
+            case LIGHT -> applyLight();
+            case INTELLIJ -> applyIntelliJ();
+            case DARK -> applyDark();
+            case DARCULA -> applyDarcula();
+            default -> System.out.println("!!! StyleCtrl : undefined style code");
+        }
+    }
+
+    private static void applyLight() {
         if(flatLightLaf == null) {
             flatLightLaf = new FlatLightLaf();
         }
@@ -25,11 +39,11 @@ public class StyleCtrl {
         try {
             UIManager.setLookAndFeel(flatDarculaLaf);
         } catch (UnsupportedLookAndFeelException e) {
-            System.out.println("Style Set Error :" + e);
+            System.out.println("!!! StyleCtrl : style set error :" + e);
         }
     }
 
-    public static void applyIntelliJ() {
+    private static void applyIntelliJ() {
         if(flatIntelliJLaf == null) {
             flatIntelliJLaf = new FlatIntelliJLaf();
         }
@@ -37,11 +51,11 @@ public class StyleCtrl {
         try {
             UIManager.setLookAndFeel(flatIntelliJLaf);
         } catch (UnsupportedLookAndFeelException e) {
-            System.out.println("Style Set Error :" + e);
+            System.out.println("!!! StyleCtrl : style set error :" + e);
         }
     }
 
-    public static void applyDark() {
+    private static void applyDark() {
         if(flatDarkLaf == null) {
             flatDarkLaf = new FlatDarkLaf();
         }
@@ -49,11 +63,11 @@ public class StyleCtrl {
         try {
             UIManager.setLookAndFeel(flatDarkLaf);
         } catch (UnsupportedLookAndFeelException e) {
-            System.out.println("Style Set Error :" + e);
+            System.out.println("!!! StyleCtrl : style set error :" + e);
         }
     }
 
-    public static void applyDarcula() {
+    private static void applyDarcula() {
         if(flatDarculaLaf == null) {
             flatDarculaLaf = new FlatDarculaLaf();
         }
@@ -61,7 +75,7 @@ public class StyleCtrl {
         try {
             UIManager.setLookAndFeel(flatDarculaLaf);
         } catch (UnsupportedLookAndFeelException e) {
-            System.out.println("Style Set Error :" + e);
+            System.out.println("!!! StyleCtrl : style set error :" + e);
         }
     }
 }

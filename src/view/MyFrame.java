@@ -31,7 +31,7 @@ abstract public class MyFrame extends JFrame {
         JMenuItem menuItemSelfCentre = new JMenuItem("个人中心", null);
         menuAccount.add(menuItemSelfCentre);
         menuItemSelfCentre.addActionListener(actionEvent -> {
-            System.out.println("Menu Clicked");
+            System.out.println("MyFrame : Menu Clicked");
             //TODO:添加打开个人中心的逻辑；
         });
         // 菜单快捷键
@@ -67,6 +67,7 @@ abstract public class MyFrame extends JFrame {
 
         MyFrame testFrm = new MyFrame() {
         };
+
 
         testFrm.setVisible(true);
     }

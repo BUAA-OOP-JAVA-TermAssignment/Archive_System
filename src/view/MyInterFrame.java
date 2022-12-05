@@ -22,6 +22,9 @@ public abstract class MyInterFrame extends JInternalFrame {
         this.setResizable(true);
         // 设置默认大小，请在子类中覆盖
         this.setSize(600, 400);
+
+
+        //TODO:打算尝试在小窗口中使用GroupLayout，能实现不错的效果，有没有GridBagLayout那么复杂，但也可以不用，丑点就丑点了
     }
 
     public static void main(String[] args) {
