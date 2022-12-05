@@ -10,21 +10,18 @@ import java.awt.event.ActionListener;
 
 public class LogOnFrm extends MyBootFrame {
     private static final int FRAME_WIDTH = 450;
-    private static final int FRAME_HEIGHT = 350;
+    private static final int FRAME_HEIGHT = 400;
     private static final int WIDGET_X = 80;
     private static final int WIDGET_Y = 50;
     private static final int WIDGET_GAP = 60;
     private static final int FIELD_HEIGHT = 30;
+
+    private JLabel[] errorLabels = new JLabel[] {
+            new JLabel("请输入正确的姓名/学工号/邮箱"),
+            new JLabel("密码错误"),
+            new JLabel("请选择登陆身份"),
+    };
     public LogOnFrm() {
-        Font font = new Font("Dialog", Font.PLAIN, 12);
-        java.util.Enumeration keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get(key);
-            if (value instanceof javax.swing.plaf.FontUIResource) {
-                UIManager.put(key, font);
-            }
-        }
         initComponents();
     }
 
@@ -40,11 +37,9 @@ public class LogOnFrm extends MyBootFrame {
         JPasswordField jPasswordField = new JPasswordField();
         JLabel jLabelOfUserType = new JLabel();
         JButton jButtonLogOn = new JButton();
-        JButton jButtonReset = new JButton();
-
+        JButton jButtonRegister = new JButton();
 
     //todo：以下的路径都需要重新配图片
-
         jLabelOfUserName.setIcon(new ImageIcon("XXX")); // NOI18N
         jLabelOfUserName.setText("用户");
 
@@ -65,15 +60,16 @@ public class LogOnFrm extends MyBootFrame {
         jButtonLogOn.setText("登录");
         jButtonLogOn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                System.out.println("Click log on button");
+                System.out.println("LogOnFrm : Click log on button");
             }
         });
 
-        jButtonReset.setIcon(new ImageIcon("XXX")); // NOI18N
-        jButtonReset.setText("重置");
-        jButtonReset.addActionListener(new ActionListener() {
+        jButtonRegister.setIcon(new ImageIcon("XXX")); // NOI18N
+        jButtonRegister.setText("注册");
+        jButtonRegister.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                System.out.println("LogOn:Click reset button");
+                System.out.println("LogOn:Click register button");
+
             }
         });
 
@@ -81,19 +77,34 @@ public class LogOnFrm extends MyBootFrame {
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
 
+        int y = WIDGET_Y;
+        int fieldWidth = this.getWidth() - 2 * WIDGET_X - 3;
+
         Container container = this.getContentPane();
         addLabels(jLabelOfUserName,container,WIDGET_GAP);
         addLabels(jLabelOfPassword,container,2*WIDGET_GAP);
         addLabels(jLabelOfUserType,container,3*WIDGET_GAP);
-        addContent(jTextField,container,this.getWidth() - 2 * WIDGET_X - 5,WIDGET_GAP+30);
-        addContent(jPasswordField,container,this.getWidth() - 2 * WIDGET_X - 5,2*WIDGET_GAP+30);
-        jComboBoxSelectUserType.setBounds(WIDGET_X-5,3*WIDGET_GAP+30,this.getWidth() - 2 * WIDGET_X - 5,FIELD_HEIGHT);
+        addContent(jTextField,container,fieldWidth,WIDGET_GAP+30);
+        addContent(jPasswordField,container,fieldWidth,2*WIDGET_GAP+30);
+        jComboBoxSelectUserType.setBounds(WIDGET_X-3,3*WIDGET_GAP+30,fieldWidth,FIELD_HEIGHT);
         this.add(jComboBoxSelectUserType);
 
-        jButtonLogOn.setBounds(WIDGET_X - 5,4*WIDGET_GAP+30,this.getWidth() - 4 * WIDGET_X - 5, FIELD_HEIGHT);
-        jButtonReset.setBounds(FRAME_WIDTH/2 + 5,4*WIDGET_GAP+30,this.getWidth() - 4 * WIDGET_X - 5, FIELD_HEIGHT);
-        this.add(jButtonReset);
+        jButtonLogOn.setBounds(FRAME_WIDTH/2 + 5,4*WIDGET_GAP+30,fieldWidth-2*WIDGET_X-3, FIELD_HEIGHT);
+        jButtonRegister.setBounds(WIDGET_X - 5,4*WIDGET_GAP+30,fieldWidth-2*WIDGET_X-3, FIELD_HEIGHT);
+        this.add(jButtonRegister);
         this.add(jButtonLogOn);
+
+
+        fieldWidth -= 5;
+        for(JLabel label : errorLabels) {
+            label.setBounds(WIDGET_X, y, fieldWidth, 30);
+            label.setVerticalAlignment(JLabel.BOTTOM);
+            label.setHorizontalAlignment(JLabel.RIGHT);
+            label.setForeground(Color.RED);
+            label.setVisible(false);
+            container.add(label);
+            y += WIDGET_GAP;
+        }
 
 
     }
@@ -110,15 +121,6 @@ public class LogOnFrm extends MyBootFrame {
         container.add(textField);
     }
 
-    public static void main(String[] args) {
-        StyleCtrl.setStyle(StyleCtrl.DARCULA);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LogOnFrm().setVisible(true);
-            }
-        });
-    }
-
     @Override
     public void enWaitMode() {
         this.setEnabled(false);
@@ -128,4 +130,15 @@ public class LogOnFrm extends MyBootFrame {
     public void disWaitMode() {
         this.setEnabled(true);
     }
+
+    public static void main(String[] args) {
+        StyleCtrl.setStyle(StyleCtrl.DARCULA);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LogOnFrm().setVisible(true);
+            }
+        });
+    }
+
+
 }
