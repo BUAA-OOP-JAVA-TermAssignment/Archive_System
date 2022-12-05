@@ -1,4 +1,4 @@
 package view;
 
-public class SearchResultFrm extends MyFrame{
+public class SearchResultFrm{
 }
