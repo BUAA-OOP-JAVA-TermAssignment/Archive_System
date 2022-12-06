@@ -1,6 +1,6 @@
 package view;
 
-import controller.UserData;
+import data.UserData;
 import style.StyleCtrl;
 
 import javax.swing.*;

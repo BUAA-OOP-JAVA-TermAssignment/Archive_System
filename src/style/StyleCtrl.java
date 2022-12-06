@@ -19,6 +19,7 @@ public class StyleCtrl {
     private static FlatIntelliJLaf flatIntelliJLaf = null;
     private static FlatDarkLaf flatDarkLaf = null;
     private static FlatDarculaLaf flatDarculaLaf = null;
+    private static int style;
 
     public static void init() {
         setStyle(DARK);
@@ -32,6 +33,7 @@ public class StyleCtrl {
             case DARCULA -> applyDarcula();
             default -> System.out.println("!!! StyleCtrl : undefined style code");
         }
+        style = styleType;
     }
 
     private static void applyLight() {
@@ -80,5 +82,9 @@ public class StyleCtrl {
         } catch (UnsupportedLookAndFeelException e) {
             System.out.println("!!! StyleCtrl : style set error :" + e);
         }
+    }
+
+    public static int getStyle() {
+        return style;
     }
 }
