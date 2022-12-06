@@ -21,6 +21,7 @@ public class BriefPaperPanel extends JPanel {
     public BriefPaperPanel() {
         this.setColor();
         this.setTextStyle();
+        this.initButton();
         this.initWidgetInGridBag();
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
@@ -55,6 +56,13 @@ public class BriefPaperPanel extends JPanel {
     private void setAlignment(JLabel label, int horizontal, int vertical) {
         label.setHorizontalAlignment(horizontal);
         label.setVerticalAlignment(vertical);
+    }
+
+    private void initButton() {
+        button.addActionListener(actionEvent -> {
+            System.out.println("BriefPaperPanel : " + actionEvent.getActionCommand());
+            //TODO: 进入文档详细页面
+        });
     }
 
     private void initImage() {
@@ -190,6 +198,30 @@ public class BriefPaperPanel extends JPanel {
         testFrame.getTable().add(testInterFrame);
         testFrame.setVisible(true);
         testInterFrame.setVisible(true);
+    }
+
+    public JLabel getTitleLabel() {
+        return titleLabel;
+    }
+
+    public JLabel getAuthorLabel() {
+        return authorLabel;
+    }
+
+    public JTextArea getAbstractTextArea() {
+        return abstractTextArea;
+    }
+
+    public JLabel getKeywordsLabel() {
+        return keywordsLabel;
+    }
+
+    public JLabel getImageLabel() {
+        return imageLabel;
+    }
+
+    public JButton getButton() {
+        return button;
     }
 }
 /*

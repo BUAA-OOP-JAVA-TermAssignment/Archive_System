@@ -8,10 +8,20 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-abstract public class MyFrame extends JFrame {
+abstract public class MyFrame extends JFrame implements WaitModeAble{
     final private JPanel panel = new JPanel();
     final private JDesktopPane table = new JDesktopPane();
     final private JMenuBar menuBar = new JMenuBar();
+
+    @Override
+    public void enWaitMode() {
+        this.setEnabled(false);
+    }
+
+    @Override
+    public void disWaitMode() {
+        this.setEnabled(true);
+    }
 
     public MyFrame() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -53,6 +63,8 @@ abstract public class MyFrame extends JFrame {
         //TODO:设置一个可爱的图标
 
         //TODO:添加个人中心头像及进入按钮
+
+
     }
 
     public JDesktopPane getTable() {
