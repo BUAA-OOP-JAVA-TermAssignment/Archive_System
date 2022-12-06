@@ -6,8 +6,6 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 
 // 程序启动即工作，类方法
 public class StyleCtrl {
@@ -19,10 +17,10 @@ public class StyleCtrl {
     private static FlatIntelliJLaf flatIntelliJLaf = null;
     private static FlatDarkLaf flatDarkLaf = null;
     private static FlatDarculaLaf flatDarculaLaf = null;
-    private static int style;
+    private static int style = -1;
 
     public static void init() {
-        setStyle(DARK);
+        setStyle(INTELLIJ);
     }
 
     public static void setStyle(int styleType) {
@@ -34,6 +32,7 @@ public class StyleCtrl {
             default -> System.out.println("!!! StyleCtrl : undefined style code");
         }
         style = styleType;
+        MyColors.setColorAfterStyleChange();
     }
 
     private static void applyLight() {
