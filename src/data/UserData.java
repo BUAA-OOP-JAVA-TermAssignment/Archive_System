@@ -1,6 +1,6 @@
 package data;
 
-// å­˜æ”¾å½“å‰ç”¨æˆ·çš„æ•°æ®
+// ´æ·Åµ±Ç°ÓÃ»§µÄÊı¾İ
 public class UserData {
     private static volatile UserData instance;
     private String userName;
@@ -13,7 +13,7 @@ public class UserData {
     private UserData(){
 
     }
-    // åŒé‡æ£€æŸ¥é”å®š
+    // Ë«ÖØ¼ì²éËø¶¨
     public static UserData getInstance(){
         if(instance == null){
             synchronized (UserData.class){
@@ -34,17 +34,17 @@ public class UserData {
         this.isReady = true;
     }
 
-    // æ¯æ¬¡ä¸‹è½½åæ•°é‡+1
+    // Ã¿´ÎÏÂÔØºóÊıÁ¿+1
     public void addDownloadNum(){
         this.downloadNum = this.downloadNum + 1;
     }
 
-    // å…¶å®ƒå†…å®¹æ¿å—éœ€è¦è·å¾—ç”¨æˆ·ä¿¡æ¯æ—¶
+    // ÆäËüÄÚÈİ°å¿éĞèÒª»ñµÃÓÃ»§ĞÅÏ¢Ê±
     public String getUserName(){
         if(isReady){
             return this.userName;
         } else {
-            return "æ¸¸å®¢12138";
+            return "ÓÎ¿Í12138";
         }
     }
 
@@ -80,7 +80,7 @@ public class UserData {
         }
     }
 
-    // ä¿®æ”¹å¯†ç 
+    // ĞŞ¸ÄÃÜÂë
     public void changePassword(String newPassword){
         this.password = newPassword;
     }

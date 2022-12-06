@@ -2,6 +2,6 @@ package view;
 
 public class GuestMainFrm extends MyFrame{
     public GuestMainFrm() {
-        //TODO:æ·»åŠ æ·»åŠ ç”¨æˆ·ç‹¬æœ‰çš„èœå•å•¥çš„
+        //TODO:Ìí¼ÓÌí¼ÓÓÃ»§¶ÀÓĞµÄ²Ëµ¥É¶µÄ
     }
 }

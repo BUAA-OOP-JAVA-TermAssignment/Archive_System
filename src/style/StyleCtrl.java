@@ -7,7 +7,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 
-// ç¨‹åºå¯åŠ¨å³å·¥ä½œï¼Œç±»æ–¹æ³•
+// ³ÌĞòÆô¶¯¼´¹¤×÷£¬Àà·½·¨
 public class StyleCtrl {
     final public static int LIGHT = 0;
     final public static int INTELLIJ = 1;

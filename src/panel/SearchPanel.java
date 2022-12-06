@@ -12,8 +12,8 @@ import java.awt.event.KeyEvent;
 
 public class SearchPanel extends JPanel {
     private static final SearchPanel searchPanel= new SearchPanel();
-    private final JTextField textField = new JTextField("è¯·è¾“å…¥æœç´¢å†…å®¹");
-    private final JButton searchButton = new JButton("æœç´¢");
+    private final JTextField textField = new JTextField("ÇëÊäÈëËÑË÷ÄÚÈİ");
+    private final JButton searchButton = new JButton("ËÑË÷");
     private SearchPanel(){
         initTextField();
         initSearchButton();
@@ -37,7 +37,7 @@ public class SearchPanel extends JPanel {
     private void initSearchButton() {
         searchButton.addActionListener(actionEvent -> {
             System.out.println("SearchPanel : search button clicked");
-            //TODO:å‘ç½‘ç»œæ§åˆ¶å™¨å‘é€æœç´¢è¯·æ±‚
+            //TODO:ÏòÍøÂç¿ØÖÆÆ÷·¢ËÍËÑË÷ÇëÇó
         });
         searchButton.setFont(MyFonts.TEXT_FONT_18);
     }
@@ -51,7 +51,7 @@ public class SearchPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = borderInsets;
 
-        // æ–‡æœ¬æ¡†
+        // ÎÄ±¾¿ò
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridheight = 1;
@@ -64,7 +64,7 @@ public class SearchPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(textField, gbc);
 
-        // æŒ‰é’®
+        // °´Å¥
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.gridheight = 1;
@@ -77,7 +77,7 @@ public class SearchPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(searchButton, gbc);
 
-        // å ä½
+        // Õ¼Î»
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridheight = 1;
