@@ -102,6 +102,7 @@ public class LogOnFrm extends MyBootFrame {
 
         jTextField.addKeyListener(enterResponse);
         jPasswordField.addKeyListener(enterResponse);
+        jComboBoxSelectUserType.addKeyListener(enterResponse);
 
         Container container = this.getContentPane();
         addLabels(jLabelOfUserName,container,WIDGET_GAP);
