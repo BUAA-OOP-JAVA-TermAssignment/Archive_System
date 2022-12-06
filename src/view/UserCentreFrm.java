@@ -3,6 +3,7 @@ package view;
 import controller.LogonRegisterCtrl;
 import controller.NetworkCtrl;
 import data.UserData;
+import style.MyFonts;
 import style.StyleCtrl;
 
 import javax.swing.*;
@@ -12,16 +13,16 @@ import java.awt.event.WindowEvent;
 
 public class UserCentreFrm extends MyInterFrame{
     private static final int FRAME_WIDTH = 450;
-    private static final int FRAME_HEIGHT = 400;
-    private static final int WIDGET_X = 80;
+    private static final int FRAME_HEIGHT = 550;
+    private static final int WIDGET_X = 20;
     private static final int WIDGET_Y = 50;
-    private static final int WIDGET_GAP = 60;
-    private static final int FIELD_HEIGHT = 30;
+    private static final int WIDGET_GAP = 400;
+    private static final int FIELD_HEIGHT = 40;
 
-    private String userName = null;
-    private String id = null;
-    private String email = null;
-    private String password = null;
+    private String userName = "这里要写十个字差三个";
+    private String id = "20374090";
+    private String email = "3232572736@qq.com";
+    private String password = "123456_ABCD";
     private String downloadNum = null;
 
 
@@ -43,23 +44,19 @@ public class UserCentreFrm extends MyInterFrame{
 
     public UserCentreFrm(){
         UserData userData = UserData.getInstance();
-        if(userData.getUserName().equals("游客12138")){
-            //TODO:一个提示未加载完成的函数
-        } else{
-            this.userName = userData.getUserName();
-            this.id = userData.getId();
-            this.email = userData.getEmail();
-            this.password = userData.getPassword();
-            this.downloadNum = userData.getDownloadNum();
+//        if(userData.getUserName().equals("游客12138")){
+//            //TODO:一个提示未加载完成的函数
+//        } else{
+//            this.userName = userData.getUserName();
+//            this.id = userData.getId();
+//            this.email = userData.getEmail();
+//            this.password = userData.getPassword();
+//            this.downloadNum = userData.getDownloadNum();
             initComponents();
-        }
+//        }
     }
 
     private void initComponents(){
-
-        JLabel jLabelUserName = new JLabel();
-        jLabelUserName.setText(this.userName);
-        jLabelUserName.setBounds(WIDGET_X,20,100,50);
 
         this.setTitle("个人信息");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -68,31 +65,45 @@ public class UserCentreFrm extends MyInterFrame{
 
         Container container = this.getContentPane();
 
-        for(JLabel label : textLabels) {
-            label.setBounds(WIDGET_X, y, 100, 30);
-            label.setVerticalAlignment(JLabel.BOTTOM);
-            label.setHorizontalAlignment(JLabel.LEFT);
-            container.add(label);
-            y += WIDGET_GAP;
-        }
+        JLabel jLabelUserName = new JLabel();
+        jLabelUserName.setText(this.userName);
+        jLabelUserName.setBounds(WIDGET_X,20,WIDGET_GAP,50);
+        jLabelUserName.setFont(MyFonts.TITLE_FONT_36);
+        container.add(jLabelUserName);
 
-        int fieldWidth = this.getWidth() - 2 * WIDGET_X - 3;
-        y = WIDGET_Y + 30;
-        for(JTextField textField : textFields) {
-            //textField.setBorder(BorderFactory.createTitledBorder(MyBorderFactory.createRectBorder(), "姓名"));
-            textField.setBounds(WIDGET_X - 3, y, fieldWidth, FIELD_HEIGHT);
-            container.add(textField);
-            y += WIDGET_GAP;
-        }
+        JLabel jLabelUserId = new JLabel();
+        jLabelUserId.setText("学工号："+this.id);
+        jLabelUserId.setBounds(WIDGET_X,20+FIELD_HEIGHT,WIDGET_GAP,50);
+        jLabelUserId.setFont(MyFonts.SUB_TITLE_FONT_24);
+        container.add(jLabelUserId);
+
+        JLabel jLabelEmail = new JLabel();
+        jLabelEmail.setText("注册邮箱："+this.email);
+        jLabelEmail.setBounds(WIDGET_X,20+2*FIELD_HEIGHT,WIDGET_GAP,50);
+        jLabelEmail.setFont(MyFonts.SUB_TITLE_FONT_24);
+        container.add(jLabelEmail);
+
+        JLabel jLabelPassword = new JLabel();
+        jLabelPassword.setText("修改密码：");
+        jLabelPassword.setBounds(WIDGET_X,20+3*FIELD_HEIGHT,WIDGET_GAP,50);
+        jLabelPassword.setFont(MyFonts.SUB_TITLE_FONT_24);
+        jLabelPassword.setVisible(false);
+        container.add(jLabelPassword);
+
+        JLabel jLabelRePassword = new JLabel();
+        jLabelRePassword.setText("确认密码：");
+        jLabelRePassword.setBounds(WIDGET_X,20+4*FIELD_HEIGHT,WIDGET_GAP,50);
+        jLabelRePassword.setFont(MyFonts.SUB_TITLE_FONT_24);
+        jLabelRePassword.setVisible(false);
+        container.add(jLabelRePassword);
+
+        JButton jButtonChangePassword = new JButton();
+        jButtonChangePassword.setText("修改密码");
+        jButtonChangePassword.setBounds(2*WIDGET_X,4*FIELD_HEIGHT,WIDGET_GAP/2,30);
+        container.add(jButtonChangePassword);
 
 
-        JButton buttonRegister = new JButton("注册");
-        buttonRegister.addActionListener(activeEvent -> {
-            this.enWaitMode();
 
-        });
-        buttonRegister.setBounds(WIDGET_X - 3, WIDGET_Y + textLabels.length * WIDGET_GAP + 50, fieldWidth + 5, 30);
-        container.add(buttonRegister);
     }
 
 

@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class MyInterFrame extends JInternalFrame {
+public abstract class MyInterFrame extends JInternalFrame implements WaitModeAble{
     public MyInterFrame() {
         super();
         // 设置小窗可以关闭，并将关闭默认操作设置为隐藏
@@ -44,6 +44,15 @@ public abstract class MyInterFrame extends JInternalFrame {
         testInterFrame.setVisible(true);
 
         testFrame.setVisible(true);
+    }
+
+    public void enWaitMode() {
+        this.setEnabled(false);
+    }
+
+
+    public void disWaitMode() {
+        this.setEnabled(true);
     }
 }
 
@@ -101,4 +110,6 @@ class TestPanel extends JPanel {
         c.gridy = 2; // third row
         this.add(button, c);
     }
+
+
 }
