@@ -10,9 +10,11 @@ abstract public class MyBootFrame extends JFrame implements WaitModeAble{
         this.setLocationByPlatform(true);
         this.setLayout(null);
         this.setResizable(false);
+        this.setFocusable(true);
     }
+    abstract boolean checkInputLegal();
 
-    public boolean isLegalId(String number){
+    boolean isLegalId(String number){
         int n = number.length();
         if(8 == n && number.matches("\\d+")){
             int num1 = Integer.parseInt(number.substring(0,2));
@@ -58,19 +60,21 @@ abstract public class MyBootFrame extends JFrame implements WaitModeAble{
 
     }
 
-    private static boolean isLegalEmail(String email){
-        return email.matches("\\w+@\\w+(\\.\\w+)+");
+    static boolean isLegalEmail(String email){
+        return email.matches("^\\w+@\\w+(\\.\\w+)+$");
     }
 
-    private static boolean isLegalPassword(String password){
+    static boolean isLegalPassword(String password){
         return password.matches("^([A-Z]|[a-z])([0-9]|[A-Z]|[a-z]|_){7,15}$");
     }
 
-    private static boolean isLegalName(String name){
+    static boolean isLegalName(String name){
         return name.matches("^(([\\u4e00-\\u9fa5]){1,5}¡¤?([\\u4e00-\\u9fa5])+){1,10}$");
     }
 
-    private static boolean isSamePassword(String rePassword,String password){
+    static boolean isSamePassword(String rePassword,String password){
         return rePassword.matches(password);
     }
+
+
 }

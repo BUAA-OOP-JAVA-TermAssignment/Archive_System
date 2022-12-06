@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 
 public class SearchPanel extends JPanel {
     private static final SearchPanel searchPanel= new SearchPanel();
-    private final JTextField textField = new JTextField("ÇëÊäÈëËÑË÷ÄÚÈİ");
+    private final JTextField textField = new JTextField("");
     private final JButton searchButton = new JButton("ËÑË÷");
     private SearchPanel(){
         initTextField();
@@ -36,7 +36,7 @@ public class SearchPanel extends JPanel {
 
     private void initSearchButton() {
         searchButton.addActionListener(actionEvent -> {
-            System.out.println("SearchPanel : search button clicked");
+            System.out.println("SearchPanel : search button clicked " + textField.getText());
             //TODO:ÏòÍøÂç¿ØÖÆÆ÷·¢ËÍËÑË÷ÇëÇó
         });
         searchButton.setFont(MyFonts.TEXT_FONT_18);

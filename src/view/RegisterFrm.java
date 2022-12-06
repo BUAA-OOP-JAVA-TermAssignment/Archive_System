@@ -6,10 +6,7 @@ import style.StyleCtrl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.util.Scanner;
 
 public class RegisterFrm extends MyBootFrame{
@@ -40,6 +37,16 @@ public class RegisterFrm extends MyBootFrame{
         new JTextField(),
         new JPasswordField(),
         new JPasswordField(),
+    };
+
+    private final JButton buttonRegister = new JButton("×¢²á");
+    private final KeyAdapter enterResponse = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                buttonRegister.doClick();
+            }
+        }
     };
     public RegisterFrm() {
         this.setTitle("ÓÃ»§×¢²á");
@@ -72,6 +79,7 @@ public class RegisterFrm extends MyBootFrame{
         for(JTextField textField : textFields) {
             //textField.setBorder(BorderFactory.createTitledBorder(MyBorderFactory.createRectBorder(), "ÐÕÃû"));
             textField.setBounds(WIDGET_X - 3, y, fieldWidth, FIELD_HEIGHT);
+            textField.addKeyListener(enterResponse);
             container.add(textField);
             y += WIDGET_GAP;
         }
@@ -88,13 +96,19 @@ public class RegisterFrm extends MyBootFrame{
             y += WIDGET_GAP;
         }
 
-        JButton buttonRegister = new JButton("×¢²á");
+
         buttonRegister.addActionListener(activeEvent -> {
+            System.out.println("Register : register clicked");
+            if(checkInputLegal()) {
+                return;
+            }
             this.enWaitMode();
             NetworkCtrl.timeoutWakeupTest(RegisterFrm.this);
         });
         buttonRegister.setBounds(WIDGET_X - 3, WIDGET_Y + textLabels.length * WIDGET_GAP + 50, fieldWidth + 5, 30);
         container.add(buttonRegister);
+
+        this.addKeyListener(enterResponse);
     }
 
     @Override
@@ -107,11 +121,60 @@ public class RegisterFrm extends MyBootFrame{
         this.setEnabled(true);
     }
 
+    @Override
+    boolean checkInputLegal() {
+        boolean isInputIllegal = false;
 
+        boolean isNameError = false;
+        boolean isIdError = false;
+        boolean isEmailError = false;
+        boolean isPasswordError = false;
+        boolean isPwdNotSame = false;
+
+        String name = textFields[0].getText();
+        String id = textFields[1].getText();
+        String email = textFields[2].getText();
+        String password = textFields[3].getText();
+        //System.out.println(password);
+
+        if(!isLegalName(name)) {
+            isNameError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isLegalId(id)) {
+            isIdError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isLegalEmail(email)) {
+            isEmailError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isLegalPassword(password)) {
+            isPasswordError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isSamePassword(password, textFields[4].getText())) {
+            isPwdNotSame = true;
+            isInputIllegal = true;
+        }
+
+        errorLabels[0].setVisible(isNameError);
+        errorLabels[1].setVisible(isIdError);
+        errorLabels[2].setVisible(isEmailError);
+        errorLabels[3].setVisible(isPasswordError);
+        errorLabels[4].setVisible(isPwdNotSame);
+
+        return isInputIllegal;
+    }
 
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARK);
         RegisterFrm registerFrmTest = new RegisterFrm();
+        registerFrmTest.setDefaultCloseOperation(EXIT_ON_CLOSE);
         registerFrmTest.setVisible(true);
     }
 }

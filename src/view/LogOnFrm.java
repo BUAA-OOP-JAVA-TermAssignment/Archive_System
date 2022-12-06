@@ -10,8 +10,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LogOnFrm extends MyBootFrame {
+    private static final int NO_CHOSEN = 0, GUEST = 1, ADMIN = 2;
     private static final int FRAME_WIDTH = 350;
     private static final int FRAME_HEIGHT = 450;
     private static final int WIDGET_X = 40;
@@ -19,34 +22,45 @@ public class LogOnFrm extends MyBootFrame {
     private static final int WIDGET_GAP = 60;
     private static final int FIELD_HEIGHT = 30;
 
+    private final JTextField jTextField = new JTextField();
+    private final JPasswordField jPasswordField = new JPasswordField();
+    private final JComboBox<String> jComboBoxSelectUserType = new JComboBox<String>();
+    private final JButton jButtonLogOn = new JButton();
+
     private JLabel[] errorLabels = new JLabel[] {
-            new JLabel("请输入正确的姓名/学工号/邮箱"),
-            new JLabel("密码错误"),
+            new JLabel("请输入正确的学工号"),
+            new JLabel("密码不合法"),
             new JLabel("请选择登陆身份"),
+    };
+
+    private final KeyAdapter enterResponse = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                jButtonLogOn.doClick();
+            }
+        }
     };
     public LogOnFrm() {
         initComponents();
+        this.addKeyListener(enterResponse);
     }
 
     private void initComponents() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JPanel jPanelSelectUserType = new JPanel();
-        JComboBox<String> jComboBoxSelectUserType = new JComboBox<String>();
         // 登陆界面输入用户名字的label
         JLabel jLabelOfUserName = new JLabel();
         // 登陆界面输入用户密码的label
         JLabel jLabelOfPassword = new JLabel();
-
-        JTextField jTextField = new JTextField();
-        JPasswordField jPasswordField = new JPasswordField();
         JLabel jLabelOfUserType = new JLabel();
-        JButton jButtonLogOn = new JButton();
+
         JButton jButtonRegister = new JButton();
 
     //todo：以下的路径都需要重新配图片
         jLabelOfUserName.setIcon(new ImageIcon("XXX")); // NOI18N
-        jLabelOfUserName.setText("用户");
+        jLabelOfUserName.setText("学工号");
 
         jLabelOfPassword.setIcon(new ImageIcon("XXX")); // NOI18N
         jLabelOfPassword.setText("密码");
@@ -65,6 +79,9 @@ public class LogOnFrm extends MyBootFrame {
         jButtonLogOn.setText("登录");
         jButtonLogOn.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click log on button");
+            if(checkInputLegal()) {
+                return;
+            }
             this.enWaitMode();
             NetworkCtrl.timeoutWakeupTest(LogOnFrm.this);
         });
@@ -82,6 +99,9 @@ public class LogOnFrm extends MyBootFrame {
 
         int y = WIDGET_Y;
         int fieldWidth = this.getWidth() - 2 * WIDGET_X - 3;
+
+        jTextField.addKeyListener(enterResponse);
+        jPasswordField.addKeyListener(enterResponse);
 
         Container container = this.getContentPane();
         addLabels(jLabelOfUserName,container,WIDGET_GAP);
@@ -132,6 +152,55 @@ public class LogOnFrm extends MyBootFrame {
     @Override
     public void disWaitMode() {
         this.setEnabled(true);
+    }
+
+    @Override
+    boolean checkInputLegal() {
+        boolean isInputIllegal = false;
+
+        boolean isIdError = false;
+        boolean isPasswordError = false;
+        boolean isNotChosen = false;
+
+        String id = jTextField.getText();
+        String password = jPasswordField.getText();
+
+
+        if(!isLegalId(id)) {
+            isIdError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isLegalPassword(password)) {
+            isPasswordError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isChosen()) {
+            isNotChosen = true;
+            isInputIllegal = true;
+        }
+
+        errorLabels[1].setText("密码不合法");
+        errorLabels[0].setVisible(isIdError);
+        errorLabels[1].setVisible(isPasswordError);
+        errorLabels[2].setVisible(isNotChosen);
+
+        return isInputIllegal;
+    }
+
+
+    private boolean isChosen() {
+        return (jComboBoxSelectUserType.getSelectedIndex() != NO_CHOSEN);
+    }
+
+    public void passwordError() {
+        errorLabels[0].setVisible(false);
+        errorLabels[1].setText("密码错误");
+        errorLabels[0].setVisible(true);
+        errorLabels[0].setVisible(false);
+
+        jPasswordField.setText("");
     }
 
     public static void main(String[] args) {
