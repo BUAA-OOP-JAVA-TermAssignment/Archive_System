@@ -25,44 +25,44 @@ abstract public class MyFrame extends JFrame implements WaitModeAble{
 
     public MyFrame() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTitle("åŒ—èˆªæ–‡çŒ®ç®¡ç†ç³»ç»Ÿ");
+        this.setTitle("±±º½ÎÄÏ×¹ÜÀíÏµÍ³");
         this.setResizable(true);
         this.setMinimumSize(new Dimension(500, 500));
 
-        // ä½¿ç”¨å…³é—­å™¨å…³é—­
+        // Ê¹ÓÃ¹Ø±ÕÆ÷¹Ø±Õ
         this.addWindowListener(Closer.getConfirmCloser());
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
 
-        // è®¾ç½®èœå•æ 
+        // ÉèÖÃ²Ëµ¥À¸
         this.setJMenuBar(menuBar);
 
-        JMenu menuAccount = new JMenu("ä¸ªäººè´¦æˆ·");
+        JMenu menuAccount = new JMenu("¸öÈËÕË»§");
         menuBar.add(menuAccount);
 
-        JMenuItem menuItemSelfCentre = new JMenuItem("ä¸ªäººä¸­å¿ƒ", null);
+        JMenuItem menuItemSelfCentre = new JMenuItem("¸öÈËÖĞĞÄ", null);
         menuAccount.add(menuItemSelfCentre);
         menuItemSelfCentre.addActionListener(actionEvent -> {
             System.out.println("MyFrame : Menu Clicked");
-            //TODO:æ·»åŠ æ‰“å¼€ä¸ªäººä¸­å¿ƒçš„é€»è¾‘ï¼›
+            //TODO:Ìí¼Ó´ò¿ª¸öÈËÖĞĞÄµÄÂß¼­£»
         });
-        // èœå•å¿«æ·é”®
+        // ²Ëµ¥¿ì½İ¼ü
         menuItemSelfCentre.setAccelerator(KeyStroke.getKeyStroke('a'));
 
 
 
-        // è®¾ç½®å®¹å™¨é¢æ¿ï¼Œé‡‡ç”¨Boarderå¸ƒå±€ï¼Œä½†æ— æ‰€è°“ï¼Œè¿™ä¸ªä¸œè¥¿æ²¡æœ‰getterå¤–éƒ¨è®¿é—®ä¸åˆ°
+        // ÉèÖÃÈİÆ÷Ãæ°å£¬²ÉÓÃBoarder²¼¾Ö£¬µ«ÎŞËùÎ½£¬Õâ¸ö¶«Î÷Ã»ÓĞgetterÍâ²¿·ÃÎÊ²»µ½
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
         panel.setLayout(new BorderLayout(5, 5));
         this.setContentPane(panel);
 
 
-        //è®¾ç½®å†…éƒ¨æ¡Œé¢ï¼Œé€šè¿‡åœ¨å†…éƒ¨æ¡Œé¢æ·»åŠ å†…å®¹å®ç°æ“ä½œ
+        //ÉèÖÃÄÚ²¿×ÀÃæ£¬Í¨¹ıÔÚÄÚ²¿×ÀÃæÌí¼ÓÄÚÈİÊµÏÖ²Ù×÷
         panel.add(table);
         table.setVisible(true);
-        //TODO:è®¾ç½®ä¸€ä¸ªå¯çˆ±çš„å›¾æ ‡
+        //TODO:ÉèÖÃÒ»¸ö¿É°®µÄÍ¼±ê
 
-        //TODO:æ·»åŠ ä¸ªäººä¸­å¿ƒå¤´åƒåŠè¿›å…¥æŒ‰é’®
+        //TODO:Ìí¼Ó¸öÈËÖĞĞÄÍ·Ïñ¼°½øÈë°´Å¥
 
 
     }

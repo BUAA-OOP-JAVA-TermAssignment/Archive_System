@@ -19,7 +19,7 @@ public class UserCentreFrm extends MyInterFrame{
     private static final int WIDGET_GAP = 400;
     private static final int FIELD_HEIGHT = 40;
 
-    private String userName = "è¿™é‡Œè¦å†™åä¸ªå­—å·®ä¸‰ä¸ª";
+    private String userName = "ÕâÀïÒªĞ´Ê®¸ö×Ö²îÈı¸ö";
     private String id = "20374090";
     private String email = "3232572736@qq.com";
     private String password = "123456_ABCD";
@@ -27,11 +27,11 @@ public class UserCentreFrm extends MyInterFrame{
 
 
     private JLabel[] textLabels = new JLabel[]{
-            new JLabel("å§“å"),
-            new JLabel("å­¦å·¥å·"),
-            new JLabel("é‚®ç®±"),
-            new JLabel("å¯†ç "),
-            new JLabel("ç¡®è®¤å¯†ç "),
+            new JLabel("ĞÕÃû"),
+            new JLabel("Ñ§¹¤ºÅ"),
+            new JLabel("ÓÊÏä"),
+            new JLabel("ÃÜÂë"),
+            new JLabel("È·ÈÏÃÜÂë"),
     };
 
     private JTextField[] textFields = new JTextField[]{
@@ -44,8 +44,8 @@ public class UserCentreFrm extends MyInterFrame{
 
     public UserCentreFrm(){
         UserData userData = UserData.getInstance();
-//        if(userData.getUserName().equals("æ¸¸å®¢12138")){
-//            //TODO:ä¸€ä¸ªæç¤ºæœªåŠ è½½å®Œæˆçš„å‡½æ•°
+//        if(userData.getUserName().equals("ÓÎ¿Í12138")){
+//            //TODO:Ò»¸öÌáÊ¾Î´¼ÓÔØÍê³ÉµÄº¯Êı
 //        } else{
 //            this.userName = userData.getUserName();
 //            this.id = userData.getId();
@@ -58,7 +58,7 @@ public class UserCentreFrm extends MyInterFrame{
 
     private void initComponents(){
 
-        this.setTitle("ä¸ªäººä¿¡æ¯");
+        this.setTitle("¸öÈËĞÅÏ¢");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 
         int y = WIDGET_Y;
@@ -72,37 +72,41 @@ public class UserCentreFrm extends MyInterFrame{
         container.add(jLabelUserName);
 
         JLabel jLabelUserId = new JLabel();
-        jLabelUserId.setText("å­¦å·¥å·ï¼š"+this.id);
+        jLabelUserId.setText("Ñ§¹¤ºÅ£º"+this.id);
         jLabelUserId.setBounds(WIDGET_X,20+FIELD_HEIGHT,WIDGET_GAP,50);
         jLabelUserId.setFont(MyFonts.SUB_TITLE_FONT_24);
         container.add(jLabelUserId);
 
         JLabel jLabelEmail = new JLabel();
-        jLabelEmail.setText("æ³¨å†Œé‚®ç®±ï¼š"+this.email);
+        jLabelEmail.setText("×¢²áÓÊÏä£º"+this.email);
         jLabelEmail.setBounds(WIDGET_X,20+2*FIELD_HEIGHT,WIDGET_GAP,50);
         jLabelEmail.setFont(MyFonts.SUB_TITLE_FONT_24);
         container.add(jLabelEmail);
 
         JLabel jLabelPassword = new JLabel();
-        jLabelPassword.setText("ä¿®æ”¹å¯†ç ï¼š");
+        jLabelPassword.setText("ĞÂÃÜÂë£º");
         jLabelPassword.setBounds(WIDGET_X,20+3*FIELD_HEIGHT,WIDGET_GAP,50);
         jLabelPassword.setFont(MyFonts.SUB_TITLE_FONT_24);
         jLabelPassword.setVisible(false);
         container.add(jLabelPassword);
 
         JLabel jLabelRePassword = new JLabel();
-        jLabelRePassword.setText("ç¡®è®¤å¯†ç ï¼š");
+        jLabelRePassword.setText("È·ÈÏÃÜÂë£º");
         jLabelRePassword.setBounds(WIDGET_X,20+4*FIELD_HEIGHT,WIDGET_GAP,50);
         jLabelRePassword.setFont(MyFonts.SUB_TITLE_FONT_24);
         jLabelRePassword.setVisible(false);
         container.add(jLabelRePassword);
 
         JButton jButtonChangePassword = new JButton();
-        jButtonChangePassword.setText("ä¿®æ”¹å¯†ç ");
+        jButtonChangePassword.setText("ĞŞ¸ÄÃÜÂë");
         jButtonChangePassword.setBounds(2*WIDGET_X,4*FIELD_HEIGHT,WIDGET_GAP/2,30);
         container.add(jButtonChangePassword);
+        jButtonChangePassword.addActionListener(evt -> {
+            System.out.println("UserCentreFrm : Click change password button");
+            this.enWaitMode();
+            String str03 = JOptionPane.showInputDialog(null, "ÇëÊäÈëËùĞèÄÚÈİ", "ÕâÊÇÊäÈë¶Ô»°¿ò", JOptionPane.QUESTION_MESSAGE);
 
-
+        });
 
     }
 

@@ -1,5 +1,5 @@
 package controller;
 
-// 鍙湁鍦ㄧ櫥褰曚箣鍚庡惎鍔紝鍗曚緥妯″紡锛屾噿鍔犺浇
+// 只有在登录之后启动，单例模式，懒加载
 public class UserMainCtrl {
 }

@@ -67,7 +67,7 @@ abstract public class MyBootFrame extends JFrame implements WaitModeAble{
     }
 
     private static boolean isLegalName(String name){
-        return name.matches("^(([\\u4e00-\\u9fa5]){1,5}Â·?([\\u4e00-\\u9fa5])+){1,10}$");
+        return name.matches("^(([\\u4e00-\\u9fa5]){1,5}¡¤?([\\u4e00-\\u9fa5])+){1,10}$");
     }
 
     private static boolean isSamePassword(String rePassword,String password){

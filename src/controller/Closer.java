@@ -5,7 +5,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Closer {
-    //TODO:æŠŠè¿™ä¸€é¡¹ç§»å…¥åˆ°UserDataä¸­
+    //TODO:°ÑÕâÒ»ÏîÒÆÈëµ½UserDataÖĞ
     private static boolean hasUserInfoChange = true;
 
     private final static WindowAdapter confirmCloser = new WindowAdapter() {
@@ -13,9 +13,9 @@ public class Closer {
         public void windowClosing(WindowEvent e) {
             System.out.println("Closer : windows confirm closer tripped");
             if(NetworkCtrl.isIsChangingData() == true) {
-                if(JOptionPane.showConfirmDialog(e.getWindow(), "å½“å‰æ­£åœ¨è¿›è¡Œæ•°æ®ä¼ è¾“ï¼Œè¦ç»§ç»­é€€å‡ºå—ï¼Ÿ", "è­¦å‘Š", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.CANCEL_OPTION)return;
+                if(JOptionPane.showConfirmDialog(e.getWindow(), "µ±Ç°ÕıÔÚ½øĞĞÊı¾İ´«Êä£¬Òª¼ÌĞøÍË³öÂğ£¿", "¾¯¸æ", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.CANCEL_OPTION)return;
             }else {
-                if(JOptionPane.showConfirmDialog(e.getWindow(), "ç¡®å®šè¦é€€å‡ºå—ï¼Ÿ", "é€€å‡ºç¡®è®¤", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.CANCEL_OPTION)return;
+                if(JOptionPane.showConfirmDialog(e.getWindow(), "È·¶¨ÒªÍË³öÂğ£¿", "ÍË³öÈ·ÈÏ", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.CANCEL_OPTION)return;
             }
             uploadData();
             System.exit(0);

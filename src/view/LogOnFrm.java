@@ -20,9 +20,9 @@ public class LogOnFrm extends MyBootFrame {
     private static final int FIELD_HEIGHT = 30;
 
     private JLabel[] errorLabels = new JLabel[] {
-            new JLabel("è¯·è¾“å…¥æ­£ç¡®çš„å§“å/å­¦å·¥å·/é‚®ç®±"),
-            new JLabel("å¯†ç é”™è¯¯"),
-            new JLabel("è¯·é€‰æ‹©ç™»é™†èº«ä»½"),
+            new JLabel("ÇëÊäÈëÕıÈ·µÄĞÕÃû/Ñ§¹¤ºÅ/ÓÊÏä"),
+            new JLabel("ÃÜÂë´íÎó"),
+            new JLabel("ÇëÑ¡ÔñµÇÂ½Éí·İ"),
     };
     public LogOnFrm() {
         initComponents();
@@ -33,9 +33,9 @@ public class LogOnFrm extends MyBootFrame {
 
         JPanel jPanelSelectUserType = new JPanel();
         JComboBox<String> jComboBoxSelectUserType = new JComboBox<String>();
-        // ç™»é™†ç•Œé¢è¾“å…¥ç”¨æˆ·åå­—çš„label
+        // µÇÂ½½çÃæÊäÈëÓÃ»§Ãû×ÖµÄlabel
         JLabel jLabelOfUserName = new JLabel();
-        // ç™»é™†ç•Œé¢è¾“å…¥ç”¨æˆ·å¯†ç çš„label
+        // µÇÂ½½çÃæÊäÈëÓÃ»§ÃÜÂëµÄlabel
         JLabel jLabelOfPassword = new JLabel();
 
         JTextField jTextField = new JTextField();
@@ -44,25 +44,25 @@ public class LogOnFrm extends MyBootFrame {
         JButton jButtonLogOn = new JButton();
         JButton jButtonRegister = new JButton();
 
-    //todoï¼šä»¥ä¸‹çš„è·¯å¾„éƒ½éœ€è¦é‡æ–°é…å›¾ç‰‡
+    //todo£ºÒÔÏÂµÄÂ·¾¶¶¼ĞèÒªÖØĞÂÅäÍ¼Æ¬
         jLabelOfUserName.setIcon(new ImageIcon("XXX")); // NOI18N
-        jLabelOfUserName.setText("ç”¨æˆ·");
+        jLabelOfUserName.setText("ÓÃ»§");
 
         jLabelOfPassword.setIcon(new ImageIcon("XXX")); // NOI18N
-        jLabelOfPassword.setText("å¯†ç ");
+        jLabelOfPassword.setText("ÃÜÂë");
 
         jLabelOfUserType.setIcon(new ImageIcon("XXX"));
-        jLabelOfUserType.setText("ç”¨æˆ·ç±»å‹");
-        jComboBoxSelectUserType.addItem("-è¯·é€‰æ‹©-");
-        jComboBoxSelectUserType.addItem("è®¿å®¢");
-        jComboBoxSelectUserType.addItem("ç®¡ç†å‘˜");
+        jLabelOfUserType.setText("ÓÃ»§ÀàĞÍ");
+        jComboBoxSelectUserType.addItem("-ÇëÑ¡Ôñ-");
+        jComboBoxSelectUserType.addItem("·Ã¿Í");
+        jComboBoxSelectUserType.addItem("¹ÜÀíÔ±");
 
         jPanelSelectUserType.add(jLabelOfUserType);
         jPanelSelectUserType.add(jComboBoxSelectUserType);
 
 
         jButtonLogOn.setIcon(new ImageIcon("XXX")); // NOI18N
-        jButtonLogOn.setText("ç™»å½•");
+        jButtonLogOn.setText("µÇÂ¼");
         jButtonLogOn.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click log on button");
             this.enWaitMode();
@@ -70,13 +70,13 @@ public class LogOnFrm extends MyBootFrame {
         });
 
         jButtonRegister.setIcon(new ImageIcon("XXX")); // NOI18N
-        jButtonRegister.setText("æ³¨å†Œ");
+        jButtonRegister.setText("×¢²á");
         jButtonRegister.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click register button");
             LogonRegisterCtrl.changeLogToReg();
         });
 
-        this.setTitle("ç”¨æˆ·ç™»å½•");
+        this.setTitle("ÓÃ»§µÇÂ¼");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
 
