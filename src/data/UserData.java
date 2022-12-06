@@ -8,6 +8,7 @@ public class UserData {
     private String email;
     private String password;
     private String downloadNum;
+    private boolean isReady = false;
 
     private UserData(){
 
@@ -30,6 +31,7 @@ public class UserData {
         this.email = email;
         this.password = password;
         this.downloadNum = downloadNum;
+        this.isReady = true;
     }
 
     // 每次下载后数量+1
@@ -38,14 +40,44 @@ public class UserData {
     }
 
     // 其它内容板块需要获得用户信息时
-    public String[] getInfo(){
-        String[] info = new String[5];
-        info[0] = this.userName;
-        info[1] = this.id;
-        info[2] = this.email;
-        info[3] = this.password;
-        info[4] = this.downloadNum;
-        return info;
+    public String getUserName(){
+        if(isReady){
+            return this.userName;
+        } else {
+            return "游客12138";
+        }
+    }
+
+    public String getId(){
+        if(isReady){
+            return this.id;
+        } else {
+            return "19000000";
+        }
+    }
+
+    public String getEmail(){
+        if(isReady){
+            return this.email;
+        } else {
+            return "NULL";
+        }
+    }
+
+    public String getPassword(){
+        if(isReady){
+            return this.password;
+        } else {
+            return "NULL";
+        }
+    }
+
+    public String getDownloadNum(){
+        if(isReady){
+            return this.downloadNum;
+        } else {
+            return "NULL";
+        }
     }
 
     // 修改密码
