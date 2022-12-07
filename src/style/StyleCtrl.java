@@ -6,10 +6,8 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 
-// ç¨‹åºå¯åŠ¨å³å·¥ä½œï¼Œç±»æ–¹æ³•
+// ³ÌÐòÆô¶¯¼´¹¤×÷£¬Àà·½·¨
 public class StyleCtrl {
     final public static int LIGHT = 0;
     final public static int INTELLIJ = 1;
@@ -19,9 +17,10 @@ public class StyleCtrl {
     private static FlatIntelliJLaf flatIntelliJLaf = null;
     private static FlatDarkLaf flatDarkLaf = null;
     private static FlatDarculaLaf flatDarculaLaf = null;
+    private static int style = -1;
 
     public static void init() {
-        setStyle(DARK);
+        setStyle(INTELLIJ);
     }
 
     public static void setStyle(int styleType) {
@@ -32,6 +31,8 @@ public class StyleCtrl {
             case DARCULA -> applyDarcula();
             default -> System.out.println("!!! StyleCtrl : undefined style code");
         }
+        style = styleType;
+        MyColors.setColorAfterStyleChange();
     }
 
     private static void applyLight() {
@@ -80,5 +81,9 @@ public class StyleCtrl {
         } catch (UnsupportedLookAndFeelException e) {
             System.out.println("!!! StyleCtrl : style set error :" + e);
         }
+    }
+
+    public static int getStyle() {
+        return style;
     }
 }

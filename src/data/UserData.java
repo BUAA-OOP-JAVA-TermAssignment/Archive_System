@@ -1,6 +1,6 @@
-package controller;
+package data;
 
-// å­˜æ”¾å½“å‰ç”¨æˆ·çš„æ•°æ®
+// ´æ·Åµ±Ç°ÓÃ»§µÄÊı¾İ
 public class UserData {
     private static volatile UserData instance;
     private String userName;
@@ -8,11 +8,12 @@ public class UserData {
     private String email;
     private String password;
     private String downloadNum;
+    private boolean isReady = false;
 
     private UserData(){
 
     }
-    // åŒé‡æ£€æŸ¥é”å®š
+    // Ë«ÖØ¼ì²éËø¶¨
     public static UserData getInstance(){
         if(instance == null){
             synchronized (UserData.class){
@@ -30,25 +31,56 @@ public class UserData {
         this.email = email;
         this.password = password;
         this.downloadNum = downloadNum;
+        this.isReady = true;
     }
 
-    // æ¯æ¬¡ä¸‹è½½åæ•°é‡+1
+    // Ã¿´ÎÏÂÔØºóÊıÁ¿+1
     public void addDownloadNum(){
         this.downloadNum = this.downloadNum + 1;
     }
 
-    // å…¶å®ƒå†…å®¹æ¿å—éœ€è¦è·å¾—ç”¨æˆ·ä¿¡æ¯æ—¶
-    public String[] getInfo(){
-        String[] info = new String[5];
-        info[0] = this.userName;
-        info[1] = this.id;
-        info[2] = this.email;
-        info[3] = this.password;
-        info[4] = this.downloadNum;
-        return info;
+    // ÆäËüÄÚÈİ°å¿éĞèÒª»ñµÃÓÃ»§ĞÅÏ¢Ê±
+    public String getUserName(){
+        if(isReady){
+            return this.userName;
+        } else {
+            return "ÓÎ¿Í12138";
+        }
     }
 
-    // ä¿®æ”¹å¯†ç 
+    public String getId(){
+        if(isReady){
+            return this.id;
+        } else {
+            return "19000000";
+        }
+    }
+
+    public String getEmail(){
+        if(isReady){
+            return this.email;
+        } else {
+            return "NULL";
+        }
+    }
+
+    public String getPassword(){
+        if(isReady){
+            return this.password;
+        } else {
+            return "NULL";
+        }
+    }
+
+    public String getDownloadNum(){
+        if(isReady){
+            return this.downloadNum;
+        } else {
+            return "NULL";
+        }
+    }
+
+    // ĞŞ¸ÄÃÜÂë
     public void changePassword(String newPassword){
         this.password = newPassword;
     }

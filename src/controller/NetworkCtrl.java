@@ -3,9 +3,9 @@ package controller;
 
 import view.MyBootFrame;
 
-// ç¨‹åºå¯åŠ¨å³å·¥ä½œï¼Œç±»æ–¹æ³•
+// ³ÌÐòÆô¶¯¼´¹¤×÷£¬Àà·½·¨
 public class NetworkCtrl {
-    //TODO:è®°å¾—æŠŠåˆå§‹å€¼æ”¹å›žfalse
+    //TODO:¼ÇµÃ°Ñ³õÊ¼Öµ¸Ä»Øfalse
     private static boolean isChangingData = true;
 
     public static boolean isIsChangingData() {
@@ -13,7 +13,7 @@ public class NetworkCtrl {
     }
 
     public static void timeoutWakeupTest(MyBootFrame sourceFrame) {
-        //TODO:è¿™æ˜¯ä¸€ä¸ªç”¨æ¥æµ‹è¯•çš„å‡½æ•°ï¼Œåˆ°æ—¶å€™ç›¸åº”çš„å†…å®¹ï¼Œéœ€è¦æŽ¥å…¥ç›¸åº”çš„å¤„ç†å™¨ä¸­
+        //TODO:ÕâÊÇÒ»¸öÓÃÀ´²âÊÔµÄº¯Êý£¬µ½Ê±ºòÏàÓ¦µÄÄÚÈÝ£¬ÐèÒª½ÓÈëÏàÓ¦µÄ´¦ÀíÆ÷ÖÐ
         new Thread(() -> {
             try {
                 Thread.sleep(3000);

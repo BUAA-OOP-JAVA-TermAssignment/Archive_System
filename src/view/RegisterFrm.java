@@ -6,10 +6,8 @@ import style.StyleCtrl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
+import java.util.Scanner;
 
 public class RegisterFrm extends MyBootFrame{
 
@@ -20,18 +18,18 @@ public class RegisterFrm extends MyBootFrame{
     private static final int WIDGET_GAP = 60;
     private static final int FIELD_HEIGHT = 30;
     private JLabel[] textLabels = new JLabel[]{
-        new JLabel("å§“å"),
-        new JLabel("å­¦å·¥å·"),
-        new JLabel("é‚®ç®±"),
-        new JLabel("å¯†ç "),
-        new JLabel("ç¡®è®¤å¯†ç "),
+        new JLabel("ÐÕÃû"),
+        new JLabel("Ñ§¹¤ºÅ"),
+        new JLabel("ÓÊÏä"),
+        new JLabel("ÃÜÂë"),
+        new JLabel("È·ÈÏÃÜÂë"),
     };
     private JLabel[] errorLabels = new JLabel[] {
-            new JLabel("å§“åä¸åˆæ³•"),
-            new JLabel("å­¦å·¥å·ä¸åˆæ³•"),
-            new JLabel("é‚®ç®±ä¸åˆæ³•"),
-            new JLabel("å¯†ç ä¸åˆæ³•"),
-            new JLabel("ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´"),
+            new JLabel("ÐÕÃû²»ºÏ·¨"),
+            new JLabel("Ñ§¹¤ºÅ²»ºÏ·¨"),
+            new JLabel("ÓÊÏä²»ºÏ·¨"),
+            new JLabel("ÃÜÂë²»ºÏ·¨"),
+            new JLabel("Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ"),
     };
     private JTextField[] textFields = new JTextField[]{
         new JTextField(),
@@ -40,8 +38,18 @@ public class RegisterFrm extends MyBootFrame{
         new JPasswordField(),
         new JPasswordField(),
     };
+
+    private final JButton buttonRegister = new JButton("×¢²á");
+    private final KeyAdapter enterResponse = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                buttonRegister.doClick();
+            }
+        }
+    };
     public RegisterFrm() {
-        this.setTitle("ç”¨æˆ·æ³¨å†Œ");
+        this.setTitle("ÓÃ»§×¢²á");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
         this.addWindowListener(new WindowAdapter() {
@@ -69,8 +77,9 @@ public class RegisterFrm extends MyBootFrame{
         int fieldWidth = this.getWidth() - 2 * WIDGET_X - 3;
         y = WIDGET_Y + 30;
         for(JTextField textField : textFields) {
-            //textField.setBorder(BorderFactory.createTitledBorder(MyBorderFactory.createRectBorder(), "å§“å"));
+            //textField.setBorder(BorderFactory.createTitledBorder(MyBorderFactory.createRectBorder(), "ÐÕÃû"));
             textField.setBounds(WIDGET_X - 3, y, fieldWidth, FIELD_HEIGHT);
+            textField.addKeyListener(enterResponse);
             container.add(textField);
             y += WIDGET_GAP;
         }
@@ -87,13 +96,19 @@ public class RegisterFrm extends MyBootFrame{
             y += WIDGET_GAP;
         }
 
-        JButton buttonRegister = new JButton("æ³¨å†Œ");
+
         buttonRegister.addActionListener(activeEvent -> {
+            System.out.println("Register : register clicked");
+            if(checkInputLegal()) {
+                return;
+            }
             this.enWaitMode();
             NetworkCtrl.timeoutWakeupTest(RegisterFrm.this);
         });
         buttonRegister.setBounds(WIDGET_X - 3, WIDGET_Y + textLabels.length * WIDGET_GAP + 50, fieldWidth + 5, 30);
         container.add(buttonRegister);
+
+        this.addKeyListener(enterResponse);
     }
 
     @Override
@@ -106,9 +121,60 @@ public class RegisterFrm extends MyBootFrame{
         this.setEnabled(true);
     }
 
+    @Override
+    boolean checkInputLegal() {
+        boolean isInputIllegal = false;
+
+        boolean isNameError = false;
+        boolean isIdError = false;
+        boolean isEmailError = false;
+        boolean isPasswordError = false;
+        boolean isPwdNotSame = false;
+
+        String name = textFields[0].getText();
+        String id = textFields[1].getText();
+        String email = textFields[2].getText();
+        String password = textFields[3].getText();
+        //System.out.println(password);
+
+        if(!isLegalName(name)) {
+            isNameError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isLegalId(id)) {
+            isIdError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isLegalEmail(email)) {
+            isEmailError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isLegalPassword(password)) {
+            isPasswordError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isSamePassword(password, textFields[4].getText())) {
+            isPwdNotSame = true;
+            isInputIllegal = true;
+        }
+
+        errorLabels[0].setVisible(isNameError);
+        errorLabels[1].setVisible(isIdError);
+        errorLabels[2].setVisible(isEmailError);
+        errorLabels[3].setVisible(isPasswordError);
+        errorLabels[4].setVisible(isPwdNotSame);
+
+        return isInputIllegal;
+    }
+
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARK);
         RegisterFrm registerFrmTest = new RegisterFrm();
+        registerFrmTest.setDefaultCloseOperation(EXIT_ON_CLOSE);
         registerFrmTest.setVisible(true);
     }
 }

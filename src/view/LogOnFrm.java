@@ -10,8 +10,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LogOnFrm extends MyBootFrame {
+    private static final int NO_CHOSEN = 0, GUEST = 1, ADMIN = 2;
     private static final int FRAME_WIDTH = 350;
     private static final int FRAME_HEIGHT = 450;
     private static final int WIDGET_X = 40;
@@ -19,69 +22,87 @@ public class LogOnFrm extends MyBootFrame {
     private static final int WIDGET_GAP = 60;
     private static final int FIELD_HEIGHT = 30;
 
+    private final JTextField jTextField = new JTextField();
+    private final JPasswordField jPasswordField = new JPasswordField();
+    private final JComboBox<String> jComboBoxSelectUserType = new JComboBox<String>();
+    private final JButton jButtonLogOn = new JButton();
+
     private JLabel[] errorLabels = new JLabel[] {
-            new JLabel("ËØ∑ËæìÂÖ•Ê≠£Á°ÆÁöÑÂßìÂêç/Â≠¶Â∑•Âè∑/ÈÇÆÁÆ±"),
-            new JLabel("ÂØÜÁ†ÅÈîôËØØ"),
-            new JLabel("ËØ∑ÈÄâÊã©ÁôªÈôÜË∫´‰ªΩ"),
+            new JLabel("«Î ‰»Î’˝»∑µƒ—ßπ§∫≈"),
+            new JLabel("√‹¬Î≤ª∫œ∑®"),
+            new JLabel("«Î—°‘Òµ«¬Ω…Ì∑›"),
+    };
+
+    private final KeyAdapter enterResponse = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                jButtonLogOn.doClick();
+            }
+        }
     };
     public LogOnFrm() {
         initComponents();
+        this.addKeyListener(enterResponse);
     }
 
     private void initComponents() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JPanel jPanelSelectUserType = new JPanel();
-        JComboBox<String> jComboBoxSelectUserType = new JComboBox<String>();
-        // ÁôªÈôÜÁïåÈù¢ËæìÂÖ•Áî®Êà∑ÂêçÂ≠óÁöÑlabel
+        // µ«¬ΩΩÁ√Ê ‰»Î”√ªß√˚◊÷µƒlabel
         JLabel jLabelOfUserName = new JLabel();
-        // ÁôªÈôÜÁïåÈù¢ËæìÂÖ•Áî®Êà∑ÂØÜÁ†ÅÁöÑlabel
+        // µ«¬ΩΩÁ√Ê ‰»Î”√ªß√‹¬Îµƒlabel
         JLabel jLabelOfPassword = new JLabel();
-
-        JTextField jTextField = new JTextField();
-        JPasswordField jPasswordField = new JPasswordField();
         JLabel jLabelOfUserType = new JLabel();
-        JButton jButtonLogOn = new JButton();
+
         JButton jButtonRegister = new JButton();
 
-    //todoÔºö‰ª•‰∏ãÁöÑË∑ØÂæÑÈÉΩÈúÄË¶ÅÈáçÊñ∞ÈÖçÂõæÁâá
+    //todo£∫“‘œ¬µƒ¬∑æ∂∂º–Ë“™÷ÿ–¬≈‰Õº∆¨
         jLabelOfUserName.setIcon(new ImageIcon("XXX")); // NOI18N
-        jLabelOfUserName.setText("Áî®Êà∑");
+        jLabelOfUserName.setText("—ßπ§∫≈");
 
         jLabelOfPassword.setIcon(new ImageIcon("XXX")); // NOI18N
-        jLabelOfPassword.setText("ÂØÜÁ†Å");
+        jLabelOfPassword.setText("√‹¬Î");
 
         jLabelOfUserType.setIcon(new ImageIcon("XXX"));
-        jLabelOfUserType.setText("Áî®Êà∑Á±ªÂûã");
-        jComboBoxSelectUserType.addItem("-ËØ∑ÈÄâÊã©-");
-        jComboBoxSelectUserType.addItem("ËÆøÂÆ¢");
-        jComboBoxSelectUserType.addItem("ÁÆ°ÁêÜÂëò");
+        jLabelOfUserType.setText("”√ªß¿‡–Õ");
+        jComboBoxSelectUserType.addItem("-«Î—°‘Ò-");
+        jComboBoxSelectUserType.addItem("∑√øÕ");
+        jComboBoxSelectUserType.addItem("π‹¿Ì‘±");
 
         jPanelSelectUserType.add(jLabelOfUserType);
         jPanelSelectUserType.add(jComboBoxSelectUserType);
 
 
         jButtonLogOn.setIcon(new ImageIcon("XXX")); // NOI18N
-        jButtonLogOn.setText("ÁôªÂΩï");
+        jButtonLogOn.setText("µ«¬º");
         jButtonLogOn.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click log on button");
+            if(checkInputLegal()) {
+                return;
+            }
             this.enWaitMode();
             NetworkCtrl.timeoutWakeupTest(LogOnFrm.this);
         });
 
         jButtonRegister.setIcon(new ImageIcon("XXX")); // NOI18N
-        jButtonRegister.setText("Ê≥®ÂÜå");
+        jButtonRegister.setText("◊¢≤·");
         jButtonRegister.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click register button");
             LogonRegisterCtrl.changeLogToReg();
         });
 
-        this.setTitle("Áî®Êà∑ÁôªÂΩï");
+        this.setTitle("”√ªßµ«¬º");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
 
         int y = WIDGET_Y;
         int fieldWidth = this.getWidth() - 2 * WIDGET_X - 3;
+
+        jTextField.addKeyListener(enterResponse);
+        jPasswordField.addKeyListener(enterResponse);
+        jComboBoxSelectUserType.addKeyListener(enterResponse);
 
         Container container = this.getContentPane();
         addLabels(jLabelOfUserName,container,WIDGET_GAP);
@@ -132,6 +153,55 @@ public class LogOnFrm extends MyBootFrame {
     @Override
     public void disWaitMode() {
         this.setEnabled(true);
+    }
+
+    @Override
+    boolean checkInputLegal() {
+        boolean isInputIllegal = false;
+
+        boolean isIdError = false;
+        boolean isPasswordError = false;
+        boolean isNotChosen = false;
+
+        String id = jTextField.getText();
+        String password = jPasswordField.getText();
+
+
+        if(!isLegalId(id)) {
+            isIdError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isLegalPassword(password)) {
+            isPasswordError = true;
+            isInputIllegal = true;
+        }
+
+        if(!isChosen()) {
+            isNotChosen = true;
+            isInputIllegal = true;
+        }
+
+        errorLabels[1].setText("√‹¬Î≤ª∫œ∑®");
+        errorLabels[0].setVisible(isIdError);
+        errorLabels[1].setVisible(isPasswordError);
+        errorLabels[2].setVisible(isNotChosen);
+
+        return isInputIllegal;
+    }
+
+
+    private boolean isChosen() {
+        return (jComboBoxSelectUserType.getSelectedIndex() != NO_CHOSEN);
+    }
+
+    public void passwordError() {
+        errorLabels[0].setVisible(false);
+        errorLabels[1].setText("√‹¬Î¥ÌŒÛ");
+        errorLabels[0].setVisible(true);
+        errorLabels[0].setVisible(false);
+
+        jPasswordField.setText("");
     }
 
     public static void main(String[] args) {
