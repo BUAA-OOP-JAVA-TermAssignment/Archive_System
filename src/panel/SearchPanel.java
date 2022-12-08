@@ -11,7 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class SearchPanel extends JPanel {
-    private static final SearchPanel searchPanel= new SearchPanel();
+    private static volatile SearchPanel searchPanel= new SearchPanel();
     private final JTextField textField = new JTextField("");
     private final JButton searchButton = new JButton("ËÑË÷");
     private SearchPanel(){
@@ -59,7 +59,7 @@ public class SearchPanel extends JPanel {
         gbc.weightx = 1;
         gbc.weighty = 0;
         gbc.ipadx = 50;
-        gbc.ipady = 10;
+        gbc.ipady = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(textField, gbc);
@@ -72,7 +72,7 @@ public class SearchPanel extends JPanel {
         gbc.weightx = 0;
         gbc.weighty = 0;
         gbc.ipadx = 30;
-        gbc.ipady = 10;
+        gbc.ipady = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(searchButton, gbc);
@@ -91,6 +91,18 @@ public class SearchPanel extends JPanel {
         this.add(emptyLabelLeft, gbc);
         gbc.gridx = 3;
         this.add(emptyLabelRight, gbc);
+    }
+
+    public static SearchPanel getInstance() {
+        if(searchPanel == null) {
+            synchronized (SearchPanel.class) {
+                if(searchPanel == null) {
+                    searchPanel = new SearchPanel();
+                }
+            }
+        }
+
+        return searchPanel;
     }
 
     public static void main(String[] args) {

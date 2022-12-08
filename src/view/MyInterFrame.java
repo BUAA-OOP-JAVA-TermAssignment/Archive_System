@@ -1,5 +1,7 @@
 package view;
 
+import style.StyleCtrl;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,6 +28,7 @@ public abstract class MyInterFrame extends JInternalFrame implements WaitModeAbl
     }
 
     public static void main(String[] args) {
+        StyleCtrl.setStyle(StyleCtrl.DARCULA);
         MyFrame testFrame = new MyFrame() {
         };
         MyInterFrame testInterFrame = new MyInterFrame() {

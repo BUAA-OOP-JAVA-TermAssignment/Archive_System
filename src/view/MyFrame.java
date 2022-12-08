@@ -53,7 +53,7 @@ abstract public class MyFrame extends JFrame implements WaitModeAble{
 
         // 设置容器面板，采用Boarder布局，但无所谓，这个东西没有getter外部访问不到
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        panel.setLayout(new BorderLayout(5, 5));
+        panel.setLayout(new BorderLayout());
         this.setContentPane(panel);
 
 
