@@ -1,7 +1,6 @@
 package client;
 
 import message.BaseMsg;
-import message.SuccessMsg;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -94,11 +93,11 @@ public class Client {
                     ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
                     BaseMsg msg = (BaseMsg) ois.readObject();
                     //TODO:接收到msg之后
-                    if (msg instanceof SuccessMsg) {
-                        System.out.println("TODO:登陆成功！");
-                    } else {
-                        System.out.println("TODO:登录失败！");
-                    }
+//                    if (msg instanceof SuccessMsg) {
+//                        System.out.println("TODO:登陆成功！");
+//                    } else {
+//                        System.out.println("TODO:登录失败！");
+//                    }
                 }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

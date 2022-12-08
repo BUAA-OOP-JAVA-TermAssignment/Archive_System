@@ -1,7 +1,6 @@
 package controller;
 
 import client.Client;
-import message.UserLoginMsg;
 
 /**
  * 所有需要和客户端通信的都由此控制
@@ -36,7 +35,7 @@ public class ClientCtrl {
      * @return true 成功 false 失败
      */
     public boolean userLogin(String username, String password) {
-        client.sendMsg(new UserLoginMsg(username, password));
+        //client.sendMsg(new UserLoginMsg(username, password));
         //TODO:怎么获取返回信息？
 
         return true;
