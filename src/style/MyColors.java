@@ -3,10 +3,13 @@ package style;
 import java.awt.*;
 
 public class MyColors {
-    public static Color paperInfoPaneColor;
+    private static Color paperInfoPaneColor;
+    private static Color specialButtonForeColor;
+    private static Color specialButtonBackColor;
 
     public static void setColorAfterStyleChange() {
         changePaperInfoPaneColor();
+        changeSpecialButtonColor();
     }
 
     public static void changePaperInfoPaneColor() {
@@ -16,7 +19,28 @@ public class MyColors {
         }
     }
 
+    public static void changeSpecialButtonColor() {
+        switch (StyleCtrl.getStyle()) {
+            case StyleCtrl.INTELLIJ, StyleCtrl.LIGHT -> {
+                specialButtonBackColor = Color.DARK_GRAY;
+                specialButtonForeColor = Color.WHITE;
+            }
+            case StyleCtrl.DARK, StyleCtrl.DARCULA -> {
+                specialButtonBackColor = Color.LIGHT_GRAY;
+                specialButtonForeColor = Color.BLACK;
+            }
+        }
+    }
+
     public static Color getPaperInfoPaneColor() {
         return paperInfoPaneColor;
+    }
+
+    public static Color getSpecialButtonForeColor() {
+        return specialButtonForeColor;
+    }
+
+    public static Color getSpecialButtonBackColor() {
+        return specialButtonBackColor;
     }
 }

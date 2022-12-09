@@ -13,16 +13,17 @@ import java.awt.*;
 public class BriefPaperPanel extends JPanel {
     private final JLabel titleLabel = new JLabel("���ױ���");
     private final JLabel authorLabel = new JLabel("����");
-    private final JTextArea abstractTextArea = new JTextArea("ժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪ");
+    private final JTextArea abstractTextArea = new JTextArea("ҪժҪժҪҪժҪժҪժҪժҪҪժҪժҪҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪҪժҪժҪҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժ");
     private final JLabel keywordsLabel = new JLabel("�ؼ���");
     private final JLabel imageLabel = new JLabel();
-    private final JButton button = new JButton("��ϸ��Ϣ...");
+    private final JButton buttonDetail = new JButton("����...");
+    private final JButton buttonChangeHeight = new JButton("����");
 
     public BriefPaperPanel() {
         this.setColor();
         this.setTextStyle();
-        this.initButton();
         this.initWidgetInGridBag();
+        // �������ñ߿��С
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
     private void setColor() {
@@ -48,7 +49,8 @@ public class BriefPaperPanel extends JPanel {
         abstractTextArea.setOpaque(false);
         abstractTextArea.setLineWrap(true);
         abstractTextArea.setEditable(false);
-        abstractTextArea.setBorder(new EmptyBorder(0, 0, 0, 0));
+        // ��������ժҪ��߿�
+        abstractTextArea.setBorder(new EmptyBorder(5, 0, 0, 0));
         // ���ѡ������Ƿ��ܱ�ѡ��
         abstractTextArea.setEditable(false);
     }
@@ -58,23 +60,18 @@ public class BriefPaperPanel extends JPanel {
         label.setVerticalAlignment(vertical);
     }
 
-    private void initButton() {
-        button.addActionListener(actionEvent -> {
-            System.out.println("BriefPaperPanel : " + actionEvent.getActionCommand());
-            //TODO: �����ĵ���ϸҳ��
-        });
-    }
-
     private void initImage() {
         imageLabel.setBackground(Color.WHITE);
-        imageLabel.setIcon(new ImageIcon(new ImageIcon(".//resource//book_init.png").getImage().getScaledInstance(150, 196, Image.SCALE_FAST)));
+        // ��������ͼƬ��С
+        imageLabel.setIcon(new ImageIcon(new ImageIcon(".//resource//book_init.png").getImage().getScaledInstance(200, 276, Image.SCALE_FAST)));
     }
 
 
     private void initWidgetInGridBag() {
         this.initImage();
 
-        final Insets borderInsets = new Insets(2, 2, 2, 2);
+        // ���������ڲ�������
+        final Insets borderInsets = new Insets(0, 3, 0, 3);
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -110,13 +107,10 @@ public class BriefPaperPanel extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridheight = 1;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         gbc.weightx = 1;
         gbc.weighty = 0;
-        gbc.ipadx = 0;
-        gbc.ipady = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTH;
         this.add(authorLabel, gbc);
 
         //�ؼ���
@@ -126,10 +120,6 @@ public class BriefPaperPanel extends JPanel {
         gbc.gridwidth = 2;
         gbc.weightx = 1;
         gbc.weighty = 0;
-        gbc.ipadx = 0;
-        gbc.ipady = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.CENTER;
         this.add(keywordsLabel, gbc);
 
         //ժҪ
@@ -139,10 +129,7 @@ public class BriefPaperPanel extends JPanel {
         gbc.gridwidth = 2;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        gbc.ipadx = 0;
-        gbc.ipady = 0;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
         this.add(abstractTextArea, gbc);
 
         //��ť
@@ -152,11 +139,17 @@ public class BriefPaperPanel extends JPanel {
         gbc.gridwidth = 1;
         gbc.weightx = 0.1;
         gbc.weighty = 0;
-        gbc.ipadx = 20;
+        gbc.ipadx = 10;
         gbc.ipady = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
-        this.add(button, gbc);
+        buttonDetail.setBackground(MyColors.getSpecialButtonBackColor());
+        buttonDetail.setForeground(MyColors.getSpecialButtonForeColor());
+        this.add(buttonDetail, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        this.add(buttonChangeHeight, gbc);
     }
 
     private void testColorSet() {
@@ -169,6 +162,12 @@ public class BriefPaperPanel extends JPanel {
         keywordsLabel.setOpaque(true);
         abstractTextArea.setBackground(Color.WHITE);
         abstractTextArea.setOpaque(true);
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        System.out.println("Brief " + super.getPreferredSize());
+        return super.getPreferredSize();
     }
 
     public static void main(String[] args) {
@@ -220,8 +219,12 @@ public class BriefPaperPanel extends JPanel {
         return imageLabel;
     }
 
-    public JButton getButton() {
-        return button;
+    public JButton getButtonDetail() {
+        return buttonDetail;
+    }
+
+    public JButton getButtonChangeHeight() {
+        return buttonChangeHeight;
     }
 }
 /*
