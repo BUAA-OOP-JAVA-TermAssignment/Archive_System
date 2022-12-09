@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Date;
+
 // 存放当前用户的数据
 public class UserData {
     private static volatile UserData instance;
@@ -7,7 +9,8 @@ public class UserData {
     private String id;
     private String email;
     private String password;
-    private String downloadNum;
+    private int downloadCnt;
+    private Date date;
     private boolean isReady = false;
 
     private UserData(){
@@ -25,18 +28,18 @@ public class UserData {
         return instance;
     }
 
-    public void readInfo(String userName,String id, String email, String password, String downloadNum){
+    public void readInfo(String userName,String id, String email, String password, int downloadNum){
         this.userName = userName;
         this.id = id;
         this.email = email;
         this.password = password;
-        this.downloadNum = downloadNum;
+        this.downloadCnt = downloadNum;
         this.isReady = true;
     }
 
     // 每次下载后数量+1
     public void addDownloadNum(){
-        this.downloadNum = this.downloadNum + 1;
+        this.downloadCnt = this.downloadCnt + 1;
     }
 
     // 其它内容板块需要获得用户信息时
@@ -72,11 +75,11 @@ public class UserData {
         }
     }
 
-    public String getDownloadNum(){
+    public int getDownloadNum(){
         if(isReady){
-            return this.downloadNum;
+            return this.downloadCnt;
         } else {
-            return "NULL";
+            return 0;
         }
     }
 

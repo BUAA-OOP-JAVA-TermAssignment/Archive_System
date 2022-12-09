@@ -1,5 +1,7 @@
 package message;
 
+import java.util.Date;
+
 /**
  * 登录成功返回的信息
  *
@@ -8,6 +10,7 @@ package message;
  */
 public class LoginReturnMsg extends BaseMsg{
     private final int downloadCnt;
+    //private final Date date;
     private final String email;
 
 
