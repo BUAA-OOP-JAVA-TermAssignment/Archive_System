@@ -120,7 +120,7 @@ public class Client {
 
         // TODO:test
         //return new BaseMsg(BaseMsg.TIME_OUT);
-        return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, new Date());
+        return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, "2022-12-11 01:20:05");
     }
 
     public boolean downloadFile(String savePath, String filename) {
