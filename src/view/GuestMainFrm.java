@@ -1,12 +1,18 @@
 package view;
 
+import controller.Closer;
+
+import javax.swing.*;
+
+
 public class GuestMainFrm extends MyFrame{
-    private static final GuestMainFrm guestSearchFrm = new GuestMainFrm();
+    private static final GuestMainFrm guestMainFrm = new GuestMainFrm();
+
     private GuestMainFrm() {
-        //TODO:添加添加用户独有的菜单啥的
+        this.addWindowListener(Closer.getDataUploadCloser());
     }
 
     public static GuestMainFrm getInstance() {
-        return guestSearchFrm;
+        return guestMainFrm;
     }
 }

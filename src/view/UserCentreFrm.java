@@ -270,6 +270,18 @@ public class UserCentreFrm extends MyInterFrame{
 
     }
 
+    public static UserCentreFrm getInstance() {
+        if(userCentreFrm == null) {
+            synchronized (UserCentreFrm.class) {
+                if(userCentreFrm == null) {
+                    userCentreFrm = new UserCentreFrm();
+                }
+            }
+        }
+
+        return userCentreFrm;
+    }
+
 
 
     public void enWaitMode() {

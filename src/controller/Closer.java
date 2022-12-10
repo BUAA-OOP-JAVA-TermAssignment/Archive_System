@@ -12,7 +12,13 @@ public class Closer {
         @Override
         public void windowClosing(WindowEvent e) {
             System.out.println("Closer : windows guest closer tripped");
-            if (checkExit(e)) return;
+            if(NetworkCtrl.isIsChangingData()) {
+                if(JOptionPane.showConfirmDialog(e.getWindow(), "当前正在进行数据传输，要继续退出吗？", "警告", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.CANCEL_OPTION)
+                    return;
+            }else {
+                if(JOptionPane.showConfirmDialog(e.getWindow(), "确定要退出吗？程序将会在确认后上传数据，并在传输完毕后退出。", "退出确认", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.CANCEL_OPTION)
+                    return;
+            }
             uploadGuestData();
             System.exit(0);
         }
@@ -23,21 +29,16 @@ public class Closer {
         @Override
         public void windowClosing(WindowEvent e) {
             System.out.println("Closer : windows admin closer tripped");
-            if (checkExit(e)) return;
+            if(NetworkCtrl.isIsChangingData()) {
+                if(JOptionPane.showConfirmDialog(e.getWindow(), "当前正在进行操作，要继续退出吗？", "警告", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.CANCEL_OPTION)
+                    return;
+            }else {
+                if(JOptionPane.showConfirmDialog(e.getWindow(), "确定要退出吗？", "退出确认", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.CANCEL_OPTION)
+                    return;
+            }
             System.exit(0);
         }
     };
-
-    private static boolean checkExit(WindowEvent e) {
-        if(NetworkCtrl.isIsChangingData()) {
-            if(JOptionPane.showConfirmDialog(e.getWindow(), "当前正在进行数据传输，要继续退出吗？", "警告", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.CANCEL_OPTION)
-                return true;
-        }else {
-            if(JOptionPane.showConfirmDialog(e.getWindow(), "确定要退出吗？", "退出确认", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.CANCEL_OPTION)
-                return true;
-        }
-        return false;
-    }
 
     private static void uploadGuestData() {
         if(!hasUserInfoChange)return;
@@ -47,5 +48,8 @@ public class Closer {
 
     public static WindowAdapter getDataUploadCloser() {
         return dataUploadCloser;
+    }
+    public static WindowAdapter getNoDataUploadCloser() {
+        return noDataUploadCloser;
     }
 }

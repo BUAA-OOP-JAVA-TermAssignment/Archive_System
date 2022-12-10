@@ -148,7 +148,7 @@ public class Client {
 
 
         // TODO:test
-        return new BaseMsg(BaseMsg.TIME_OUT);
-        //return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, new Date());
+        //return new BaseMsg(BaseMsg.TIME_OUT);
+        return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, new Date());
     }
 }
