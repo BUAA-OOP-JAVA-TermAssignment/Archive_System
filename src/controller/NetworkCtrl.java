@@ -5,7 +5,7 @@ import view.MyBootFrame;
 
 // 程序启动即工作，类方法
 public class NetworkCtrl {
-    //TODO:记得把初始值改回false
+    //TODO:清除这个用来测试的类
     private static boolean isChangingData;
 
     public static boolean isIsChangingData() {

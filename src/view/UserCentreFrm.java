@@ -32,7 +32,7 @@ public class UserCentreFrm extends MyInterFrame{
     public UserCentreFrm(){
         UserData userData = UserData.getInstance();
 //        if(userData.getUserName().equals("游客12138")){
-//            //TODO:一个提示未加载完成的函数
+//            //TODO:一个提示未加载完成的函数，洲：我觉得不用提示就等加载完了再显示就行
 //        } else{
 //            this.userName = userData.getUserName();
 //            this.id = userData.getId();
