@@ -79,13 +79,11 @@ public class LogOnFrm extends MyBootFrame {
         jButtonLogOn.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click log on button");
             msgLabel.setVisible(false);
-            if(checkInputLegal()) {
+            if(checkInputLegalAndSend()) {
                 return;
             }
             this.enWaitMode();
             sendMsgNotice();
-            // 发送登录请求
-            LogonRegisterCtrl.tryLogon(jComboBoxSelectUserType.getSelectedIndex(), jTextField.getText(), jPasswordField.getText());
             //NetworkCtrl.timeoutWakeupTest(LogOnFrm.this);
         });
 
@@ -162,7 +160,7 @@ public class LogOnFrm extends MyBootFrame {
     }
 
     @Override
-    boolean checkInputLegal() {
+    boolean checkInputLegalAndSend() {
         boolean isInputIllegal = false;
 
         boolean isIdError = false;
@@ -193,6 +191,8 @@ public class LogOnFrm extends MyBootFrame {
         errorLabels[1].setVisible(isPasswordError);
         errorLabels[2].setVisible(isNotChosen);
 
+        if(!isInputIllegal)
+            LogonRegisterCtrl.tryLogon(jComboBoxSelectUserType.getSelectedIndex(), id, password);
         return isInputIllegal;
     }
 
@@ -235,6 +235,12 @@ public class LogOnFrm extends MyBootFrame {
         msgLabel.setVisible(true);
     }
 
+    public void registerSuccess() {
+        msgLabel.setText("注册成功");
+        msgLabel.setForeground(Color.GREEN);
+        msgLabel.setVisible(true);
+    }
+
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARK);
 
@@ -245,5 +251,17 @@ public class LogOnFrm extends MyBootFrame {
 
     public static LogOnFrm getInstance() {
         return logOnFrm;
+    }
+
+    public JTextField getjTextField() {
+        return jTextField;
+    }
+
+    public JPasswordField getjPasswordField() {
+        return jPasswordField;
+    }
+
+    public JComboBox<String> getjComboBoxSelectUserType() {
+        return jComboBoxSelectUserType;
     }
 }

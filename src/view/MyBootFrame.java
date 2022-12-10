@@ -1,7 +1,5 @@
 package view;
 
-import style.StyleCtrl;
-
 import javax.swing.*;
 
 abstract public class MyBootFrame extends JFrame implements WaitModeAble{
@@ -12,7 +10,7 @@ abstract public class MyBootFrame extends JFrame implements WaitModeAble{
         this.setResizable(false);
         this.setFocusable(true);
     }
-    abstract boolean checkInputLegal();
+    abstract boolean checkInputLegalAndSend();
 
     boolean isLegalId(String number){
         int n = number.length();

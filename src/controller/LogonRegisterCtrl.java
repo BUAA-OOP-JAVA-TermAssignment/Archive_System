@@ -5,8 +5,8 @@ import data.UserData;
 import message.BaseMsg;
 import message.LoginReturnMsg;
 import message.UserLoginRequestMsg;
+import message.UserRegisterRequestMsg;
 import style.StyleCtrl;
-import view.AdminMainFrm;
 import view.LogOnFrm;
 import view.RegisterFrm;
 
@@ -116,6 +116,49 @@ public class LogonRegisterCtrl {
             return;
         }
 
-        System.out.println("!!!LogonRegisterCtrl : undefined return message");
+        System.out.println("!!!LogonRegisterCtrl : logon undefined return message");
+    }
+
+    public static void tryRegister(String name, String id, String password, String email) {
+        System.out.println("LogonRegisterCtrl : receive register request : " + name + " " + id + " " + password + " " +email);
+
+        // 当发送消息时连接还未就绪
+        if(myClient == null) {
+            registerFrm.connectError();
+            registerFrm.disWaitMode();
+            return;
+        }
+
+        int ret = myClient.sendMsg(UserRegisterRequestMsg.createRegisterRequestMsg(name, id, password, email));
+
+        if(ret == Client.SUCCESS) registerFrm.sendMsgNotice();
+        else {
+            registerFrm.connectError();
+            registerFrm.disWaitMode();
+            return;
+        }
+
+        // 接收
+        BaseMsg retMsg = myClient.waitMsg();
+        registerFrm.disWaitMode();
+        if(retMsg.getMsgCode() == BaseMsg.SUCCESS) {
+            registerFrm.registerSuccess();
+            logOnFrm.getjTextField().setText(id);
+            logOnFrm.getjPasswordField().setText(password);
+            logOnFrm.getjComboBoxSelectUserType().setSelectedIndex(1);
+            logOnFrm.registerSuccess();
+            changeRegToLog();
+            return;
+        }
+        if(retMsg.getMsgCode() == BaseMsg.TIME_OUT) {
+            registerFrm.timeoutError();
+            return;
+        }
+        if(retMsg.getMsgCode() == BaseMsg.UNDEFINED_FAILED) {
+            registerFrm.registerFailed();
+            return;
+        }
+
+        System.out.println("!!!LogonRegisterCtrl : register undefined return message");
     }
 }

@@ -38,11 +38,6 @@ public class GuestMainCtrl {
         interFrame.setVisible(true);
         mainWindow.getTable().add(interFrame);
         interFrame.setBounds(0, 0,1000, 600);
-        try {
-            interFrame.setMaximum(true);
-        } catch (PropertyVetoException e) {
-            System.out.println("GuestMainCtrl : default inter frame maximum error");
-        }
     }
 
     private static void initPersonalCentre() {
