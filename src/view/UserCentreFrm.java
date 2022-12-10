@@ -19,6 +19,8 @@ public class UserCentreFrm extends MyInterFrame{
     private static final int WIDGET_GAP = 400;
     private static final int FIELD_HEIGHT = 40;
 
+    private static volatile UserCentreFrm userCentreFrm = null;
+
     private String userName = "这里要写十个字差三个";
     private String id = "20374090";
     private String email = "3232572736@qq.com";
@@ -29,7 +31,7 @@ public class UserCentreFrm extends MyInterFrame{
 
 
 
-    public UserCentreFrm(){
+    private UserCentreFrm(){
         UserData userData = UserData.getInstance();
 //        if(userData.getUserName().equals("游客12138")){
 //            //TODO:一个提示未加载完成的函数
@@ -41,6 +43,18 @@ public class UserCentreFrm extends MyInterFrame{
 //            this.downloadNum = userData.getDownloadNum();
         initComponents();
 //        }
+    }
+
+    public static UserCentreFrm createUserCentreFrm(){
+        if(userCentreFrm == null) {
+            synchronized (GuestSearchFrm.class) {
+                if(userCentreFrm == null) {
+                    userCentreFrm = new UserCentreFrm();
+                }
+            }
+        }
+
+        return userCentreFrm;
     }
 
     private void initComponents(){
@@ -272,7 +286,7 @@ public class UserCentreFrm extends MyInterFrame{
         MyFrame myFrameTest = new MyFrame() {
         };
 
-        UserCentreFrm userCentreFrmTest = new UserCentreFrm();
+        UserCentreFrm userCentreFrmTest = createUserCentreFrm();
         myFrameTest.getTable().add(userCentreFrmTest);
         userCentreFrmTest.setVisible(true);
         myFrameTest.setVisible(true);

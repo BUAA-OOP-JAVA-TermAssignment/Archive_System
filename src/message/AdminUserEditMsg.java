@@ -1,5 +1,8 @@
 package message;
 
+import data.UserData;
+import view.AdminMainFrm;
+
 import java.util.*;
 
 /**
@@ -9,12 +12,13 @@ import java.util.*;
  * &#064;date  : 2022/12/8 20:57
  */
 public class AdminUserEditMsg extends BaseMsg{
+    private static volatile AdminUserEditMsg instance;
     public static final int REQUEST_INFO = 0;
 
-    private final int adminUserEditCode;
-    //TODO:还没有设计具体包含什么
+    private int adminUserEditCode;
 
-    private ArrayList<User> userArrayList;
+
+    private ArrayList<User> userArrayList = null;
     class User {
         private String userName;
         private String id;
@@ -26,17 +30,40 @@ public class AdminUserEditMsg extends BaseMsg{
     }
 
 
-    private AdminUserEditMsg(int adminUserEditCode,ArrayList<User> userArrayList) {
+    private AdminUserEditMsg() {
         super(ADMIN_USER_EDIT);
-        this.adminUserEditCode = adminUserEditCode;
+    }
+
+    public static AdminUserEditMsg createAdminUserEditMsg(){
+        if(instance == null){
+            synchronized (UserData.class){
+                if(instance == null){
+                    instance = new AdminUserEditMsg();
+                }
+            }
+        }
+        return instance;
+    }
+
+    /**
+     * 在数据库上传时调用
+     * @param userArrayList
+     *
+     */
+    public void addUserMsg(ArrayList<User> userArrayList){
         this.userArrayList = userArrayList;
     }
 
-    public static AdminUserEditMsg createAdminUserEditMsg(int adminUserEditCode, ArrayList<User> userArrayList) {
-        return new AdminUserEditMsg(adminUserEditCode,userArrayList);
+    public void addEditCode(int adminUserEditCode){
+        this.adminUserEditCode = adminUserEditCode;
     }
 
-    public int getUserNum(){return userArrayList.size();}
+    public int getUserNum(){
+        if(userArrayList == null){
+            return 0;
+        }
+        return userArrayList.size();
+    }
     public User getUserInfo(int i){
         return userArrayList.get(i);
     }
