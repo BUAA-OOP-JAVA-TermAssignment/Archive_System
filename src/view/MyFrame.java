@@ -30,7 +30,7 @@ abstract public class MyFrame extends JFrame implements WaitModeAble{
         this.setMinimumSize(new Dimension(500, 500));
 
         // 使用关闭器关闭
-        this.addWindowListener(Closer.getConfirmCloser());
+        this.addWindowListener(Closer.getDataUploadCloser());
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
 

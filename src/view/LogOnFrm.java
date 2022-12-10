@@ -1,22 +1,17 @@
 package view;
 
-import controller.Closer;
 import controller.LogonRegisterCtrl;
-import controller.NetworkCtrl;
 import style.StyleCtrl;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class LogOnFrm extends MyBootFrame {
     // 启动即调用，该单例模式不需要懒加载
     private static final LogOnFrm logOnFrm = new LogOnFrm();
-    private static final int NO_CHOSEN = 0, GUEST = 1, ADMIN = 2;
+    public static final int NO_CHOSEN = 0, GUEST = 1, ADMIN = 2;
     private static final int FRAME_WIDTH = 350;
     private static final int FRAME_HEIGHT = 450;
     private static final int WIDGET_X = 40;
@@ -43,6 +38,8 @@ public class LogOnFrm extends MyBootFrame {
             }
         }
     };
+
+    private final JLabel msgLabel = new JLabel("等待服务器响应...");
     private LogOnFrm() {
         initComponents();
         this.addKeyListener(enterResponse);
@@ -81,15 +78,19 @@ public class LogOnFrm extends MyBootFrame {
         jButtonLogOn.setText("登录");
         jButtonLogOn.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click log on button");
+            msgLabel.setVisible(false);
             if(checkInputLegal()) {
                 return;
             }
             this.enWaitMode();
-            NetworkCtrl.timeoutWakeupTest(LogOnFrm.this);
+            sendMsgNotice();
+            // 发送登录请求
+            LogonRegisterCtrl.tryLogon(jComboBoxSelectUserType.getSelectedIndex(), jTextField.getText(), jPasswordField.getText());
+            //NetworkCtrl.timeoutWakeupTest(LogOnFrm.this);
         });
 
         jButtonRegister.setIcon(new ImageIcon("XXX")); // NOI18N
-        jButtonRegister.setText("注册");
+        jButtonRegister.setText("注册...");
         jButtonRegister.addActionListener(evt -> {
             System.out.println("LogOnFrm : Click register button");
             LogonRegisterCtrl.changeLogToReg();
@@ -120,6 +121,9 @@ public class LogOnFrm extends MyBootFrame {
         this.add(jButtonRegister);
         this.add(jButtonLogOn);
 
+        msgLabel.setBounds(WIDGET_X,4 * WIDGET_GAP + 5, 200, 30);
+        this.add(msgLabel);
+        this.msgLabel.setVisible(false);
 
         fieldWidth -= 5;
         for(JLabel label : errorLabels) {
@@ -149,12 +153,12 @@ public class LogOnFrm extends MyBootFrame {
 
     @Override
     public void enWaitMode() {
-        this.setEnabled(false);
+        this.jButtonLogOn.setEnabled(false);
     }
 
     @Override
     public void disWaitMode() {
-        this.setEnabled(true);
+        this.jButtonLogOn.setEnabled(true);
     }
 
     @Override
@@ -184,7 +188,7 @@ public class LogOnFrm extends MyBootFrame {
             isInputIllegal = true;
         }
 
-        errorLabels[1].setText("密码不合法");
+        //errorLabels[1].setText("密码不合法");
         errorLabels[0].setVisible(isIdError);
         errorLabels[1].setVisible(isPasswordError);
         errorLabels[2].setVisible(isNotChosen);
@@ -197,19 +201,44 @@ public class LogOnFrm extends MyBootFrame {
         return (jComboBoxSelectUserType.getSelectedIndex() != NO_CHOSEN);
     }
 
-    public void passwordError() {
-        errorLabels[0].setVisible(false);
-        errorLabels[1].setText("密码错误");
-        errorLabels[0].setVisible(true);
-        errorLabels[0].setVisible(false);
+    public void idOrPasswordError() {
+        msgLabel.setText("用户名或密码错误");
+        msgLabel.setForeground(Color.RED);
+        msgLabel.setVisible(true);
 
-        jPasswordField.setText("");
+        //errorLabels[1].setText("密码错误");
+        //jPasswordField.setText("");
+    }
+
+
+    public void connectError() {
+        msgLabel.setText("登陆请求发送失败，请稍后重试");
+        msgLabel.setForeground(Color.RED);
+        msgLabel.setVisible(true);
+    }
+
+    public void timeoutError() {
+        msgLabel.setText("服务器连接超时，请稍后重试");
+        msgLabel.setForeground(Color.RED);
+        msgLabel.setVisible(true);
+    }
+
+    public void sendMsgNotice() {
+        msgLabel.setText("等待服务器响应...");
+        msgLabel.setForeground(Color.YELLOW);
+        msgLabel.setVisible(true);
+    }
+
+    public void logonSuccess() {
+        msgLabel.setText("登录成功");
+        msgLabel.setForeground(Color.GREEN);
+        msgLabel.setVisible(true);
     }
 
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARK);
 
-        LogOnFrm LogOnFrmTest = LogOnFrm.getInstance();
+        LogOnFrm LogOnFrmTest = new LogOnFrm();
         LogOnFrmTest.setVisible(true);
     }
 

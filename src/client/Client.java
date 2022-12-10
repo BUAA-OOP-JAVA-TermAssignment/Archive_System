@@ -1,11 +1,13 @@
 package client;
 
 import message.BaseMsg;
+import message.LoginReturnMsg;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Date;
 
 /**
  * @author pcpas
@@ -117,6 +119,11 @@ public class Client {
      * @param msg
      */
     public int sendMsg(BaseMsg msg) {
+        // TODO:test
+        System.out.println("Client : send message");
+        return SUCCESS;
+
+        /*
         if (!isConnected) {
             return DISCONNECT;
         }
@@ -131,10 +138,17 @@ public class Client {
         }
 
         return SUCCESS;
+
+         */
     }
 
     public BaseMsg waitMsg() {
-        // TODO:阻塞等待主机返回的消息，不判断返回消息类型，交由调用的方法处理，
+        System.out.println("Client : wait message");
+        // TODO:阻塞等待主机返回的消息，不判断返回消息类型，交由调用的方法处理，超时自动返回一个超时的消息
+
+
+        // TODO:test
         return new BaseMsg(BaseMsg.TIME_OUT);
+        //return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, new Date());
     }
 }
