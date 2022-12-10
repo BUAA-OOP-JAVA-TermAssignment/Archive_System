@@ -91,8 +91,9 @@ public class AdminMainFrm extends MyFrame{
         jPanelTableBody.setBackground(Color.PINK);
         jPanelTableBody.setSize(WIDTH_TABLE, HEIGHT_BODY);
         jPanelTableBody.setLocation(TABLE_X,TABLE_Y+HEIGHT_ROW);
-        table.add(jPanelTableBody);
         initBodyContent();
+        table.add(jPanelTableBody);
+
     }
 
     private void initHeaderLabel(){

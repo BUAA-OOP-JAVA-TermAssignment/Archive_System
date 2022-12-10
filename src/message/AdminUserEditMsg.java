@@ -83,6 +83,18 @@ public class AdminUserEditMsg extends BaseMsg{
         this.adminUserEditCode = adminUserEditCode;
     }
 
+    public void changeDownloadCnt(int i){
+        this.userArrayList.get(i).downloadCnt = 0;
+    }
+
+    public void changePassword(int i, String password){
+        this.userArrayList.get(i).password = password;
+    }
+
+    public void changeEmail(int i, String email){
+        this.userArrayList.get(i).email = email;
+    }
+
     public int getUserNum(){
         if(userArrayList == null){
             return 0;
