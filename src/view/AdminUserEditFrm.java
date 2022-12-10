@@ -8,7 +8,7 @@ import style.StyleCtrl;
 import javax.swing.*;
 import java.awt.*;
 
-public class AdminUserEditFrm extends MyFrame {
+public class AdminUserEditFrm extends MyInterFrame {
 
 
     public final static int WIDTH_TABLE = 1300;
@@ -40,11 +40,11 @@ public class AdminUserEditFrm extends MyFrame {
     private int whichPage = 0;
 
     private static volatile AdminUserEditFrm adminMainFrm = null;
-    private JDesktopPane table;
+    private static Container container;
 
     private AdminUserEditFrm() {
         super();
-        table = getTable();
+
         initComponents();
     }
 
@@ -74,6 +74,7 @@ public class AdminUserEditFrm extends MyFrame {
 
     private void initFrame() {
         this.setTitle("管理员个人中心");
+        container = this.getContentPane();
     }
 
     private void initTableHeader() {
@@ -82,7 +83,7 @@ public class AdminUserEditFrm extends MyFrame {
         jPanelTableHeader.setBackground(Color.LIGHT_GRAY);
         jPanelTableHeader.setSize(WIDTH_TABLE, HEIGHT_ROW);
         jPanelTableHeader.setLocation(TABLE_X, TABLE_Y);
-        table.add(jPanelTableHeader);
+        container.add(jPanelTableHeader);
         initHeaderLabel();
     }
 
@@ -93,7 +94,7 @@ public class AdminUserEditFrm extends MyFrame {
         jPanelTableBody.setSize(WIDTH_TABLE, HEIGHT_BODY);
         jPanelTableBody.setLocation(TABLE_X, TABLE_Y + HEIGHT_ROW);
         initBodyContent();
-        table.add(jPanelTableBody);
+        container.add(jPanelTableBody);
 
     }
 
@@ -191,7 +192,7 @@ public class AdminUserEditFrm extends MyFrame {
      */
     private void initDetailPanels() {
         for (int i = 0; i < 10; i++) {
-            table.add(jPanelsUsers[i]);
+            container.add(jPanelsUsers[i]);
             jPanelsUsers[i].setLayout(null);
             if (i % 2 == 0) {
                 jPanelsUsers[i].setBackground(Color.LIGHT_GRAY);
@@ -293,7 +294,11 @@ public class AdminUserEditFrm extends MyFrame {
 
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARCULA);
+        MyFrame myFrameTest = new MyFrame() {
+        };
         AdminUserEditFrm adminMainFrm1 = AdminUserEditFrm.createAdminMainFrm();
+        myFrameTest.getTable().add(adminMainFrm1);
         adminMainFrm1.setVisible(true);
+        myFrameTest.setVisible(true);
     }
 }
