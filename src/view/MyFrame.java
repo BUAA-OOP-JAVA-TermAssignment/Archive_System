@@ -30,25 +30,16 @@ abstract public class MyFrame extends JFrame implements WaitModeAble{
         this.setMinimumSize(new Dimension(500, 500));
 
         // 使用关闭器关闭
-        this.addWindowListener(Closer.getDataUploadCloser());
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
 
         // 设置菜单栏
         this.setJMenuBar(menuBar);
 
-        JMenu menuAccount = new JMenu("个人账户");
+        JMenu menuApplication = new JMenu("应用");
+        JMenu menuAccount = new JMenu("账户");
+        menuBar.add(menuApplication);
         menuBar.add(menuAccount);
-
-        JMenuItem menuItemSelfCentre = new JMenuItem("个人中心", null);
-        menuAccount.add(menuItemSelfCentre);
-        menuItemSelfCentre.addActionListener(actionEvent -> {
-            System.out.println("MyFrame : Menu Clicked");
-            //TODO:添加打开个人中心的逻辑；
-        });
-        // 菜单快捷键
-        menuItemSelfCentre.setAccelerator(KeyStroke.getKeyStroke('a'));
-
 
 
         // 设置容器面板，采用Boarder布局，但无所谓，这个东西没有getter外部访问不到
@@ -61,9 +52,6 @@ abstract public class MyFrame extends JFrame implements WaitModeAble{
         panel.add(table);
         table.setVisible(true);
         //TODO:设置一个可爱的图标
-
-        //TODO:添加个人中心头像及进入按钮
-
 
     }
 
@@ -81,6 +69,7 @@ abstract public class MyFrame extends JFrame implements WaitModeAble{
 
         MyFrame testFrm = new MyFrame() {
         };
+        testFrm.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
         testFrm.setVisible(true);

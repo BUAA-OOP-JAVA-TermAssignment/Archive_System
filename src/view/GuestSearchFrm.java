@@ -25,6 +25,7 @@ public class GuestSearchFrm extends MyInterFrame {
 
     private GuestSearchFrm() {
         this.setSize(1000, 800);
+        this.setMinimumSize(new Dimension(800, 400));
         refreshDisplay();
         initLayOut();
         this.setVisible(true);
