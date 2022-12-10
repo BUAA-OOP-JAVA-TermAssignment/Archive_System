@@ -7,6 +7,7 @@ package message;
  * &#064;date  : 2022/12/8 20:19
  */
 public class UserLoginRequestMsg extends BaseMsg{
+    public static final int GUEST = 1, ADMIN = 2;
     private int userType;
     private String id;
     private String password;
