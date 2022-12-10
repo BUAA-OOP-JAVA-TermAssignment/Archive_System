@@ -10,13 +10,15 @@ package message;
  * @date : 2022/12/8 20:53
  */
 public class ModifyUserInfo extends BaseMsg{
+    private final String id;
     private final String password;
     private final String email;
     private final int downloadCnt;
 
 
-    private ModifyUserInfo(String password, String email, int downloadCnt) {
+    private ModifyUserInfo(String id,String password, String email, int downloadCnt) {
         super(MODIFY_USER_INFO);
+        this.id = id;
         this.password = password;
         this.email = email;
         this.downloadCnt = downloadCnt;
@@ -29,10 +31,11 @@ public class ModifyUserInfo extends BaseMsg{
      * @param downloadCnt 下载量
      * @return 返回新建的实例
      */
-    public static ModifyUserInfo createModifyUserInfo(String password, String email, int downloadCnt) {
-        return new ModifyUserInfo(password, email, downloadCnt);
+    public static ModifyUserInfo createModifyUserInfo(String id, String password, String email, int downloadCnt) {
+        return new ModifyUserInfo(id, password, email, downloadCnt);
     }
 
+    public String getId(){return id;}
     public String getPassword() {
         return password;
     }

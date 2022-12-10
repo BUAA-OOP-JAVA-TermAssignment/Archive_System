@@ -36,6 +36,7 @@ public class AdminUserEditMsg extends BaseMsg{
         return new AdminUserEditMsg(adminUserEditCode,userArrayList);
     }
 
+    public int getUserNum(){return userArrayList.size();}
     public User getUserInfo(int i){
         return userArrayList.get(i);
     }
