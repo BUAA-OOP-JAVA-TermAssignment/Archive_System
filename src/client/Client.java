@@ -109,18 +109,18 @@ public class Client {
     public BaseMsg waitMsg() {
         System.out.println("Client : wait message");
         // TODO:阻塞等待主机返回的消息，不判断返回消息类型，交由调用的方法处理，超时自动返回一个超时的消息
-        try {
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-            BaseMsg msg = (BaseMsg) ois.readObject();
-            return msg;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return new BaseMsg(BaseMsg.UNDEFINED_FAILED);
-        }
+//        try {
+//            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+//            BaseMsg msg = (BaseMsg) ois.readObject();
+//            return msg;
+//        } catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//            return new BaseMsg(BaseMsg.UNDEFINED_FAILED);
+//        }
 
         // TODO:test
         //return new BaseMsg(BaseMsg.TIME_OUT);
-        //return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, new Date());
+        return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, new Date());
     }
 
     public boolean downloadFile(String savePath, String filename) {

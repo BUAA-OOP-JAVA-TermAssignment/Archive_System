@@ -23,6 +23,7 @@ public class LogOnFrm extends MyBootFrame {
     private final JPasswordField jPasswordField = new JPasswordField();
     private final JComboBox<String> jComboBoxSelectUserType = new JComboBox<String>();
     private final JButton jButtonLogOn = new JButton();
+    private final JButton jButtonRegister = new JButton();
 
     private JLabel[] errorLabels = new JLabel[] {
             new JLabel("请输入正确的学工号"),
@@ -54,8 +55,6 @@ public class LogOnFrm extends MyBootFrame {
         // 登陆界面输入用户密码的label
         JLabel jLabelOfPassword = new JLabel();
         JLabel jLabelOfUserType = new JLabel();
-
-        JButton jButtonRegister = new JButton();
 
     //todo：以下的路径都需要重新配图片
         jLabelOfUserName.setIcon(new ImageIcon("XXX")); // NOI18N
@@ -152,11 +151,13 @@ public class LogOnFrm extends MyBootFrame {
     @Override
     public void enWaitMode() {
         this.jButtonLogOn.setEnabled(false);
+        this.jButtonRegister.setEnabled(false);
     }
 
     @Override
     public void disWaitMode() {
         this.jButtonLogOn.setEnabled(true);
+        this.jButtonRegister.setEnabled(true);
     }
 
     @Override

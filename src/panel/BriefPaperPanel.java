@@ -16,6 +16,7 @@ public class BriefPaperPanel extends JPanel {
     private final JTextArea abstractTextArea = new JTextArea("ҪժҪժҪҪժҪժҪժҪժҪҪժҪժҪҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪҪժҪժҪҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժҪժ");
     private final JLabel keywordsLabel = new JLabel("�ؼ���");
     private final JLabel imageLabel = new JLabel();
+    private final JLabel cntLabel = new JLabel("ȫ��ƥ��500��");
     private final JButton buttonDetail = new JButton("����...");
     private final JButton buttonChangeHeight = new JButton("����");
 
@@ -33,18 +34,19 @@ public class BriefPaperPanel extends JPanel {
 
     private void setTextStyle() {
         final Font titleFont = MyFonts.TITLE_FONT_24;
-        final Font authorFont = MyFonts.SUB_TITLE_FONT_18;
         final Font keywordFont = MyFonts.SUB_TITLE_FONT_18;
         final Font abstractFont = MyFonts.TEXT_FONT_18;
 
         titleLabel.setFont(titleFont);
-        authorLabel.setFont(authorFont);
+        authorLabel.setFont(keywordFont);
         keywordsLabel.setFont(keywordFont);
         abstractTextArea.setFont(abstractFont);
+        cntLabel.setFont(keywordFont);
 
         setAlignment(titleLabel, JLabel.CENTER, JLabel.TOP);
         setAlignment(authorLabel, JLabel.LEFT, JLabel.TOP);
         setAlignment(keywordsLabel, JLabel.LEFT, JLabel.TOP);
+        setAlignment(cntLabel, JLabel.RIGHT, JLabel.TOP);
 
         abstractTextArea.setOpaque(false);
         abstractTextArea.setLineWrap(true);
@@ -117,7 +119,7 @@ public class BriefPaperPanel extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.gridheight = 1;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         gbc.weightx = 1;
         gbc.weighty = 0;
         this.add(keywordsLabel, gbc);
@@ -150,6 +152,12 @@ public class BriefPaperPanel extends JPanel {
         gbc.gridx = 2;
         gbc.gridy = 1;
         this.add(buttonChangeHeight, gbc);
+
+        //ƥ�������ǩ
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.EAST;
+        this.add(cntLabel, gbc);
     }
 
     private void testColorSet() {

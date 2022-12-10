@@ -1,5 +1,6 @@
 package view;
 
+import message.SearchReturnMsg;
 import panel.BriefPaperPanel;
 import panel.SearchPanel;
 import style.StyleCtrl;
@@ -156,6 +157,14 @@ public class GuestSearchFrm extends MyInterFrame {
 
         //getInstance().briefPanels[4].setPreferredSize(new Dimension(0, 500));
         //getInstance().container.setSize(getInstance().container.getPreferredSize());
+    }
+
+    private void pageUp() {
+
+    }
+
+    private void pageDown() {
+
     }
 }
 
