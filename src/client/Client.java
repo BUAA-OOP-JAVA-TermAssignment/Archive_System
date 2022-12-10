@@ -11,6 +11,9 @@ import java.net.Socket;
  * @author pcpas
  */
 public class Client {
+    public static final int SUCCESS = 0;
+    public static final int DISCONNECT = -1;
+    public static final int EXCEPTION = -2;
 
     private static Client client;
 
@@ -113,9 +116,9 @@ public class Client {
      *
      * @param msg
      */
-    public void sendMsg(BaseMsg msg) {
+    public int sendMsg(BaseMsg msg) {
         if (!isConnected) {
-            return;
+            return DISCONNECT;
         }
         try {
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -124,6 +127,14 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("!!!发送报文错误");
+            return EXCEPTION;
         }
+
+        return SUCCESS;
+    }
+
+    public BaseMsg waitMsg() {
+        // TODO:阻塞等待主机返回的消息，不判断返回消息类型，交由调用的方法处理，
+        return new BaseMsg(BaseMsg.TIME_OUT);
     }
 }

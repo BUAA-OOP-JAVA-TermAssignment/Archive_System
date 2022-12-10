@@ -43,4 +43,8 @@ public class LogonRegisterCtrl {
         registerFrm.setVisible(false);
         status = LOGON;
     }
+
+    public static void tryLogon() {
+
+    }
 }
