@@ -3,9 +3,7 @@ package client;
 import message.BaseMsg;
 import message.LoginReturnMsg;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Date;
 
@@ -56,7 +54,6 @@ public class Client {
             return false;
         }
         this.isConnected = true;
-        new ReceiveServerThread(socket).start();
         return true;
     }
 
@@ -80,38 +77,6 @@ public class Client {
         return true;
     }
 
-    /**
-     * 不断接受报文类
-     */
-    class ReceiveServerThread extends Thread {
-        private Socket client;
-
-        public ReceiveServerThread(Socket client) {
-            super();
-            this.client = client;
-        }
-
-        @Override
-        public void run() {
-            try {
-                while (true) {
-                    ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
-                    BaseMsg msg = (BaseMsg) ois.readObject();
-                    //TODO:接收到msg之后
-//                    if (msg instanceof SuccessMsg) {
-//                        System.out.println("TODO:登陆成功！");
-//                    } else {
-//                        System.out.println("TODO:登录失败！");
-//                    }
-                }
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
-
 
     /**
      * 供Controller调用，向服务器发送msg类的方法
@@ -121,9 +86,9 @@ public class Client {
     public int sendMsg(BaseMsg msg) {
         // TODO:test
         System.out.println("Client : send message");
-        return SUCCESS;
+        //return SUCCESS;
 
-        /*
+
         if (!isConnected) {
             return DISCONNECT;
         }
@@ -139,17 +104,48 @@ public class Client {
 
         return SUCCESS;
 
-         */
     }
 
     public BaseMsg waitMsg() {
         System.out.println("Client : wait message");
         // TODO:阻塞等待主机返回的消息，不判断返回消息类型，交由调用的方法处理，超时自动返回一个超时的消息
-
+        try {
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            BaseMsg msg = (BaseMsg) ois.readObject();
+            return msg;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new BaseMsg(BaseMsg.UNDEFINED_FAILED);
+        }
 
         // TODO:test
-        //return new BaseMsg(BaseMsg.SUCCESS);
         //return new BaseMsg(BaseMsg.TIME_OUT);
-        return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, new Date());
+        //return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, new Date());
     }
+
+    public boolean downloadFile(String savePath, String filename) {
+        try {
+            InputStream inputStream = socket.getInputStream();
+            File file = new File(savePath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+
+            BufferedOutputStream bos = new BufferedOutputStream((new FileOutputStream(file + "\\" + filename + ".pdf")));
+            System.out.println("hello");
+            byte[] data = new byte[1024];
+            int len;
+            while ((len = inputStream.read(data)) != -1) {
+                bos.write(data, 0, len);
+            }
+            System.out.println("文件接收成功");
+            inputStream.close();
+            bos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
