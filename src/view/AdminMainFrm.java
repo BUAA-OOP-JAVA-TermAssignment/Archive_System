@@ -268,6 +268,15 @@ public class AdminMainFrm extends MyFrame{
         y += 10*WIDTH_BASE;
         jPanelsUsers[i].add(jTextFieldDate);
 
+        JButton jButtonReset = new JButton();
+        jButtonReset.setVisible(true);
+        jButtonReset.setText("重置次数");
+        jButtonReset.addActionListener(evt ->{
+            System.out.println("AdminMainFrm : Click reset button");
+            jTextFieldDownloadCnt.setText("0");
+        });
+
+
         JTextField jTextFieldOption = new JTextField();
         jTextFieldOption.setOpaque(false);
         jTextFieldOption.setText("操作选项");
