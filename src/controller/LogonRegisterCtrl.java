@@ -9,10 +9,13 @@ import javax.swing.*;
 
 public class LogonRegisterCtrl {
     static {
-        StyleCtrl.init();
+        // 添加判断，防止和其他类的测试方法冲突
+        if(StyleCtrl.getStyle() == StyleCtrl.NOT_SET) StyleCtrl.init();
     }
-    private final static LogOnFrm logOnFrm = new LogOnFrm();
-    private final static RegisterFrm registerFrm = new RegisterFrm();
+    // 启动即使用
+    private static LogOnFrm logOnFrm = LogOnFrm.getInstance();
+    // 调用时加载
+    private static RegisterFrm registerFrm = null;
     public static final int LOGON = 0, REGISTER = 1, RUNNING = 2;
 
     private static int status = 0;
@@ -22,6 +25,9 @@ public class LogonRegisterCtrl {
 
     public static void changeLogToReg() {
         if(status != LOGON)return;
+
+        if(registerFrm == null) registerFrm = RegisterFrm.getInstance();
+
         registerFrm.setVisible(true);
         registerFrm.setLocationRelativeTo(logOnFrm);
         logOnFrm.setVisible(false);
@@ -30,6 +36,8 @@ public class LogonRegisterCtrl {
 
     public static void changeRegToLog() {
         if(status != REGISTER)return;
+
+
         logOnFrm.setVisible(true);
         logOnFrm.setLocationRelativeTo(registerFrm);
         registerFrm.setVisible(false);

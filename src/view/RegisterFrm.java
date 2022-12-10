@@ -7,9 +7,9 @@ import style.StyleCtrl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Scanner;
 
 public class RegisterFrm extends MyBootFrame{
+    private static volatile RegisterFrm registerFrm = null;
 
     private static final int FRAME_WIDTH = 450;
     private static final int FRAME_HEIGHT = 550;
@@ -48,7 +48,7 @@ public class RegisterFrm extends MyBootFrame{
             }
         }
     };
-    public RegisterFrm() {
+    private RegisterFrm() {
         this.setTitle("ÓÃ»§×¢²á");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLocationRelativeTo(null);
@@ -171,9 +171,21 @@ public class RegisterFrm extends MyBootFrame{
         return isInputIllegal;
     }
 
+    public static RegisterFrm getInstance() {
+        if(registerFrm == null) {
+            synchronized (RegisterFrm.class) {
+                if(registerFrm == null) {
+                    registerFrm = new RegisterFrm();
+                }
+            }
+        }
+
+        return registerFrm;
+    }
+
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARK);
-        RegisterFrm registerFrmTest = new RegisterFrm();
+        RegisterFrm registerFrmTest = RegisterFrm.getInstance();
         registerFrmTest.setDefaultCloseOperation(EXIT_ON_CLOSE);
         registerFrmTest.setVisible(true);
     }

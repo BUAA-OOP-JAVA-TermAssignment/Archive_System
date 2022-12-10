@@ -14,6 +14,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class LogOnFrm extends MyBootFrame {
+    // 启动即调用，该单例模式不需要懒加载
+    private static final LogOnFrm logOnFrm = new LogOnFrm();
     private static final int NO_CHOSEN = 0, GUEST = 1, ADMIN = 2;
     private static final int FRAME_WIDTH = 350;
     private static final int FRAME_HEIGHT = 450;
@@ -41,7 +43,7 @@ public class LogOnFrm extends MyBootFrame {
             }
         }
     };
-    public LogOnFrm() {
+    private LogOnFrm() {
         initComponents();
         this.addKeyListener(enterResponse);
     }
@@ -207,8 +209,12 @@ public class LogOnFrm extends MyBootFrame {
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARK);
 
-        LogOnFrm LogOnFrmTest = new LogOnFrm();
+        LogOnFrm LogOnFrmTest = LogOnFrm.getInstance();
         LogOnFrmTest.setVisible(true);
     }
 
+
+    public static LogOnFrm getInstance() {
+        return logOnFrm;
+    }
 }

@@ -9,6 +9,7 @@ import javax.swing.*;
 
 // 程序启动即工作，类方法
 public class StyleCtrl {
+    final public static int NOT_SET = -1;
     final public static int LIGHT = 0;
     final public static int INTELLIJ = 1;
     final public static int DARK = 2;
@@ -17,7 +18,7 @@ public class StyleCtrl {
     private static FlatIntelliJLaf flatIntelliJLaf = null;
     private static FlatDarkLaf flatDarkLaf = null;
     private static FlatDarculaLaf flatDarculaLaf = null;
-    private static int style = -1;
+    private static int style = NOT_SET;
 
     public static void init() {
         setStyle(INTELLIJ);
