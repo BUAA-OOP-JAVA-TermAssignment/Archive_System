@@ -31,6 +31,7 @@ public class LogonRegisterCtrl {
         logOnFrm.setVisible(true);
         //System.out.println("startGet");
         myClient = Client.getMyClient();
+        myClient.connect();
         System.out.println("LogonRegisterCtrl : client ready");
     }
 

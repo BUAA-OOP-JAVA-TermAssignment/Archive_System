@@ -49,7 +49,7 @@ public class Client {
         try {
             socket = new Socket("127.0.0.1", 8888);
             //将超时时间设定为10s，若没有返回任何信息则抛出异常
-            socket.setSoTimeout(10);
+            socket.setSoTimeout(10000);
             System.out.println("Connect Server Success");
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,10 +98,10 @@ public class Client {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject(msg);
-            System.out.println("！！！发送报文成功");
+            System.out.println("Send Message Success");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("!!!发送报文错误");
+            System.out.println("Send Message Failed!");
             return EXCEPTION;
         }
 
@@ -112,21 +112,21 @@ public class Client {
     public BaseMsg waitMsg() {
         System.out.println("Client : wait message");
         // TODO:阻塞等待主机返回的消息，不判断返回消息类型，交由调用的方法处理，超时自动返回一个超时的消息
-//        try {
-//            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-//            BaseMsg msg = (BaseMsg) ois.readObject();
-//            return msg;
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//            return new BaseMsg(BaseMsg.UNDEFINED_FAILED);
-//        } catch (SocketTimeoutException e) {
-//            return new BaseMsg(BaseMsg.TIME_OUT);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            System.out.println("Lost connection!");
-//        }
-
-        return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, "2022-12-11 01:20:05");
+        try {
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            BaseMsg msg = (BaseMsg) ois.readObject();
+            return msg;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return new BaseMsg(BaseMsg.UNDEFINED_FAILED);
+        } catch (SocketTimeoutException e) {
+            return new BaseMsg(BaseMsg.TIME_OUT);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Lost connection!");
+        }
+        //return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, "2022-12-11 01:20:05");
+        return new BaseMsg(BaseMsg.TIME_OUT);
     }
 
     public boolean downloadFile(String savePath, String filename) {
@@ -138,14 +138,17 @@ public class Client {
             }
 
             BufferedOutputStream bos = new BufferedOutputStream((new FileOutputStream(file + "\\" + filename)));
-            System.out.println("hello");
             byte[] data = new byte[1024];
             int len;
             while ((len = inputStream.read(data)) != -1) {
+                if (len == 3) {
+                    if (data[0] == 'E' && data[1] == 'O' && data[2] == 'F') {
+                        break;
+                    }
+                }
                 bos.write(data, 0, len);
             }
-            System.out.println("文件接收成功");
-            inputStream.close();
+            System.out.println("File Download Success");
             bos.close();
             return true;
         } catch (IOException e) {

@@ -26,7 +26,6 @@ public class AdminMainCtrl {
     private static final AdminMainFrm adminMainFrm = AdminMainFrm.getInstance();
     //private static final AdminUserEditFrm adminUserEditFrm = AdminUserEditFrm.createAdminEditFrm();
 
-    private static int status = 0;
     public static void main(String[] args) {
         adminMainFrm.setVisible(true);
         //System.out.println("startGet");
@@ -45,7 +44,8 @@ public class AdminMainCtrl {
         mainWindow.setVisible(true);
     }
 
-    public static boolean tryLoad() {
+    public static synchronized boolean tryLoad() {
+        adminMainFrm.enWaitMode();
         System.out.println("AdminMainCtrl : receive adminMain request");
         myClient = Client.getMyClient();
         // 当发送消息时连接还未就绪
@@ -84,7 +84,8 @@ public class AdminMainCtrl {
         return false;
     }
 
-    public static boolean Change(String userName,String id, String email, String password, int downloadCnt, String date){
+    public static synchronized boolean Change(String userName,String id, String email, String password, int downloadCnt, String date){
+        adminMainFrm.enWaitMode();
         System.out.println("AdminMainCtrl : adminUserEdit reset downloadCnt request");
         if(myClient == null) {
             adminMainFrm.disWaitMode();
@@ -93,8 +94,10 @@ public class AdminMainCtrl {
         int ret = myClient.sendMsg(AdminUserEditMsg.createAdminUserEditMsg(AdminUserEditMsg.CHANGE,userName,id,email,password,downloadCnt,date));
 
         if(ret == Client.SUCCESS){
+            adminMainFrm.disWaitMode();
             return true;
         } else {
+            adminMainFrm.disWaitMode();
             return false;
         }
     }
