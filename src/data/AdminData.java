@@ -80,4 +80,16 @@ public class AdminData {
     public String getUserDate(int idx){
         return userArrayList.get(idx).date;
     }
+
+    public void ChangeDownloadCnt(int idx){
+        userArrayList.get(idx).downloadCnt = 0;
+    }
+
+    public void ChangePassword(int idx, String password){
+        userArrayList.get(idx).password = password;
+    }
+
+    public void ChangeEmail(int idx, String email){
+        userArrayList.get(idx).email = email;
+    }
 }

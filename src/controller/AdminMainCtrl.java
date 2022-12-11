@@ -3,10 +3,7 @@ package controller;
 import client.Client;
 import data.AdminData;
 import data.UserData;
-import message.AdminUserRequestMsg;
-import message.BaseMsg;
-import message.LoginReturnMsg;
-import message.UserLoginRequestMsg;
+import message.*;
 import style.StyleCtrl;
 import view.AdminMainFrm;
 import view.AdminUserEditFrm;
@@ -31,7 +28,6 @@ public class AdminMainCtrl {
 
     private static int status = 0;
     public static void main(String[] args) {
-        adminMainFrm.setVisible(true);
         adminMainFrm.setVisible(true);
         //System.out.println("startGet");
         myClient = Client.getMyClient();
@@ -97,4 +93,21 @@ public class AdminMainCtrl {
         System.out.println("!!!LogonRegisterCtrl : logon undefined return message");
         return false;
     }
+
+    public static boolean Change(String userName,String id, String email, String password, int downloadCnt, String date){
+        System.out.println("AdminMainCtrl : adminUserEdit reset downloadCnt request");
+        if(myClient == null) {
+            adminMainFrm.disWaitMode();
+            return false;
+        }
+        int ret = myClient.sendMsg(AdminUserEditMsg.createAdminUserEditMsg(AdminUserEditMsg.CHANGE,userName,id,email,password,downloadCnt,date));
+
+        if(ret == Client.SUCCESS){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }
