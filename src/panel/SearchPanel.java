@@ -24,6 +24,9 @@ public class SearchPanel extends JPanel {
         initWidgetInGridBag();
     }
 
+    /**
+     * 设置搜索框，为其添加一个回车键的事件响应，当搜索框被focus时，敲击回车即触发搜索
+     */
     private void initTextField() {
         textField.setOpaque(false);
         textField.setFont(MyFonts.TEXT_FONT_18);
@@ -46,6 +49,11 @@ public class SearchPanel extends JPanel {
         searchButton.setFont(MyFonts.TEXT_FONT_18);
     }
 
+    /**
+     * 在该容器中，使用GridBagLayout添加各个组件。
+     * 当容器的大小变化时，各个组件自身的高度不会变化，但他们将会始终在容器竖直方向的正中。
+     * 水平方向上，各个按钮将会以不同的权重横向拉伸。
+     */
     private void initWidgetInGridBag() {
         final Insets borderInsets = new Insets(0, 10, 0, 10);
         JLabel emptyLabelLeft = new JLabel();
@@ -165,42 +173,66 @@ public class SearchPanel extends JPanel {
         testInterFrame.setVisible(true);
     }
 
+    /**
+     * 处理当网络连接中断时对用户的显示
+     */
     public void connectError() {
         msgLabel.setText("搜索请求发送失败，请稍后重试");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当正在向服务器请求推荐信息时对用户的显示
+     */
     public void showPrepareSuggest() {
         msgLabel.setText("正在加载推荐信息...");
         msgLabel.setForeground(Color.WHITE);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当等待消息超时时对用户的显示
+     */
     public void timeoutError() {
         msgLabel.setText("服务器连接超时，请稍后重试");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当搜索遇到未知错误时对用户的显示
+     */
     public void undefinedFailed() {
         msgLabel.setText("搜索发生未知错误");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当成功搜索对用户的显示
+     */
     public void searchSuccess() {
         msgLabel.setVisible(false);
     }
 
+    /**
+     * 处理当等待服务器消息时对用户的显示
+     */
     public void sendMsgNotice() {
         msgLabel.setText("等待服务器响应...");
         msgLabel.setForeground(Color.YELLOW);
         msgLabel.setVisible(true);
     }
 
-    public void emptySearchText() {
-        msgLabel.setText("请输入搜索内容");
+    public void showSuggest() {
+        msgLabel.setText("正在为您显示推荐内容");
+        msgLabel.setForeground(Color.WHITE);
+        msgLabel.setVisible(true);
+    }
+
+    public void sameSearchText() {
+        msgLabel.setText("搜索内容的结果正在被展示");
         msgLabel.setForeground(Color.YELLOW);
         msgLabel.setVisible(true);
     }

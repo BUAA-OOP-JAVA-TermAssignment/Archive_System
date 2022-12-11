@@ -100,6 +100,10 @@ public class BriefPaperPanel extends JPanel {
     }
 
 
+    /**
+     * 在该容器中，使用GridBagLayout添加各个组件。
+     * 当容器的大小变化时，图片的大小不会变化，而按钮以及各个文字载体将会以不同的权重拉伸。
+     */
     private void initWidgetInGridBag() {
         this.initImage();
 
@@ -190,6 +194,9 @@ public class BriefPaperPanel extends JPanel {
         this.add(cntLabel, gbc);
     }
 
+    /**
+     * 用于为部分组件添加背景色，用于在测试中表明它们占据的空间。
+     */
     private void testColorSet() {
         this.setBackground(Color.BLUE);
         titleLabel.setBackground(Color.WHITE);
