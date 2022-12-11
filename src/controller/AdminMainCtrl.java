@@ -34,6 +34,7 @@ public class AdminMainCtrl {
     }
 
     private static final AdminMainFrm mainWindow = AdminMainFrm.getInstance();
+    private static final AdminUserEditFrm adminUserEditFrm = AdminUserEditFrm.getInstance();
 
 
     public static void startMainWindow() {
@@ -42,6 +43,7 @@ public class AdminMainCtrl {
         RegisterFrm.getInstance().setVisible(false);
         RegisterFrm.getInstance().setEnabled(false);
         mainWindow.setVisible(true);
+        adminUserEditFrm.Load();
     }
 
     public static synchronized boolean tryLoad() {

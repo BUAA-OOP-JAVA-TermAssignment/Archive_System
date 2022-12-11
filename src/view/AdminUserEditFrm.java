@@ -90,6 +90,9 @@ public class AdminUserEditFrm extends MyInterFrame {
         initTitle();
         initFrame();
         initTableHeader();
+    }
+
+    public void Load(){
         boolean isLoad = AdminMainCtrl.tryLoad();
         try {
             Thread.sleep(1000);
