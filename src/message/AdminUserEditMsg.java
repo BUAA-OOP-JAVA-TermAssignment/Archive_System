@@ -1,7 +1,5 @@
 package message;
 
-import data.UserData;
-import view.AdminMainFrm;
 
 import java.util.*;
 

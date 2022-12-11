@@ -43,10 +43,12 @@ public class SearchCtrl {
         int ret = client.sendMsg(SearchRequestMsg.createSearchRequestMsg(keyWord, offset, count));
         if (ret != 0) {
             System.out.println("搜索信息发送失败");
+            return null;
         }
         BaseMsg msg = client.waitMsg();
         if (msg.getMsgCode() != -BaseMsg.SEARCH_ARCHIVE) {
             System.out.println("搜索接收到错误信息");
+            return null;
         }
         SearchReturnMsg sr = (SearchReturnMsg) msg;
         for (int i = 0; i < count; i++) {
