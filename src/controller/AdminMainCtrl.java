@@ -79,7 +79,7 @@ public class AdminMainCtrl {
                 AdminData.getInstance().add(adminUserRequestMsg.getUserId(i), adminUserRequestMsg.getUserName(i), adminUserRequestMsg.getUserPassword(i),
                         adminUserRequestMsg.getUserEmail(i), adminUserRequestMsg.getUserDownloadCnt(i),adminUserRequestMsg.getUserDate(i));
             }
-
+            adminMainFrm.disWaitMode();
             return true;
         }
 
