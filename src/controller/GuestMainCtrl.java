@@ -22,10 +22,6 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class GuestMainCtrl {
-    //TODO:test
-    static {
-        StyleCtrl.setStyle(StyleCtrl.DARCULA);
-    }
 
     private static final Client myClient = Client.getMyClient();
     // 主窗口直接加载

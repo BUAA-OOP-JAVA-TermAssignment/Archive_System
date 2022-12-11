@@ -137,7 +137,7 @@ public class Client {
                 file.mkdirs();
             }
 
-            BufferedOutputStream bos = new BufferedOutputStream((new FileOutputStream(file + "\\" + filename + ".pdf")));
+            BufferedOutputStream bos = new BufferedOutputStream((new FileOutputStream(file + "\\" + filename)));
             System.out.println("hello");
             byte[] data = new byte[1024];
             int len;
