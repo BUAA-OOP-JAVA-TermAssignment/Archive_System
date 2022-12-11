@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GuestSearchFrm extends MyInterFrame {
     public final static int HEIGHT_BRIEF = 0, HEIGHT_MORE = 1;
@@ -19,6 +21,7 @@ public class GuestSearchFrm extends MyInterFrame {
     private final static int MAX_ELEMENT = 5;
     private final SearchPanel searchBar = SearchPanel.getInstance();
     private final BriefPaperPanel[] briefPanels = new BriefPaperPanel[MAX_ELEMENT];
+    private final JScrollPane scrollPane = new JScrollPane();
     private final int[] entriesShowOption = new int[MAX_ELEMENT];
     private Dimension preferredSize;
     private JPanel container;
@@ -34,14 +37,12 @@ public class GuestSearchFrm extends MyInterFrame {
 
 
     private void initLayOut() {
-        JScrollPane scrollPane = new JScrollPane();
-
         container = new JPanel(){
             @Override
             public Dimension getPreferredSize() {
                 preferredSize = super.getPreferredSize();
                 preferredSize.setSize(scrollPane.getWidth() - 75, (int) preferredSize.getHeight());
-                System.out.println("container  " + preferredSize);
+                //System.out.println("container  " + preferredSize);
                 return preferredSize;
             }
         };
@@ -166,40 +167,40 @@ public class GuestSearchFrm extends MyInterFrame {
     private void pageDown() {
 
     }
-}
 
-class ChangeHeightListener implements ActionListener {
-    private final int buttonInx;
-    private int showOption = GuestSearchFrm.HEIGHT_BRIEF;
+    class ChangeHeightListener implements ActionListener {
+        private final int buttonInx;
+        private int showOption = GuestSearchFrm.HEIGHT_BRIEF;
 
-    public ChangeHeightListener(int buttonInx) {
-        this.buttonInx = buttonInx;
-    }
+        public ChangeHeightListener(int buttonInx) {
+            this.buttonInx = buttonInx;
+        }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        switch (showOption) {
-            case GuestSearchFrm.HEIGHT_BRIEF -> {
-                GuestSearchFrm.makeEntryShowMore(buttonInx);
-                showOption = GuestSearchFrm.HEIGHT_MORE;
-            }
-            case GuestSearchFrm.HEIGHT_MORE -> {
-                GuestSearchFrm.makeEntryShowLess(buttonInx);
-                showOption = GuestSearchFrm.HEIGHT_BRIEF;
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switch (showOption) {
+                case GuestSearchFrm.HEIGHT_BRIEF -> {
+                    GuestSearchFrm.makeEntryShowMore(buttonInx);
+                    showOption = GuestSearchFrm.HEIGHT_MORE;
+                }
+                case GuestSearchFrm.HEIGHT_MORE -> {
+                    GuestSearchFrm.makeEntryShowLess(buttonInx);
+                    showOption = GuestSearchFrm.HEIGHT_BRIEF;
+                }
             }
         }
     }
-}
 
-class DetailListener implements ActionListener {
-    private final int buttonInx;
+    class DetailListener implements ActionListener {
+        private final int buttonInx;
 
-    public DetailListener(int buttonInx) {
-        this.buttonInx = buttonInx;
-    }
+        public DetailListener(int buttonInx) {
+            this.buttonInx = buttonInx;
+        }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //TODO:添加点击详细信息按钮的事件响应
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //TODO:添加点击详细信息按钮的事件响应
+        }
     }
 }

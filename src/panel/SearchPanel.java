@@ -14,6 +14,8 @@ public class SearchPanel extends JPanel {
     private static volatile SearchPanel searchPanel= new SearchPanel();
     private final JTextField textField = new JTextField("");
     private final JButton searchButton = new JButton("搜索");
+    private final JButton upButton = new JButton("上一页");
+    private final JButton downButton = new JButton("下一页");
     private SearchPanel(){
         initTextField();
         initSearchButton();
@@ -52,7 +54,7 @@ public class SearchPanel extends JPanel {
         gbc.insets = borderInsets;
 
         // 文本框
-        gbc.gridx = 1;
+        gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
@@ -65,7 +67,7 @@ public class SearchPanel extends JPanel {
         this.add(textField, gbc);
 
         // 按钮
-        gbc.gridx = 2;
+        gbc.gridx = 3;
         gbc.gridy = 0;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
@@ -89,8 +91,23 @@ public class SearchPanel extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(emptyLabelLeft, gbc);
-        gbc.gridx = 3;
+        gbc.gridx = 5;
         this.add(emptyLabelRight, gbc);
+
+        //翻页
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.ipadx = 15;
+        gbc.ipady = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        this.add(upButton, gbc);
+        gbc.gridx = 4;
+        this.add(downButton, gbc);
     }
 
     public static SearchPanel getInstance() {

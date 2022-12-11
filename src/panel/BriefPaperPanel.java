@@ -174,7 +174,7 @@ public class BriefPaperPanel extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        System.out.println("Brief " + super.getPreferredSize());
+        //System.out.println("Brief " + super.getPreferredSize());
         return super.getPreferredSize();
     }
 
