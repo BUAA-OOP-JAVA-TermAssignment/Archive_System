@@ -6,13 +6,16 @@ import java.util.ArrayList;
 
 public class AdminData {
     private static volatile AdminData instance;
-    private ArrayList<User> userArrayList = new ArrayList<>();
+    /**
+     * 删掉static！！！！和下面的User一起删
+     */
+    private static ArrayList<User> userArrayList = new ArrayList<>();
 
     private AdminData(){
 
     }
 
-    public class User {
+    public static class User {
         String userName;
         String id;
         String password;
@@ -50,7 +53,7 @@ public class AdminData {
         }
         return userArrayList.size();
     }
-    public void add(String id, String userName, String password, String email, int downloadCnt, String date){
+    public void add(String id, String userName, String password, int downloadCnt, String email, String date){
         userArrayList.add(new User(userName,id,password,downloadCnt,date,email));
     }
     public User getUserInfo(int i){

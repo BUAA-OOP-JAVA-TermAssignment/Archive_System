@@ -43,7 +43,7 @@ public class AdminMainCtrl {
         RegisterFrm.getInstance().setVisible(false);
         RegisterFrm.getInstance().setEnabled(false);
         mainWindow.setVisible(true);
-        adminUserEditFrm.Load();
+        //adminUserEditFrm.Load();
     }
 
     public static synchronized boolean tryLoad() {
@@ -77,7 +77,7 @@ public class AdminMainCtrl {
 
             for(int i = 0; i < adminUserRequestMsg.getUserNum(); i++){
                 AdminData.getInstance().add(adminUserRequestMsg.getUserId(i), adminUserRequestMsg.getUserName(i), adminUserRequestMsg.getUserPassword(i),
-                        adminUserRequestMsg.getUserEmail(i), adminUserRequestMsg.getUserDownloadCnt(i),adminUserRequestMsg.getUserDate(i));
+                        adminUserRequestMsg.getUserDownloadCnt(i),adminUserRequestMsg.getUserEmail(i), adminUserRequestMsg.getUserDate(i));
             }
             adminMainFrm.disWaitMode();
             return true;
