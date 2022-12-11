@@ -34,6 +34,9 @@ public class LogonRegisterCtrl {
         System.out.println("LogonRegisterCtrl : client ready");
     }
 
+    /**
+     * 由登录窗口切换至注册窗口
+     */
     public static void changeLogToReg() {
         if(status != LOGON)return;
 
@@ -45,6 +48,9 @@ public class LogonRegisterCtrl {
         status = REGISTER;
     }
 
+    /**
+     * 由注册窗口切换至登录窗口
+     */
     public static void changeRegToLog() {
         if(status != REGISTER)return;
 
@@ -55,13 +61,20 @@ public class LogonRegisterCtrl {
         status = LOGON;
     }
 
+    /**
+     * 在各个参数的合法性检验通过后，向服务器发送消息，并阻塞等待，尝试登陆。
+     * 当登录失败时，会调用登录窗口中相关方法，显示错误信息。
+     * 登录成功时，会隐藏注册和登录窗口，并新建线程启动主窗口，同时解析服务器返回的用户信息并保存。
+     * @param userType 用户类型，1代表访客，2代表管理员
+     * @param id 用户ID
+     * @param password 用户密码
+     */
     public static synchronized void tryLogon(int userType, String id, String password) {
         System.out.println("LogonRegisterCtrl : receive logon request : " + id + " " + password);
 
         // 当发送消息时连接还未就绪
         if(myClient == null) {
             logOnFrm.connectError();
-            logOnFrm.disWaitMode();
             return;
         }
         int ret = myClient.sendMsg(UserLoginRequestMsg.createLoginRequestMsg(userType, id, password));
@@ -69,7 +82,6 @@ public class LogonRegisterCtrl {
         if(ret == Client.SUCCESS) logOnFrm.sendMsgNotice();
         else {
             logOnFrm.connectError();
-            logOnFrm.disWaitMode();
             return;
         }
 
@@ -83,7 +95,6 @@ public class LogonRegisterCtrl {
                 loginReturnMsg = (LoginReturnMsg) retMsg;
             }catch (Exception e) {
                 System.out.println("!!!LogonRegisterCtrl : success return message type error");
-                logOnFrm.disWaitMode();
                 return;
             }
 
@@ -105,7 +116,6 @@ public class LogonRegisterCtrl {
             return;
         }
 
-        logOnFrm.disWaitMode();
         if(retMsg.getMsgCode() == BaseMsg.TIME_OUT) {
             logOnFrm.timeoutError();
             return;
@@ -119,13 +129,22 @@ public class LogonRegisterCtrl {
         System.out.println("!!!LogonRegisterCtrl : logon undefined return message");
     }
 
+
+    /**
+     * 在各个参数的合法性检验通过后，向服务器发送消息，并阻塞等待，尝试注册。
+     * 当注册失败时，会调用注册窗口中相应方法，向用户显示失败信息。
+     * 当注册成功后，会将注册的用户ID与密码填充至登录窗口相应位置，并跳转回登录窗口。
+     * @param name
+     * @param id
+     * @param password
+     * @param email
+     */
     public static synchronized void tryRegister(String name, String id, String password, String email) {
         System.out.println("LogonRegisterCtrl : receive register request : " + name + " " + id + " " + password + " " +email);
 
         // 当发送消息时连接还未就绪
         if(myClient == null) {
             registerFrm.connectError();
-            registerFrm.disWaitMode();
             return;
         }
 
@@ -134,13 +153,11 @@ public class LogonRegisterCtrl {
         if(ret == Client.SUCCESS) registerFrm.sendMsgNotice();
         else {
             registerFrm.connectError();
-            registerFrm.disWaitMode();
             return;
         }
 
         // 接收
         BaseMsg retMsg = myClient.waitMsg();
-        registerFrm.disWaitMode();
         if(retMsg.getMsgCode() == BaseMsg.SUCCESS) {
             registerFrm.registerSuccess();
             logOnFrm.getjTextField().setText(id);

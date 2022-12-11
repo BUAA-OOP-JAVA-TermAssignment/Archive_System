@@ -38,6 +38,12 @@ public class GuestSearchFrm extends MyInterFrame {
     }
 
 
+    /**
+     * 初始化用户搜索窗口的页面布局。
+     * 首先创建容器，并重写容器的getPreferredSize()，以避免其在滚动窗口中无限扩张。
+     * 之后调用initWidgetAndButtonInGridBag(JComponent container)填充容器。
+     * 最后将其设置为至滚动窗口的ViewportView。
+     */
     private void initLayOut() {
         container = new JPanel(){
             @Override
@@ -66,6 +72,15 @@ public class GuestSearchFrm extends MyInterFrame {
         this.add(scrollPane);
     }
 
+
+    /**
+     * 在所给的容器中应用GridBagLayout，并将该InternalFrame所需要的组件加入其中。
+     * 组件纵向生长，从上至下依次是搜索栏，以及各个搜索结果的显示条目。
+     * 各个组件均能够适应窗口的横向增长，但对于纵向增长则不会改变自己的大小。
+     * 此方法调用另外的方法用于为搜索栏的按钮绑定事件响应。
+     * 此方法添加内部类作为显示条目改变高度的事件响应。
+     * @param container 将会把各个组件添加至此容器中
+     */
     private void initWidgetAndButtonInGridBag(JComponent container) {
         container.setLayout(new GridBagLayout());
         final Insets entryInset = new Insets(20, 0, 20, 0);
@@ -240,7 +255,7 @@ public class GuestSearchFrm extends MyInterFrame {
     /**
      * 上一页事件。
      * 上一页和下一页按钮均不能触发searchText的更新。
-     * 单机上一页重新以不同的offset搜索。
+     * 触发之后，将以不同的offset值发送新的搜索消息。
      */
     private void pageUp() {
         if(offset == 0) {
@@ -253,7 +268,7 @@ public class GuestSearchFrm extends MyInterFrame {
     /**
      * 下一页事件。
      * 上一页和下一页按钮均不能触发searchText的更新。
-     * 单机下一页重新以不同的offset搜索。
+     * 触发之后，将以不同的offset值发送新的搜索消息。
      */
     private void pageDown() {
         if(briefPanels[briefPanels.length - 1] != null && !briefPanels[briefPanels.length - 1].isVisible()) {
@@ -281,7 +296,7 @@ public class GuestSearchFrm extends MyInterFrame {
     /**
      * 解除不可点击状态。
      * 如果最后一项有内容，则认为可以使用下一页操作。
-     * 如果offset 》 0，则可以使用上一页操作。
+     * 如果offset > 0，则可以使用上一页操作。
      */
     @Override
     public void disWaitMode() {

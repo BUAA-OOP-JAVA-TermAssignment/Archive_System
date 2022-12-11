@@ -76,13 +76,11 @@ public class LogOnFrm extends MyBootFrame {
         jButtonLogOn.setIcon(new ImageIcon("XXX")); // NOI18N
         jButtonLogOn.setText("登录");
         jButtonLogOn.addActionListener(evt -> {
+            enWaitMode();
             System.out.println("LogOnFrm : Click log on button");
             msgLabel.setVisible(false);
-            if(checkInputLegalAndSend()) {
-                return;
-            }
-            this.enWaitMode();
-            sendMsgNotice();
+            checkInputLegalAndSend();
+            disWaitMode();
             //NetworkCtrl.timeoutWakeupTest(LogOnFrm.this);
         });
 
@@ -160,8 +158,13 @@ public class LogOnFrm extends MyBootFrame {
         this.jButtonRegister.setEnabled(true);
     }
 
+    /**
+     * 检查各个输入是否合法，并向用户返回具体的不合法信息。
+     * 如果各个输入均合法，则向服务器发送登录信息。
+     * @return 返回检查是否未通过 ，即返回true表示不合法，返回false表示通过
+     */
     @Override
-    boolean checkInputLegalAndSend() {
+    synchronized boolean checkInputLegalAndSend() {
         boolean isInputIllegal = false;
 
         boolean isIdError = false;
@@ -192,8 +195,10 @@ public class LogOnFrm extends MyBootFrame {
         errorLabels[1].setVisible(isPasswordError);
         errorLabels[2].setVisible(isNotChosen);
 
-        if(!isInputIllegal)
+        if(!isInputIllegal) {
+            sendMsgNotice();
             LogonRegisterCtrl.tryLogon(jComboBoxSelectUserType.getSelectedIndex(), id, password);
+        }
         return isInputIllegal;
     }
 
@@ -212,30 +217,45 @@ public class LogOnFrm extends MyBootFrame {
     }
 
 
+    /**
+     * 处理当网络连接中断时对用户的显示
+     */
     public void connectError() {
         msgLabel.setText("登陆请求发送失败，请稍后重试");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当等待消息超时时对用户的显示
+     */
     public void timeoutError() {
         msgLabel.setText("服务器连接超时，请稍后重试");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当等待服务器响应时对用户的显示
+     */
     public void sendMsgNotice() {
         msgLabel.setText("等待服务器响应...");
         msgLabel.setForeground(Color.YELLOW);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当登录成功时对用户的显示
+     */
     public void logonSuccess() {
         msgLabel.setText("登录成功");
         msgLabel.setForeground(Color.GREEN);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当注册成功时对用户的显示
+     */
     public void registerSuccess() {
         msgLabel.setText("注册成功");
         msgLabel.setForeground(Color.GREEN);

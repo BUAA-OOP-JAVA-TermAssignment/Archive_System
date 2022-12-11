@@ -102,11 +102,10 @@ public class RegisterFrm extends MyBootFrame{
 
 
         buttonRegister.addActionListener(activeEvent -> {
+            enWaitMode();
             System.out.println("Register : register clicked");
-            if(checkInputLegalAndSend()) {
-                return;
-            }
-            this.enWaitMode();
+            checkInputLegalAndSend();
+            disWaitMode();
         });
         buttonRegister.setBounds(WIDGET_X - 3, WIDGET_Y + textLabels.length * WIDGET_GAP + 50, fieldWidth + 5, 30);
         container.add(buttonRegister);
@@ -129,8 +128,13 @@ public class RegisterFrm extends MyBootFrame{
         this.buttonRegister.setEnabled(true);
     }
 
+    /**
+     * 检查各个输入是否合法，并向用户返回具体的不合法信息。
+     * 如果各个输入均合法，则向服务器发送注册信息。
+     * @return 返回检查是否未通过 ，即返回true表示不合法，返回false表示通过
+     */
     @Override
-    boolean checkInputLegalAndSend() {
+    synchronized boolean checkInputLegalAndSend() {
         boolean isInputIllegal = false;
 
         boolean isNameError = false;
@@ -194,30 +198,45 @@ public class RegisterFrm extends MyBootFrame{
         return registerFrm;
     }
 
+    /**
+     * 处理当网络连接中断时对用户的显示
+     */
     public void connectError() {
         msgLabel.setText("注册请求发送失败，请稍后重试");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当等待消息超时时对用户的显示
+     */
     public void timeoutError() {
         msgLabel.setText("服务器连接超时，请稍后重试");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当注册失败时对用户的显示
+     */
     public void registerFailed() {
         msgLabel.setText("注册失败");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当等待服务器响应时对用户的显示
+     */
     public void sendMsgNotice() {
         msgLabel.setText("等待服务器响应...");
         msgLabel.setForeground(Color.YELLOW);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 处理当注册成功时时对用户的显示
+     */
     public void registerSuccess() {
         msgLabel.setText("注册成功");
         msgLabel.setForeground(Color.GREEN);

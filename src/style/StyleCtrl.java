@@ -20,10 +20,18 @@ public class StyleCtrl {
     private static FlatDarculaLaf flatDarculaLaf = null;
     private static int style = NOT_SET;
 
+    /**
+     * 使用预设值初始化风格。
+     */
     public static void init() {
         setStyle(INTELLIJ);
     }
 
+    /**
+     * 调用相应的风格应用方法，将当前风格设置为给定值。
+     * 注意只有在风格更新后建立的组件才会使用新的风格，如果想要更新已经建立好的组件，需要调用UIManager.setLookAndFeel(...)方法更新
+     * @param styleType 风格代码
+     */
     public static void setStyle(int styleType) {
         switch (styleType) {
             case LIGHT -> applyLight();
@@ -36,6 +44,9 @@ public class StyleCtrl {
         MyColors.setColorAfterStyleChange();
     }
 
+    /**
+     * 应用浅色风格
+     */
     private static void applyLight() {
         if(flatLightLaf == null) {
             flatLightLaf = new FlatLightLaf();
@@ -48,6 +59,9 @@ public class StyleCtrl {
         }
     }
 
+    /**
+     * 应用IntelLij风格
+     */
     private static void applyIntelliJ() {
         if(flatIntelliJLaf == null) {
             flatIntelliJLaf = new FlatIntelliJLaf();
@@ -60,6 +74,9 @@ public class StyleCtrl {
         }
     }
 
+    /**
+     * 应用深色风格
+     */
     private static void applyDark() {
         if(flatDarkLaf == null) {
             flatDarkLaf = new FlatDarkLaf();
@@ -72,6 +89,9 @@ public class StyleCtrl {
         }
     }
 
+    /**
+     * 应用Darcula风格
+     */
     private static void applyDarcula() {
         if(flatDarculaLaf == null) {
             flatDarculaLaf = new FlatDarculaLaf();

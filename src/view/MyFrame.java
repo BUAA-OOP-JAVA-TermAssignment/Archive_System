@@ -1,6 +1,5 @@
 package view;
 
-import controller.Closer;
 import style.StyleCtrl;
 
 
@@ -27,7 +26,7 @@ abstract public class MyFrame extends JFrame implements WaitModeAble{
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("北航文献管理系统");
         this.setResizable(true);
-        this.setMinimumSize(new Dimension(500, 500));
+        this.setMinimumSize(new Dimension(1000, 600));
 
         // 使用关闭器关闭
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
