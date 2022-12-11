@@ -1,15 +1,12 @@
 package view;
 
-import controller.LogonRegisterCtrl;
+import controller.UserCentreCtrl;
 import data.UserData;
 import style.MyFonts;
 import style.StyleCtrl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.util.EventListener;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class UserCentreFrm extends MyInterFrame{
     private static final int FRAME_WIDTH = 450;
@@ -25,7 +22,8 @@ public class UserCentreFrm extends MyInterFrame{
     private String id = "20374090";
     private String email = "3232572736@qq.com";
     private String password = "123456_ABCD";
-    private String downloadNum = null;
+    private int downloadNum = 0;
+    private String date;
     private String oldPassword;
 
 
@@ -33,29 +31,18 @@ public class UserCentreFrm extends MyInterFrame{
 
     private UserCentreFrm(){
         UserData userData = UserData.getInstance();
-//        if(userData.getUserName().equals("游客12138")){
-//            //TODO:一个提示未加载完成的函数，洲：我觉得不用提示就等加载完了再显示就行
-//        } else{
-//            this.userName = userData.getUserName();
-//            this.id = userData.getId();
-//            this.email = userData.getEmail();
-//            this.password = userData.getPassword();
-//            this.downloadNum = userData.getDownloadNum();
+        if(userData.getUserName().equals("这里要写十个字差三个")){
+            //TODO:一个提示未加载完成的函数，洲：我觉得不用提示就等加载完了再显示就行
+        } else{
+            this.userName = userData.getUserName();
+            this.id = userData.getId();
+            this.email = userData.getEmail();
+            this.password = userData.getPassword();
+            this.downloadNum = userData.getDownloadNum();
         initComponents();
-//        }
-    }
-
-    public static UserCentreFrm createUserCentreFrm(){
-        if(userCentreFrm == null) {
-            synchronized (GuestSearchFrm.class) {
-                if(userCentreFrm == null) {
-                    userCentreFrm = new UserCentreFrm();
-                }
-            }
         }
-
-        return userCentreFrm;
     }
+
 
     private void initComponents(){
 
@@ -179,18 +166,21 @@ public class UserCentreFrm extends MyInterFrame{
             String password1 = new String(jPasswordFieldRenew.getPassword());
             if(MyBootFrame.isLegalPassword(password0)){
                 if(password0.matches(password1)){
-                    jButtonChangePassword.setVisible(true);
-                    jButtonContinueChange.setVisible(false);
-                    jButtonCancelPassword.setVisible(false);
-                    jLabelPassword.setVisible(false);
-                    jLabelRePassword.setVisible(false);
-                    jPasswordFieldNew.setVisible(false);
-                    jPasswordFieldRenew.setVisible(false);
-                    jPasswordFieldNew.setText("");
-                    jPasswordFieldRenew.setText("");
-                    jWrongPasswordType.setVisible(false);
-                    jWrongRePassword.setVisible(false);
-                    jLabelTip.setVisible(false);
+                    if(UserCentreCtrl.Change(userName,id,email,password0,downloadNum,date)){
+                        jButtonChangePassword.setVisible(true);
+                        jButtonContinueChange.setVisible(false);
+                        jButtonCancelPassword.setVisible(false);
+                        jLabelPassword.setVisible(false);
+                        jLabelRePassword.setVisible(false);
+                        jPasswordFieldNew.setVisible(false);
+                        jPasswordFieldRenew.setVisible(false);
+                        jPasswordFieldNew.setText("");
+                        jPasswordFieldRenew.setText("");
+                        jWrongPasswordType.setVisible(false);
+                        jWrongRePassword.setVisible(false);
+                        jLabelTip.setVisible(false);
+                    }
+
                 } else {
                     jWrongRePassword.setVisible(true);
                     jPasswordFieldRenew.setText("");
@@ -298,7 +288,7 @@ public class UserCentreFrm extends MyInterFrame{
         MyFrame myFrameTest = new MyFrame() {
         };
 
-        UserCentreFrm userCentreFrmTest = createUserCentreFrm();
+        UserCentreFrm userCentreFrmTest = getInstance();
         myFrameTest.getTable().add(userCentreFrmTest);
         userCentreFrmTest.setVisible(true);
         myFrameTest.setVisible(true);

@@ -10,6 +10,7 @@ public class UserData {
     private String email;
     private String password;
     private int downloadCnt;
+    private String date;
     private boolean isReady = false;
 
     private UserData(){
@@ -27,12 +28,13 @@ public class UserData {
         return instance;
     }
 
-    public void readInfo(String userName,String id, String email, String password, int downloadNum){
+    public void readInfo(String userName,String id, String email, String password, int downloadNum, String date){
         this.userName = userName;
         this.id = id;
         this.email = email;
         this.password = password;
         this.downloadCnt = downloadNum;
+        this.date = date;
         this.isReady = true;
     }
 
@@ -79,6 +81,13 @@ public class UserData {
             return this.downloadCnt;
         } else {
             return 0;
+        }
+    }
+    public String getDate(){
+        if(isReady){
+            return this.date;
+        } else {
+            return "NULL";
         }
     }
 

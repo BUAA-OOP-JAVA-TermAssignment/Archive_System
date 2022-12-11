@@ -43,7 +43,7 @@ public class AdminMainCtrl {
         RegisterFrm.getInstance().setVisible(false);
         RegisterFrm.getInstance().setEnabled(false);
         mainWindow.setVisible(true);
-        //adminUserEditFrm.Load();
+        adminUserEditFrm.Load();
     }
 
     public static synchronized boolean tryLoad() {

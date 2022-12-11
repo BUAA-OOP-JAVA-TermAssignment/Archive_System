@@ -119,7 +119,8 @@ public class LogonRegisterCtrl {
                     loginReturnMsg.getId(),
                     loginReturnMsg.getEmail(),
                     loginReturnMsg.getPassword(),
-                    loginReturnMsg.getDownloadCnt()
+                    loginReturnMsg.getDownloadCnt(),
+                    loginReturnMsg.getDate()
             );
             return;
         }

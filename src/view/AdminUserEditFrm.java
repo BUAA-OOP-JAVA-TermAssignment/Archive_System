@@ -140,18 +140,18 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     private void initComponents() {
        adminData = AdminData.getInstance();
-        adminData.add("zzq1","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq2","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq3","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq4","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq5","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq6","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq7","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq8","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq9","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq10","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq1","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq2","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq3","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq4","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq5","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq6","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq7","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq8","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq9","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq10","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
         System.out.println(adminData.getUserNum());
         initTitle();
         initFrame();
@@ -160,19 +160,19 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     }
 
-//    public void Load(){
-//        boolean isLoad = AdminMainCtrl.tryLoad();
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//        if(isLoad){
-//            initTableBody();
-//        } else {
-//            System.out.println("没有数据");
-//        }
-//    }
+    public void Load(){
+        boolean isLoad = AdminMainCtrl.tryLoad();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if(isLoad){
+            initTableBody();
+        } else {
+            System.out.println("没有数据");
+        }
+    }
 
     /**
      * 初始化管理员主界面最上方的标题
@@ -340,9 +340,16 @@ public class AdminUserEditFrm extends MyInterFrame {
 
             jButtonsDelete[i].setBounds(10,i * HEIGHT_DETAIL,70,HEIGHT_DETAIL);
             jPanelTableBody.add(jButtonsDelete[i]);
+            int finalI1 = i;
             jButtonsDelete[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    if(AdminMainCtrl.Delete(adminData.getUserName(finalI1 + whichPage * 10),adminData.getUserId(finalI1 + whichPage * 10),
+                            adminData.getUserEmail(finalI1 + whichPage * 10), adminData.getUserPassword(finalI1 + whichPage * 10),
+                            adminData.getUserDownloadCnt(finalI1 + whichPage * 10), adminData.getUserDate(finalI1 + whichPage * 10))){
+                        adminData.DeleteUser(finalI1 + whichPage * 10);
+                        changeDetailMsg();
+                    }
 
                 }
             });

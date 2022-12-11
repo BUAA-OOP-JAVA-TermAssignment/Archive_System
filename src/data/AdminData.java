@@ -95,4 +95,7 @@ public class AdminData {
     public void ChangeEmail(int idx, String email){
         userArrayList.get(idx).email = email;
     }
+    public void DeleteUser(int idx){
+        userArrayList.remove(idx);
+    }
 }
