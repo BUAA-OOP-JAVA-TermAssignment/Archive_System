@@ -37,10 +37,10 @@ public class SearchPanel extends JPanel {
     }
 
     private void initSearchButton() {
-        searchButton.addActionListener(actionEvent -> {
-            System.out.println("SearchPanel : search button clicked " + textField.getText());
-            //TODO:向网络控制器发送搜索请求
-        });
+//        searchButton.addActionListener(actionEvent -> {
+//            System.out.println("SearchPanel : search button clicked " + textField.getText());
+//            //TODO:向网络控制器发送搜索请求
+//        });
         searchButton.setFont(MyFonts.TEXT_FONT_18);
     }
 

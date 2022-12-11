@@ -22,7 +22,6 @@ public class GuestSearchFrm extends MyInterFrame {
     private final SearchPanel searchBar = SearchPanel.getInstance();
     private final BriefPaperPanel[] briefPanels = new BriefPaperPanel[MAX_ELEMENT];
     private final JScrollPane scrollPane = new JScrollPane();
-    private final int[] entriesShowOption = new int[MAX_ELEMENT];
     private Dimension preferredSize;
     private JPanel container;
 
@@ -30,7 +29,6 @@ public class GuestSearchFrm extends MyInterFrame {
     private GuestSearchFrm() {
         this.setSize(1000, 800);
         this.setMinimumSize(new Dimension(800, 400));
-        refreshDisplay();
         initLayOut();
         this.setVisible(true);
     }
@@ -48,6 +46,8 @@ public class GuestSearchFrm extends MyInterFrame {
         };
         container.setBorder(new EmptyBorder(30, 30, 100, 45));
         initWidgetAndButtonInGridBag(container);
+
+        hideAllEntries();
 
         container.setVisible(true);
         container.setFocusable(true);
@@ -90,8 +90,8 @@ public class GuestSearchFrm extends MyInterFrame {
         gbc.insets = entryInset;
         for(int i = 0; i < briefPanels.length; i++) {
             briefPanels[i] = new BriefPaperPanel();
+            //briefPanels[i].setVisible(false);
 
-            entriesShowOption[i] = HEIGHT_BRIEF;
             briefPanels[i].getButtonChangeHeight().addActionListener(new ChangeHeightListener(i));
             briefPanels[i].getButtonDetail().addActionListener(new DetailListener(i));
             briefPanels[i].setPreferredSize(BRIEF_DIMENSION);
@@ -100,10 +100,24 @@ public class GuestSearchFrm extends MyInterFrame {
         }
     }
 
-    public void refreshEntriesDataAndShow() {
-        //TODO:刷新各个条目显示的内容，刻意选择先将所有的数据缓存成某种数据类型的对象，再统一交给各个显示条目， 也可以直接交给显示条目
+    private void hideAllEntries() {
+        for(int i = 0; i < briefPanels.length; i++) {
+            briefPanels[i].setVisible(false);
+        }
+    }
 
-        refreshDisplay();
+    public void refreshEntriesData(SearchReturnMsg returnMsg) {
+        int bookNum = returnMsg.getBookNum();
+        for(int i = 0; i < bookNum; i++) {
+            briefPanels[i].getTitleLabel().setText(returnMsg.getBookName(i));
+            briefPanels[i].getAuthorLabel().setText(returnMsg.getBookAuthor(i));
+            // 由于没保存关键词，此处显示文档编号
+            briefPanels[i].getKeywordsLabel().setText(returnMsg.getBookId(i));
+            briefPanels[i].getAbstractTextArea().setText(returnMsg.getBookMatchedText(i));
+            briefPanels[i].getCntLabel().setText("全文匹配" + returnMsg.getBookMatchedText(i) + "次");
+
+            briefPanels[i].setVisible(true);
+        }
     }
 
     public static GuestSearchFrm getInstance() {
@@ -116,10 +130,6 @@ public class GuestSearchFrm extends MyInterFrame {
         }
 
         return guestSearchFrm;
-    }
-
-    private void refreshDisplay() {
-        //TODO:刷新各个条目的显示
     }
 
     static void makeEntryShowMore(int inx) {
@@ -166,6 +176,24 @@ public class GuestSearchFrm extends MyInterFrame {
 
     private void pageDown() {
 
+    }
+
+    @Override
+    public void enWaitMode() {
+        for(int i = 0; i < briefPanels.length; i++) {
+            if(briefPanels[i] != null) {
+                briefPanels[i].getButtonDetail().setEnabled(false);
+            }
+        }
+    }
+
+    @Override
+    public void disWaitMode() {
+        for(int i = 0; i < briefPanels.length; i++) {
+            if(briefPanels[i] != null) {
+                briefPanels[i].getButtonDetail().setEnabled(true);
+            }
+        }
     }
 
     class ChangeHeightListener implements ActionListener {

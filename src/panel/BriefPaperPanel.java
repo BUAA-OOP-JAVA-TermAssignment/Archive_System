@@ -234,6 +234,10 @@ public class BriefPaperPanel extends JPanel {
     public JButton getButtonChangeHeight() {
         return buttonChangeHeight;
     }
+
+    public JLabel getCntLabel() {
+        return cntLabel;
+    }
 }
 /*
 GridBagLayout布局管理器:
