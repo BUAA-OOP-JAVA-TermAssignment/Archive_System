@@ -55,9 +55,7 @@ public class AdminMainCtrl {
         }
         int ret = myClient.sendMsg(new BaseMsg(BaseMsg.ADMIN_USER_SEND));
 
-        if(ret == Client.SUCCESS) adminMainFrm.sendMsgNotice();
-        else {
-
+        if(ret != Client.SUCCESS){
             adminMainFrm.disWaitMode();
             return false;
         }
@@ -81,11 +79,6 @@ public class AdminMainCtrl {
             }
 
             return true;
-        }
-
-        adminMainFrm.disWaitMode();
-        if(retMsg.getMsgCode() == BaseMsg.TIME_OUT) {
-            adminMainFrm.timeoutError();
         }
 
         return false;
