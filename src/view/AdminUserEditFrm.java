@@ -140,19 +140,19 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     private void initComponents() {
        adminData = AdminData.getInstance();
-//        adminData.add("zzq1","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq2","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq3","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq4","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq5","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq6","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq7","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq8","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq9","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq10","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-//        System.out.println(adminData.getUserNum());
+        adminData.add("zzq1","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq2","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq3","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq4","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq5","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq6","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq7","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq8","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq9","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq10","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+        System.out.println(adminData.getUserNum());
         initTitle();
         initFrame();
         initTableHeader();
@@ -160,19 +160,19 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     }
 
-    public void Load(){
-        boolean isLoad = AdminMainCtrl.tryLoad();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        if(isLoad){
-            initTableBody();
-        } else {
-            System.out.println("没有数据");
-        }
-    }
+//    public void Load(){
+//        boolean isLoad = AdminMainCtrl.tryLoad();
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        if(isLoad){
+//            initTableBody();
+//        } else {
+//            System.out.println("没有数据");
+//        }
+//    }
 
     /**
      * 初始化管理员主界面最上方的标题
@@ -359,7 +359,7 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     private void initDetailMsg() {
         System.out.println("Success!"+whichPage);
-
+        final int[] select = {-1};
         for(int j = 0; j < 10; j++){
             int x = 0;
             jTextFieldIndex[j].setEditable(false);
@@ -475,6 +475,7 @@ public class AdminUserEditFrm extends MyInterFrame {
 
             jButtonChangePassword[j].setBounds(x, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
             jButtonChangePassword[j].setVerticalAlignment(SwingConstants.CENTER);
+            int finalJ7 = j;
             jButtonChangePassword[j].addActionListener(evt -> {
                 System.out.println("AdminMainFrm : Click change password button");
                 passwordWin.setVisible(true);
@@ -483,7 +484,7 @@ public class AdminUserEditFrm extends MyInterFrame {
                 jLabelInput.setVisible(true);
                 jButtonYes.setVisible(true);
                 jButtonNo.setVisible(true);
-
+                select[0] = finalJ7;
             });
             x+=4*WIDTH_BASE;
             jPanelsUsers[j].add(jButtonChangePassword[j]);
@@ -505,57 +506,56 @@ public class AdminUserEditFrm extends MyInterFrame {
             jPanelsUsers[j].add(jButtonChangeEmail[j]);
 
 
-            passwordWin.setLayout(null);
-            passwordWin.setResizable(false);
-            passwordWin.setSize(300,200);
 
-
-            jLabelInput.setText("请输入修改后密码：");
-            jLabelInput.setBounds(WIDGET_X,10,WIDGET_GAP,30);
-            passwordWin.add(jLabelInput);
-
-            jPasswordField.setBounds(WIDGET_X,FIELD_HEIGHT,240,30);
-
-            jButtonYes.setText("确认");
-            jButtonYes.setBounds(30,80,100,30);
-            int finalJ5 = j;
-            jButtonYes.addActionListener(evt -> {
-                System.out.println("AdminUserEditFrmWin : Click yes button");
-                String newPassword = String.valueOf(jPasswordField.getPassword());
-                if(MyBootFrame.isLegalPassword(newPassword)){
-                    if(AdminMainCtrl.Change(adminData.getUserName(finalJ5 + whichPage * 10),adminData.getUserId(finalJ5 + whichPage * 10),
-                            adminData.getUserEmail(finalJ5 + whichPage * 10), newPassword,
-                            adminData.getUserDownloadCnt(finalJ5 + whichPage * 10),adminData.getUserDate(finalJ5 + whichPage * 10))) {
-                        jPasswordField.setText("");
-                        passwordWin.setVisible(false);
-                        jPasswordField.setVisible(false);
-                        jLabelInput.setVisible(false);
-                        jButtonYes.setVisible(false);
-                        jButtonNo.setVisible(false);
-                        passwordWin.dispose();
-                        adminData.ChangePassword(finalJ5 + whichPage * 10,newPassword);
-                    } else {
-                        OptionError();
-                    }
-                } else {
-                    EmailOrPasswordError();
-                }
-
-            });
-
-            jButtonNo.setText("重置");
-            jButtonNo.setBounds(150,80,100,30);
-            jButtonNo.addActionListener(evt -> {
-                System.out.println("AdminUserEditFrmWin : Click no button");
-                jPasswordField.setText("");
-            });
-
-            passwordWin.add(jPasswordField);
-            passwordWin.add(jButtonYes);
-            passwordWin.add(jButtonNo);
-            passwordWin.setVisible(false);
         }
+        passwordWin.setLayout(null);
+        passwordWin.setResizable(false);
+        passwordWin.setSize(300,200);
 
+
+        jLabelInput.setText("请输入修改后密码：");
+        jLabelInput.setBounds(WIDGET_X,10,WIDGET_GAP,30);
+        passwordWin.add(jLabelInput);
+
+        jPasswordField.setBounds(WIDGET_X,FIELD_HEIGHT,240,30);
+
+        jButtonYes.setText("确认");
+        jButtonYes.setBounds(30,80,100,30);
+        jButtonYes.addActionListener(evt -> {
+            System.out.println("AdminUserEditFrmWin : Click yes button");
+            String newPassword = String.valueOf(jPasswordField.getPassword());
+            if(MyBootFrame.isLegalPassword(newPassword)){
+                if(AdminMainCtrl.Change(adminData.getUserName(select[0] + whichPage * 10),adminData.getUserId(select[0] + whichPage * 10),
+                        adminData.getUserEmail(select[0] + whichPage * 10), newPassword,
+                        adminData.getUserDownloadCnt(select[0] + whichPage * 10),adminData.getUserDate(select[0] + whichPage * 10))) {
+                    jPasswordField.setText("");
+                    passwordWin.setVisible(false);
+                    jPasswordField.setVisible(false);
+                    jLabelInput.setVisible(false);
+                    jButtonYes.setVisible(false);
+                    jButtonNo.setVisible(false);
+                    passwordWin.dispose();
+                    adminData.ChangePassword(select[0] + whichPage * 10,newPassword);
+                } else {
+                    OptionError();
+                }
+            } else {
+                EmailOrPasswordError();
+            }
+
+        });
+
+        jButtonNo.setText("重置");
+        jButtonNo.setBounds(150,80,100,30);
+        jButtonNo.addActionListener(evt -> {
+            System.out.println("AdminUserEditFrmWin : Click no button");
+            jPasswordField.setText("");
+        });
+
+        passwordWin.add(jPasswordField);
+        passwordWin.add(jButtonYes);
+        passwordWin.add(jButtonNo);
+        passwordWin.setVisible(false);
 
     }
 
