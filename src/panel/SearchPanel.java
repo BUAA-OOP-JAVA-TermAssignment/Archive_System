@@ -174,16 +174,16 @@ public class SearchPanel extends JPanel {
     }
 
     /**
-     * 处理当网络连接中断时对用户的显示
+     * 在搜索栏下方显示连接中断错误
      */
     public void connectError() {
-        msgLabel.setText("搜索请求发送失败，请稍后重试");
+        msgLabel.setText("套接字链接异常");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }
 
     /**
-     * 处理当正在向服务器请求推荐信息时对用户的显示
+     * 在搜索栏下方显示正在准备推荐错误
      */
     public void showPrepareSuggest() {
         msgLabel.setText("正在加载推荐信息...");
@@ -192,7 +192,7 @@ public class SearchPanel extends JPanel {
     }
 
     /**
-     * 处理当等待消息超时时对用户的显示
+     * 在搜索栏下方显示超时错误
      */
     public void timeoutError() {
         msgLabel.setText("服务器连接超时，请稍后重试");
@@ -201,7 +201,7 @@ public class SearchPanel extends JPanel {
     }
 
     /**
-     * 处理当搜索遇到未知错误时对用户的显示
+     * 在搜索栏下方显示错误
      */
     public void undefinedFailed() {
         msgLabel.setText("搜索发生未知错误");
@@ -210,14 +210,14 @@ public class SearchPanel extends JPanel {
     }
 
     /**
-     * 处理当成功搜索对用户的显示
+     * 关闭搜索栏下方显示
      */
     public void searchSuccess() {
         msgLabel.setVisible(false);
     }
 
     /**
-     * 处理当等待服务器消息时对用户的显示
+     * 在搜索栏下方显示等待响应
      */
     public void sendMsgNotice() {
         msgLabel.setText("等待服务器响应...");
@@ -225,14 +225,29 @@ public class SearchPanel extends JPanel {
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 在搜索栏下方显示正在显示推荐
+     */
     public void showSuggest() {
         msgLabel.setText("正在为您显示推荐内容");
         msgLabel.setForeground(Color.WHITE);
         msgLabel.setVisible(true);
     }
 
+    /**
+     * 在搜索栏下方显示正在显示搜索内容相同
+     */
     public void sameSearchText() {
         msgLabel.setText("搜索内容的结果正在被展示");
+        msgLabel.setForeground(Color.YELLOW);
+        msgLabel.setVisible(true);
+    }
+
+    /**
+     * 在搜索栏下方显示正在显示无匹配
+     */
+    public void emptySearchResult() {
+        msgLabel.setText("没有匹配的结果了");
         msgLabel.setForeground(Color.YELLOW);
         msgLabel.setVisible(true);
     }

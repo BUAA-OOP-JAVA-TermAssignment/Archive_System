@@ -301,14 +301,23 @@ public class GuestSearchFrm extends MyInterFrame {
         searchBar.getSearchButton().setEnabled(true);
     }
 
+    /**
+     * 处理当网络连接中断时对用户的显示
+     */
     public void connectError() {
         searchBar.connectError();
     }
 
+    /**
+     * 处理当网络连接超时时对用户的显示
+     */
     public void timeoutError() {
         searchBar.timeoutError();
     }
 
+    /**
+     * 处理当遇到错误时对用户的显示
+     */
     public void undefinedFailed() {
         searchBar.undefinedFailed();
     }
@@ -316,6 +325,7 @@ public class GuestSearchFrm extends MyInterFrame {
     /**
      * 当从服务器拿到成功返回的结果之后，将结果更新至屏幕。
      * 同时更新保存的搜索文本以及偏移量。
+     * 假如当前的搜索内容为空，则认为是推荐内容，调用相应提示。
      * 将会无视搜索框内容的修改，并将当前的搜索内容在搜索框中显示。
      * @param returnMsg 服务器返回的消息
      * @param searchText 向服务器发送的搜索消息，成功返回后将其保存至当前搜索内容，供翻页调用。
@@ -335,6 +345,9 @@ public class GuestSearchFrm extends MyInterFrame {
         searchBar.getTextField().setText(searchText);
     }
 
+    /**
+     * 处理当等待服务器响应时对用户的显示
+     */
     public void sendMsgNotice() {
         searchBar.sendMsgNotice();
     }
