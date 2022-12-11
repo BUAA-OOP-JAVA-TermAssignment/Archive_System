@@ -1,6 +1,7 @@
 package controller;
 
 import client.Client;
+import data.AdminData;
 import data.UserData;
 import message.AdminUserRequestMsg;
 import message.BaseMsg;
@@ -76,6 +77,11 @@ public class AdminMainCtrl {
                 System.out.println("!!!LogonRegisterCtrl : success return message type error");
                 adminMainFrm.disWaitMode();
                 return false;
+            }
+
+            for(int i = 0; i < adminUserRequestMsg.getUserNum(); i++){
+                AdminData.getInstance().add(adminUserRequestMsg.getUserId(i), adminUserRequestMsg.getUserName(i), adminUserRequestMsg.getUserPassword(i),
+                        adminUserRequestMsg.getUserEmail(i), adminUserRequestMsg.getUserDownloadCnt(i),adminUserRequestMsg.getUserDate(i));
             }
 
             return true;

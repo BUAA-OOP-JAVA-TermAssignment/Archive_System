@@ -1,22 +1,24 @@
-package message;
+package data;
 
-import data.AdminData;
+import message.AdminUserRequestMsg;
 
 import java.util.ArrayList;
 
+public class AdminData {
+    private static volatile AdminData instance;
+    private ArrayList<User> userArrayList = new ArrayList<>();
 
-public class AdminUserRequestMsg extends BaseMsg{
+    private AdminData(){
 
-    private ArrayList<User> userArrayList;
-
+    }
 
     public class User {
-         String userName;
-         String id;
-         String password;
-         int downloadCnt;
-         String date;
-         String email;
+        String userName;
+        String id;
+        String password;
+        int downloadCnt;
+        String date;
+        String email;
 
         /**
          * Òª×¢ÊÍµô£¡
@@ -31,12 +33,16 @@ public class AdminUserRequestMsg extends BaseMsg{
         }
     }
 
-    public AdminUserRequestMsg() {
-        super(ADMIN_USER_REQUEST);
-        this.userArrayList = new ArrayList<>();
+    public static AdminData getInstance(){
+        if(instance == null){
+            synchronized (UserData.class){
+                if(instance == null){
+                    instance = new AdminData();
+                }
+            }
+        }
+        return instance;
     }
-
-
 
     public int getUserNum(){
         if(userArrayList == null){
@@ -44,8 +50,10 @@ public class AdminUserRequestMsg extends BaseMsg{
         }
         return userArrayList.size();
     }
-
-    public AdminUserRequestMsg.User getUserInfo(int i){
+    public void add(String id, String userName, String password, String email, int downloadCnt, String date){
+        userArrayList.add(new User(userName,id,password,downloadCnt,date,email));
+    }
+    public User getUserInfo(int i){
         return userArrayList.get(i);
     }
 
@@ -72,5 +80,4 @@ public class AdminUserRequestMsg extends BaseMsg{
     public String getUserDate(int idx){
         return userArrayList.get(idx).date;
     }
-
 }

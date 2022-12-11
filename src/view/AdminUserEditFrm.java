@@ -1,6 +1,7 @@
 package view;
 
 import controller.AdminMainCtrl;
+import data.AdminData;
 import message.AdminUserRequestMsg;
 import style.MyColors;
 import style.MyFonts;
@@ -46,6 +47,7 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     private static volatile AdminUserEditFrm adminEditFrm = null;
     private static Container container;
+    private AdminData adminData = AdminData.getInstance();
 
     private AdminUserEditFrm() {
         super();
@@ -182,7 +184,7 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     private void initBodyContent() {
 
-        usersNum = 1;//AdminUserRequestMsg.getUserNum();
+        usersNum = adminData.getUserNum();
         if (usersNum == 0) {
             //TODO: 一个暂无数据的标
 
@@ -229,7 +231,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         JTextField jTextFieldID = new JTextField();
         jTextFieldID.setEditable(false);
         jTextFieldID.setOpaque(false);
-        //jTextFieldID.setText(AdminUserRequestMsg);
+        jTextFieldID.setText(adminData.getUserId(i));
         jTextFieldID.setFont(MyFonts.TEXT_FONT_18);
         jTextFieldID.setBounds(y, 0, 4 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldID.setVisible(true);
@@ -241,7 +243,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         JTextField jTextFieldName = new JTextField();
         jTextFieldName.setEditable(false);
         jTextFieldName.setOpaque(false);
-        //jTextFieldName.setText(adminUserEditMsg.getUserName());
+        jTextFieldName.setText(adminData.getUserName(i));
         jTextFieldName.setFont(MyFonts.TEXT_FONT_18);
         jTextFieldName.setBounds(y, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldName.setVisible(true);
@@ -253,7 +255,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         JTextField jTextFieldEmail = new JTextField();
         jTextFieldEmail.setEditable(false);
         jTextFieldEmail.setOpaque(false);
-       // jTextFieldEmail.setText(adminUserEditMsg.getUserEmail(adminUserEditMsg.getUserInfo(i)));
+        jTextFieldEmail.setText(adminData.getUserEmail(i));
         jTextFieldEmail.setFont(MyFonts.TEXT_FONT_18);
         jTextFieldEmail.setBounds(y, 0, 11 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldEmail.setVisible(true);
@@ -265,7 +267,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         JTextField jTextFieldDownloadCnt = new JTextField();
         jTextFieldDownloadCnt.setEditable(false);
         jTextFieldDownloadCnt.setOpaque(false);
-       // jTextFieldDownloadCnt.setText(String.valueOf(adminUserEditMsg.getUserDownloadCnt(adminUserEditMsg.getUserInfo(i))));
+        jTextFieldDownloadCnt.setText(String.valueOf(adminData.getUserDownloadCnt(i)));
         jTextFieldDownloadCnt.setFont(MyFonts.TEXT_FONT_18);
         jTextFieldDownloadCnt.setBounds(y, 0, 3 * WIDTH_BASE, HEIGHT_ROW);
         //jTextFieldDownloadCnt.setVerticalAlignment(SwingConstants.CENTER);
@@ -277,7 +279,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         JTextField jTextFieldDate = new JTextField();
         jTextFieldDate.setEditable(false);
         jTextFieldDate.setOpaque(false);
-       // jTextFieldDate.setText(adminUserEditMsg.getUserDate(adminUserEditMsg.getUserInfo(i)));
+        jTextFieldDate.setText(adminData.getUserDate(i));
         jTextFieldDate.setFont(MyFonts.TEXT_FONT_18);
         jTextFieldDate.setBounds(y, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldDate.setVisible(true);
