@@ -5,6 +5,7 @@ import message.LoginReturnMsg;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.Date;
 
 /**
@@ -47,10 +48,12 @@ public class Client {
     public boolean connect() {
         try {
             socket = new Socket("127.0.0.1", 8888);
-            System.out.println("!!!服务器连接成功");
+            //将超时时间设定为10s，若没有返回任何信息则抛出异常
+            socket.setSoTimeout(10);
+            System.out.println("Connect Server Success");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("！！！连接服务器失败");
+            System.out.println("Connect Server failed!");
             return false;
         }
         this.isConnected = true;
@@ -70,7 +73,7 @@ public class Client {
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("!!!关闭连接失败");
+            System.out.println("Close connection failed!");
             return false;
         }
         isConnected = false;
@@ -113,13 +116,16 @@ public class Client {
 //            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 //            BaseMsg msg = (BaseMsg) ois.readObject();
 //            return msg;
-//        } catch (IOException | ClassNotFoundException e) {
+//        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
 //            return new BaseMsg(BaseMsg.UNDEFINED_FAILED);
+//        } catch (SocketTimeoutException e) {
+//            return new BaseMsg(BaseMsg.TIME_OUT);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.println("Lost connection!");
 //        }
 
-        // TODO:test
-        //return new BaseMsg(BaseMsg.TIME_OUT);
         return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, "2022-12-11 01:20:05");
     }
 
