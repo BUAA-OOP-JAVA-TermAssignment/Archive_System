@@ -97,7 +97,6 @@ public class GuestSearchFrm extends MyInterFrame {
             //briefPanels[i].setVisible(true);
 
             briefPanels[i].getButtonChangeHeight().addActionListener(new ChangeHeightListener(i));
-            briefPanels[i].getButtonDetail().addActionListener(new DetailListener(i));
             briefPanels[i].setPreferredSize(BRIEF_DIMENSION);
             gbc.gridy = i + 1;
             container.add(briefPanels[i], gbc);
@@ -123,6 +122,7 @@ public class GuestSearchFrm extends MyInterFrame {
             briefPanels[i].getKeywordsLabel().setText(returnMsg.getBookId(i));
             briefPanels[i].getAbstractTextArea().setText(returnMsg.getBookMatchedText(i));
             briefPanels[i].getCntLabel().setText("全文匹配" + returnMsg.getBookMatchedText(i) + "次");
+            briefPanels[i].getButtonDetail().setText("下载...");
 
             briefPanels[i].setVisible(true);
         }
@@ -306,7 +306,8 @@ public class GuestSearchFrm extends MyInterFrame {
 
     /**
      * 当从服务器拿到成功返回的结果之后，将结果更新至屏幕。
-     * 同时更新保存的搜索文本以及偏移量
+     * 同时更新保存的搜索文本以及偏移量。
+     * 将会无视搜索框内容的修改，并将当前的搜索内容在搜索框中显示。
      * @param returnMsg 服务器返回的消息
      * @param searchText 向服务器发送的搜索消息，成功返回后将其保存至当前搜索内容，供翻页调用。
      * @param offset 当前结果的偏移量，代表翻页位置。
@@ -316,6 +317,7 @@ public class GuestSearchFrm extends MyInterFrame {
         this.offset = offset;
         refreshEntriesData(returnMsg);
         searchBar.searchSuccess();
+        searchBar.getTextField().setText(searchText);
     }
 
     public void sendMsgNotice() {
@@ -342,19 +344,6 @@ public class GuestSearchFrm extends MyInterFrame {
                     showOption = GuestSearchFrm.HEIGHT_BRIEF;
                 }
             }
-        }
-    }
-
-    static class DetailListener implements ActionListener {
-        private final int buttonInx;
-
-        public DetailListener(int buttonInx) {
-            this.buttonInx = buttonInx;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //TODO:添加点击详细信息按钮的事件响应
         }
     }
 }

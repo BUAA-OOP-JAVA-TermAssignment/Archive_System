@@ -70,6 +70,9 @@ public class SearchPanel extends JPanel {
 
         // 消息提示
         gbc.gridy = 1;
+        gbc.ipadx = 0;
+        gbc.ipady = 0;
+        gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.WEST;
         this.add(msgLabel, gbc);
 

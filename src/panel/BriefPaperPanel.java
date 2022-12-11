@@ -1,14 +1,19 @@
 package panel;
 
+import controller.GuestMainCtrl;
 import style.MyColors;
 import style.MyFonts;
 import style.StyleCtrl;
+import view.GuestMainFrm;
+import view.GuestSearchFrm;
 import view.MyFrame;
 import view.MyInterFrame;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BriefPaperPanel extends JPanel {
     private final JLabel titleLabel = new JLabel("文献标题");
@@ -23,6 +28,7 @@ public class BriefPaperPanel extends JPanel {
     public BriefPaperPanel() {
         this.setColor();
         this.setTextStyle();
+        addButtonListener();
         this.initWidgetInGridBag();
         // 这里设置边框大小
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -66,6 +72,16 @@ public class BriefPaperPanel extends JPanel {
         imageLabel.setBackground(Color.WHITE);
         // 这里设置图片大小
         imageLabel.setIcon(new ImageIcon(new ImageIcon(".//resource//book_init.png").getImage().getScaledInstance(200, 276, Image.SCALE_FAST)));
+    }
+
+    private void addButtonListener() {
+        buttonDetail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("BriefPaperPanel : download clicked " + titleLabel.getText());
+                GuestMainCtrl.tryDownload(e, titleLabel.getText(), keywordsLabel.getText());
+            }
+        });
     }
 
 

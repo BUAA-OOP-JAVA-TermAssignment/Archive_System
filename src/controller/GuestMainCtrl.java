@@ -5,13 +5,23 @@ import message.BaseMsg;
 import message.SearchRequestMsg;
 import message.SearchReturnMsg;
 import message.UserLoginRequestMsg;
+import style.StyleCtrl;
 import view.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.PrintStream;
 
 public class GuestMainCtrl {
+    //TODO:test
+    static {
+        StyleCtrl.setStyle(StyleCtrl.DARCULA);
+    }
 
     private static Client myClient = Client.getMyClient();
     // 主窗口直接加载
@@ -19,6 +29,7 @@ public class GuestMainCtrl {
     // 默认首先显示的小窗口，直接加载
     private static GuestSearchFrm searchFrm = GuestSearchFrm.getInstance();
     private static UserCentreFrm centreFrm = null;
+    private static JFileChooser fileChooser = null;
 
 
     private static void setMenu() {
@@ -64,7 +75,7 @@ public class GuestMainCtrl {
         mainWindow.setVisible(true);
     }
 
-    public static void trySearch(String searchText, int offset, int cnt) {
+    public static synchronized void trySearch(String searchText, int offset, int cnt) {
         makeAllWait();
         System.out.println("LogonRegisterCtrl : receive search request : " + searchText + " " + offset + " " + cnt);
 
@@ -108,6 +119,60 @@ public class GuestMainCtrl {
         }
 
         System.out.println("!!!LogonRegisterCtrl : logon undefined return message");
+        makeAllDeWait();
+    }
+
+    public static synchronized void tryDownload(ActionEvent actionEvent, String title, String id) {
+        makeAllWait();
+        System.out.println("LogonRegisterCtrl : download clicked " + title + " " + id);
+        JButton source;
+        try {
+            source = (JButton) actionEvent.getSource();
+        }catch (Exception e) {
+            System.out.println("!!!LogonRegisterCtrl : class type change error");
+            makeAllDeWait();
+            return;
+        }
+
+        source.setText("请选择路径");
+        if(fileChooser == null) {
+            initFileChooser();
+        }
+        fileChooser.setName(title);
+        int result = fileChooser.showSaveDialog(searchFrm);
+
+        if(result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if(selectedFile.exists()) {
+                if(JOptionPane.showConfirmDialog(searchFrm, "选中的文件已经存在，要覆盖它吗？", "警告", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) != JOptionPane.OK_OPTION) {
+                    source.setText("下载...");
+                    makeAllDeWait();
+                    return;
+                }
+            }
+            source.setText("正在下载...");
+            boolean ret = DownloadCtrl.downloadFile(id, selectedFile.getPath(), selectedFile.getName());
+
+            if(ret)
+                source.setText("下载成功");
+            else
+                source.setText("下载失败");
+
+            makeAllDeWait();
+            return;
+        }
+
+        source.setText("下载...");
+        if(result == JFileChooser.ERROR_OPTION) {
+            JOptionPane.showConfirmDialog(searchFrm, "文件选择发生错误！", "警告", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        }
+        makeAllDeWait();
+    }
+
+    private static void initFileChooser() {
+        fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PDF files", "pdf"));
     }
 
     private static void makeAllWait() {
@@ -122,5 +187,9 @@ public class GuestMainCtrl {
             searchFrm.disWaitMode();
         if(centreFrm != null)
             centreFrm.disWaitMode();
+    }
+
+    public static void main(String[] args) {
+        GuestMainCtrl.startMainWindow();
     }
 }
