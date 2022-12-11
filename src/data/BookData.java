@@ -6,58 +6,45 @@ public class BookData {
     private String Id;
     private String name;
     private String author;
-    private String publish;
-    private String introduction;
-    private String language;
-    private Date uploadDate;
-    private int downloadCnt;
-    private BookData(){
-    }
 
-    public void readInfo(String Id, String name, String author, String publish, String introduction, String language, Date uploadDate, int downloadCnt){
+    private int downloadCnt;
+    private float score;
+    private String matchedText;
+
+    public BookData(String Id, String name, String author, String matchedText, int downloadCnt, float score) {
         this.Id = Id;
         this.name = name;
         this.author = author;
-        this.publish = publish;
-        this.introduction = introduction;
-        this.language = language;
-        this.uploadDate = uploadDate;
+        this.matchedText = matchedText;
         this.downloadCnt = downloadCnt;
+        this.score = score;
     }
 
-    public void addDownloadCnt(){
+    public void addDownloadCnt() {
         this.downloadCnt++;
     }
 
-    public String getId(){
+    public String getId() {
         return this.Id;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public String getAuthor(){
+    public String getAuthor() {
         return this.author;
     }
 
-    public String getPublish(){
-        return this.publish;
-    }
-
-    public String getIntroduction(){
-        return this.introduction;
-    }
-
-    public String getLanguage(){
-        return this.language;
-    }
-
-    public Date getUploadDate(){
-        return this.uploadDate;
-    }
-
-    public int getDownloadCnt(){
+    public int getDownloadCnt() {
         return this.downloadCnt;
+    }
+
+    public String getMatchedText() {
+        return this.matchedText;
+    }
+
+    public float getScore() {
+        return this.score;
     }
 }
