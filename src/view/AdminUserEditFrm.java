@@ -1,5 +1,6 @@
 package view;
 
+import message.AdminUserRequestMsg;
 import style.MyColors;
 import style.MyFonts;
 import message.AdminUserEditMsg;
@@ -7,6 +8,7 @@ import style.StyleCtrl;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class AdminUserEditFrm extends MyInterFrame {
@@ -35,12 +37,12 @@ public class AdminUserEditFrm extends MyInterFrame {
             new JPanel(),
             new JPanel()
     };
-    AdminUserEditMsg adminUserEditMsg = null;
+
     private int usersNum = 0;
     private int pagesNum = 0;
     private int whichPage = 0;
 
-    private static volatile AdminUserEditFrm adminMainFrm = null;
+    private static volatile AdminUserEditFrm adminEditFrm = null;
     private static Container container;
 
     private AdminUserEditFrm() {
@@ -49,16 +51,16 @@ public class AdminUserEditFrm extends MyInterFrame {
         initComponents();
     }
 
-    public static AdminUserEditFrm createAdminMainFrm() {
-        if (adminMainFrm == null) {
+    public static AdminUserEditFrm createAdminEditFrm() {
+        if (adminEditFrm == null) {
             synchronized (AdminUserEditFrm.class) {
-                if (adminMainFrm == null) {
-                    adminMainFrm = new AdminUserEditFrm();
+                if (adminEditFrm == null) {
+                    adminEditFrm = new AdminUserEditFrm();
                 }
             }
         }
 
-        return adminMainFrm;
+        return adminEditFrm;
     }
 
     private void initComponents() {
@@ -173,8 +175,8 @@ public class AdminUserEditFrm extends MyInterFrame {
     }
 
     private void initBodyContent() {
-        adminUserEditMsg = null;//AdminUserEditMsg.createAdminUserEditMsg();
-        usersNum = 1;//adminUserEditMsg.getUserNum();
+
+        usersNum = 1;//AdminUserRequestMsg.getUserNum();
         if (usersNum == 0) {
             //TODO: 一个暂无数据的标
 
@@ -221,7 +223,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         JTextField jTextFieldID = new JTextField();
         jTextFieldID.setEditable(false);
         jTextFieldID.setOpaque(false);
-       // jTextFieldID.setText(adminUserEditMsg.getUserId(adminUserEditMsg.getUserInfo(i)));
+        //jTextFieldID.setText(AdminUserRequestMsg);
         jTextFieldID.setFont(MyFonts.TEXT_FONT_18);
         jTextFieldID.setBounds(y, 0, 4 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldID.setVisible(true);
@@ -379,7 +381,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         StyleCtrl.setStyle(StyleCtrl.DARCULA);
         MyFrame myFrameTest = new MyFrame() {
         };
-        AdminUserEditFrm adminMainFrm1 = AdminUserEditFrm.createAdminMainFrm();
+        AdminUserEditFrm adminMainFrm1 = AdminUserEditFrm.createAdminEditFrm();
         myFrameTest.getTable().add(adminMainFrm1);
         adminMainFrm1.setVisible(true);
         myFrameTest.setVisible(true);

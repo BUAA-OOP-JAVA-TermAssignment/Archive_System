@@ -22,7 +22,7 @@ public class AdminUserRequestMsg extends BaseMsg{
     }};
 
 
-    class User {
+    public class User {
         private String userName;
         private String id;
         private String password;
@@ -48,13 +48,14 @@ public class AdminUserRequestMsg extends BaseMsg{
         this.userArrayList = userArrayList;
     }
 
-    public AdminUserRequestMsg createAdminUserRequestMsg(ArrayList<User> userArrayList){
+    public static AdminUserRequestMsg createAdminUserRequestMsg(ArrayList<User> userArrayList){
         return new AdminUserRequestMsg(userArrayList);
     }
 
 
 
-    public int getUserNum(){
+
+    public  int getUserNum(){
         if(userArrayList == null){
             return 0;
         }
@@ -64,27 +65,27 @@ public class AdminUserRequestMsg extends BaseMsg{
         return userArrayList.get(i);
     }
 
-    public String getUserName(User user){
-        return user.userName;
+    public String getUserName(int idx){
+        return userArrayList.get(idx).userName;
     }
 
-    public String getUserId(User user){
-        return user.id;
+    public String getUserId(int idx){
+        return userArrayList.get(idx).id;
     }
 
-    public String getUserEmail(User user){
-        return user.email;
+    public String getUserEmail(int idx){
+        return userArrayList.get(idx).email;
     }
 
-    public String getUserPassword(User user){
-        return user.password;
+    public String getUserPassword(int idx){
+        return userArrayList.get(idx).password;
     }
 
-    public int getUserDownloadCnt(User user){
-        return user.downloadCnt;
+    public int getUserDownloadCnt(int idx){
+        return userArrayList.get(idx).downloadCnt;
     }
 
-    public String getUserDate(User user){
-        return user.date;
+    public String getUserDate(int idx){
+        return userArrayList.get(idx).date;
     }
 }
