@@ -47,7 +47,7 @@ public class AdminMainCtrl {
 
     public static boolean tryLoad() {
         System.out.println("AdminMainCtrl : receive adminMain request");
-
+        myClient = Client.getMyClient();
         // 当发送消息时连接还未就绪
         if(myClient == null) {
             adminMainFrm.disWaitMode();

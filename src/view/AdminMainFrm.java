@@ -3,7 +3,6 @@ package view;
 import controller.Closer;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class AdminMainFrm extends MyFrame {
     public final JLabel msgLabel = new JLabel();
@@ -12,9 +11,9 @@ public class AdminMainFrm extends MyFrame {
 
     private AdminMainFrm() {
         this.addWindowListener(Closer.getNoDataUploadCloser());
-        adminUserEditFrm = AdminUserEditFrm.createAdminEditFrm();
+        adminUserEditFrm = AdminUserEditFrm.getInstance();
         adminUserEditFrm.setVisible(true);
-        this.add(adminUserEditFrm);
+        this.getTable().add(adminUserEditFrm);
     }
 
     public static AdminMainFrm getInstance() {

@@ -7,6 +7,8 @@ import style.StyleCtrl;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class AdminUserEditFrm extends MyInterFrame {
@@ -49,6 +51,10 @@ public class AdminUserEditFrm extends MyInterFrame {
             new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定")
     };
 
+    private final JButton[] jButtonsNo = new JButton[]{
+            new JButton("取消")
+    };
+
     private int usersNum = 0;
     private int pagesNum = 0;
     private int whichPage = 0;
@@ -64,7 +70,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         initComponents();
     }
 
-    public static AdminUserEditFrm createAdminEditFrm() {
+    public static AdminUserEditFrm getInstance() {
         if (adminEditFrm == null) {
             synchronized (AdminUserEditFrm.class) {
                 if (adminEditFrm == null) {
@@ -261,7 +267,16 @@ public class AdminUserEditFrm extends MyInterFrame {
             jPanelsUsers[i].setSize(WIDTH_TABLE, HEIGHT_DETAIL);
             jPanelsUsers[i].setLocation(TABLE_X, TABLE_Y + HEIGHT_ROW + i * HEIGHT_DETAIL);
 
-
+            jButtonsDelete[i].setBounds(TABLE_X/2,TABLE_Y + HEIGHT_ROW + i * HEIGHT_DETAIL,TABLE_X/4,HEIGHT_DETAIL);
+            int finalI = i;
+            jButtonsDelete[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    jButtonsDelete[finalI].setVisible(false);
+                    jButtonsYes[finalI].setVisible(true);
+                }
+            });
+            jButtonsYes[i].setBounds(TABLE_X/2,TABLE_Y + HEIGHT_ROW + i * HEIGHT_DETAIL,TABLE_X/4,HEIGHT_DETAIL);
         }
     }
 
@@ -597,7 +612,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         StyleCtrl.setStyle(StyleCtrl.DARCULA);
         MyFrame myFrameTest = new MyFrame() {
         };
-        AdminUserEditFrm adminMainFrm1 = AdminUserEditFrm.createAdminEditFrm();
+        AdminUserEditFrm adminMainFrm1 = AdminUserEditFrm.getInstance();
         myFrameTest.getTable().add(adminMainFrm1);
         adminMainFrm1.setVisible(true);
         myFrameTest.setVisible(true);
