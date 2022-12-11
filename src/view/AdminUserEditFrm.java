@@ -40,6 +40,15 @@ public class AdminUserEditFrm extends MyInterFrame {
             new JPanel()
     };
 
+    private final JButton[] jButtonsDelete = new JButton[]{
+            new JButton("删除"),new JButton("删除"),new JButton("删除"),new JButton("删除"),new JButton("删除"),
+            new JButton("删除"),new JButton("删除"),new JButton("删除"),new JButton("删除"),new JButton("删除")
+    };
+    private final JButton[] jButtonsYes = new JButton[]{
+            new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定"),
+            new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定")
+    };
+
     private int usersNum = 0;
     private int pagesNum = 0;
     private int whichPage = 0;
@@ -47,7 +56,7 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     private static volatile AdminUserEditFrm adminEditFrm = null;
     private static Container container;
-    private AdminData adminData = AdminData.getInstance();
+    private AdminData adminData;
 
     private AdminUserEditFrm() {
         super();
@@ -75,11 +84,16 @@ public class AdminUserEditFrm extends MyInterFrame {
         initTitle();
         initFrame();
         initTableHeader();
-        if(AdminMainCtrl.tryLoad()){
+        boolean isLoad = AdminMainCtrl.tryLoad();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if(isLoad){
             initTableBody();
         } else {
             System.out.println("没有数据");
-            //TODO:暂无数据
         }
     }
 
@@ -118,13 +132,14 @@ public class AdminUserEditFrm extends MyInterFrame {
      * 用来加载整体的用户信息主体内容
      */
     private void initTableBody() {
+        adminData = AdminData.getInstance();
         jPanelTableBody.setVisible(true);
         jPanelTableBody.setLayout(null);
         jPanelTableBody.setBackground(Color.PINK);
         jPanelTableBody.setSize(WIDTH_TABLE, HEIGHT_BODY);
         jPanelTableBody.setLocation(TABLE_X, TABLE_Y + HEIGHT_ROW);
         initBodyContent();
-        intiBodyPage();
+        initBodyPage();
         container.add(jPanelTableBody);
 
     }
@@ -225,6 +240,7 @@ public class AdminUserEditFrm extends MyInterFrame {
             for (int i = 0; i < 10 && i < usersNum; i++) {
                 jPanelsUsers[i].setVisible(true);
                 addDetailMsg(i);
+                initDeleteButtons(i);
             }
 
         }
@@ -244,6 +260,8 @@ public class AdminUserEditFrm extends MyInterFrame {
             }
             jPanelsUsers[i].setSize(WIDTH_TABLE, HEIGHT_DETAIL);
             jPanelsUsers[i].setLocation(TABLE_X, TABLE_Y + HEIGHT_ROW + i * HEIGHT_DETAIL);
+
+
         }
     }
 
@@ -492,7 +510,7 @@ public class AdminUserEditFrm extends MyInterFrame {
      * 用来加载管理员管理用户界面中，最下方一栏的页数提醒和换页按键
      */
 
-    private void intiBodyPage(){
+    private void initBodyPage(){
         JButton jButtonLeft = new JButton();
         JButton jButtonRight = new JButton();
         JLabel jLabelPage = new JLabel();
@@ -513,7 +531,10 @@ public class AdminUserEditFrm extends MyInterFrame {
         jButtonLeft.addActionListener(e -> {
             if(whichPage > 0){
                 whichPage--;
-                initBodyContent();
+                jLabelPage.setText(whichPage+1+"/"+pagesNum);
+                for(int i = 0; i < 10 || i < usersNum-10*whichPage;i++){
+                    addDetailMsg(i);
+                }
             } else {
                 OptionError();
             }
@@ -528,6 +549,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         jButtonRight.addActionListener(e -> {
             if(whichPage < pagesNum - 1){
                 whichPage++;
+                jLabelPage.setText(whichPage+1+"/"+pagesNum);
                 initBodyContent();
             } else {
                 OptionError();
@@ -535,24 +557,10 @@ public class AdminUserEditFrm extends MyInterFrame {
         });
     }
 
+    private void initDeleteButtons(int idx){
 
-
-
-    /**
-     * 当服务器连接超时时，返回提示信息
-     */
-
-    public void timeoutError() {
-        msgLabel.setText("服务器连接超时，请稍后重试");
-        msgLabel.setForeground(Color.RED);
-        msgLabel.setVisible(true);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        msgLabel.setVisible(false);
     }
+
 
     /**
      * 当邮箱或密码格式不合法时，返回提示信息

@@ -21,10 +21,10 @@ public class AdminMainCtrl {
         // 添加判断，防止和其他类的测试方法冲突
         if(StyleCtrl.getStyle() == StyleCtrl.NOT_SET) StyleCtrl.init();
     }
-    private static Client myClient = null;
+    private static Client myClient = Client.getMyClient();
     // 启动即使用
     private static final AdminMainFrm adminMainFrm = AdminMainFrm.getInstance();
-    private static final AdminUserEditFrm adminUserEditFrm = AdminUserEditFrm.createAdminEditFrm();
+    //private static final AdminUserEditFrm adminUserEditFrm = AdminUserEditFrm.createAdminEditFrm();
 
     private static int status = 0;
     public static void main(String[] args) {
@@ -65,12 +65,11 @@ public class AdminMainCtrl {
         BaseMsg retMsg = myClient.waitMsg();
         if(retMsg.getMsgCode() == - BaseMsg.ADMIN_USER_REQUEST) {
             // 加载信息
-            AdminUserEditFrm adminUserEditFrm = AdminUserEditFrm.createAdminEditFrm();
             AdminUserRequestMsg adminUserRequestMsg;
             try{
                 adminUserRequestMsg = (AdminUserRequestMsg) retMsg;
             }catch (Exception e) {
-                System.out.println("!!!LogonRegisterCtrl : success return message type error");
+                System.out.println("AdminUserCtrl : return message error");
                 adminMainFrm.disWaitMode();
                 return false;
             }
@@ -86,11 +85,8 @@ public class AdminMainCtrl {
         adminMainFrm.disWaitMode();
         if(retMsg.getMsgCode() == BaseMsg.TIME_OUT) {
             adminMainFrm.timeoutError();
-            return false;
         }
 
-
-        System.out.println("!!!LogonRegisterCtrl : logon undefined return message");
         return false;
     }
 
