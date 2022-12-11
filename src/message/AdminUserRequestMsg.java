@@ -34,6 +34,10 @@ public class AdminUserRequestMsg extends BaseMsg{
         this.userArrayList = new ArrayList<>();
     }
 
+    public void add(String id, String userName, String password, String email, int downloadCnt, String date){
+        userArrayList.add(new User(userName,id,password,downloadCnt,date,email));
+    }
+
     public int getUserNum(){
         if(userArrayList == null){
             return 0;
