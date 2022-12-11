@@ -11,8 +11,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class GuestSearchFrm extends MyInterFrame {
     public final static int HEIGHT_BRIEF = 0, HEIGHT_MORE = 1;
@@ -110,7 +108,7 @@ public class GuestSearchFrm extends MyInterFrame {
         gbc.ipady = 0;
         gbc.insets = entryInset;
         for(int i = 0; i < briefPanels.length; i++) {
-            briefPanels[i] = new BriefPaperPanel();
+            briefPanels[i] = BriefPaperPanel.createBriefPaperPanel();
             //briefPanels[i].setVisible(true);
 
             briefPanels[i].getButtonChangeHeight().addActionListener(new ChangeHeightListener(i));
@@ -132,6 +130,9 @@ public class GuestSearchFrm extends MyInterFrame {
      */
     public void refreshEntriesData(SearchReturnMsg returnMsg, boolean isSuggest) {
         int bookNum = returnMsg.getBookNum();
+        if(bookNum == 0)
+            searchBar.emptySearchResult();
+
         for(int i = 0; i < bookNum; i++) {
             briefPanels[i].getTitleLabel().setText(returnMsg.getBookName(i));
             briefPanels[i].getAuthorLabel().setText(returnMsg.getBookAuthor(i));
