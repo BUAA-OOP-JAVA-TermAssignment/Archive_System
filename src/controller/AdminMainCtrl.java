@@ -2,6 +2,7 @@ package controller;
 
 import client.Client;
 import data.UserData;
+import message.AdminUserRequestMsg;
 import message.BaseMsg;
 import message.LoginReturnMsg;
 import message.UserLoginRequestMsg;
@@ -55,7 +56,7 @@ public class AdminMainCtrl {
             adminMainFrm.disWaitMode();
             return false;
         }
-        int ret = myClient.sendMsg(new BaseMsg(BaseMsg.ADMIN_USER_REQUEST));
+        int ret = myClient.sendMsg(new BaseMsg(BaseMsg.ADMIN_USER_SEND));
 
         if(ret == Client.SUCCESS) adminMainFrm.sendMsgNotice();
         else {
@@ -68,9 +69,9 @@ public class AdminMainCtrl {
         if(retMsg.getMsgCode() == - BaseMsg.ADMIN_USER_REQUEST) {
             // º”‘ÿ–≈œ¢
             AdminUserEditFrm adminUserEditFrm = AdminUserEditFrm.createAdminEditFrm();
-            LoginReturnMsg loginReturnMsg;
+            AdminUserRequestMsg adminUserRequestMsg;
             try{
-                loginReturnMsg = (LoginReturnMsg) retMsg;
+                adminUserRequestMsg = (AdminUserRequestMsg) retMsg;
             }catch (Exception e) {
                 System.out.println("!!!LogonRegisterCtrl : success return message type error");
                 adminMainFrm.disWaitMode();
