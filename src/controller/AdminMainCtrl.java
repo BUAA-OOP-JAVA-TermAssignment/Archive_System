@@ -68,6 +68,7 @@ public class AdminMainCtrl {
             AdminUserRequestMsg adminUserRequestMsg;
             try{
                 adminUserRequestMsg = (AdminUserRequestMsg) retMsg;
+                System.out.println("Success!!!");
             }catch (Exception e) {
                 System.out.println("AdminUserCtrl : return message error");
                 adminMainFrm.disWaitMode();
