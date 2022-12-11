@@ -7,13 +7,11 @@ import style.StyleCtrl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class AdminUserEditFrm extends MyInterFrame {
 
     private static final int WIDGET_X = 20;
-    private static final int WIDGET_Y = 50;
     private static final int WIDGET_GAP = 400;
     private static final int FIELD_HEIGHT = 40;
 
@@ -27,9 +25,9 @@ public class AdminUserEditFrm extends MyInterFrame {
     public final static int TABLE_Y = 100;
 
     public final JLabel msgLabel = new JLabel();
-    private JPanel jPanelTableHeader = new JPanel();
-    private JPanel jPanelTableBody = new JPanel();
-    private JPanel[] jPanelsUsers = new JPanel[]{
+    private final JPanel jPanelTableHeader = new JPanel();
+    private final JPanel jPanelTableBody = new JPanel();
+    private final JPanel[] jPanelsUsers = new JPanel[]{
             new JPanel(),
             new JPanel(),
             new JPanel(),
@@ -69,6 +67,10 @@ public class AdminUserEditFrm extends MyInterFrame {
         return adminEditFrm;
     }
 
+    /**
+     * 初始化加载模块
+     */
+
     private void initComponents() {
         initTitle();
         initFrame();
@@ -81,14 +83,26 @@ public class AdminUserEditFrm extends MyInterFrame {
         }
     }
 
+    /**
+     * 初始化管理员主界面最上方的标题
+     */
+
     private void initTitle() {
         //TODO:有一个主页面最上方的title捏
     }
+
+    /**
+     * 初始化整个框架
+     */
 
     private void initFrame() {
         this.setTitle("管理员个人中心");
         container = this.getContentPane();
     }
+
+    /**
+     * 用来加载用户信息的表头
+     */
 
     private void initTableHeader() {
         jPanelTableHeader.setVisible(true);
@@ -100,6 +114,9 @@ public class AdminUserEditFrm extends MyInterFrame {
         initHeaderLabel();
     }
 
+    /**
+     * 用来加载整体的用户信息主体内容
+     */
     private void initTableBody() {
         jPanelTableBody.setVisible(true);
         jPanelTableBody.setLayout(null);
@@ -112,72 +129,76 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     }
 
+    /**
+     * 用来加载展示用户信息的表头内容
+     */
+
     private void initHeaderLabel() {
-        int y = 0;
+        int x = 0;
         JLabel jLabelIndex = new JLabel();
         jLabelIndex.setText("序号");
         jLabelIndex.setFont(MyFonts.TEXT_FONT_BOLD_18);
-        jLabelIndex.setBounds(WIDTH_BASE, 0, y + 2 * WIDTH_BASE, HEIGHT_ROW);
+        jLabelIndex.setBounds(WIDTH_BASE, 0, x + 2 * WIDTH_BASE, HEIGHT_ROW);
         jLabelIndex.setVisible(true);
         jLabelIndex.setVerticalAlignment(SwingConstants.CENTER);
         jLabelIndex.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 3 * WIDTH_BASE;
+        x += 3 * WIDTH_BASE;
         jPanelTableHeader.add(jLabelIndex);
 
         JLabel jLabelID = new JLabel();
         jLabelID.setText("学号");
         jLabelID.setFont(MyFonts.TEXT_FONT_BOLD_18);
-        jLabelID.setBounds(y, 0, 4 * WIDTH_BASE, HEIGHT_ROW);
+        jLabelID.setBounds(x, 0, 4 * WIDTH_BASE, HEIGHT_ROW);
         jLabelID.setVisible(true);
         jLabelID.setVerticalAlignment(SwingConstants.CENTER);
         jLabelID.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 4 * WIDTH_BASE;
+        x += 4 * WIDTH_BASE;
         jPanelTableHeader.add(jLabelID);
 
         JLabel jLabelName = new JLabel();
         jLabelName.setText("姓名");
         jLabelName.setFont(MyFonts.TEXT_FONT_BOLD_18);
-        jLabelName.setBounds(y, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
+        jLabelName.setBounds(x, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
         jLabelName.setVisible(true);
         jLabelName.setVerticalAlignment(SwingConstants.CENTER);
         jLabelName.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 10 * WIDTH_BASE;
+        x += 10 * WIDTH_BASE;
         jPanelTableHeader.add(jLabelName);
 
         JLabel jLabelEmail = new JLabel();
         jLabelEmail.setText("邮箱");
         jLabelEmail.setFont(MyFonts.TEXT_FONT_BOLD_18);
-        jLabelEmail.setBounds(y, 0, 11 * WIDTH_BASE, HEIGHT_ROW);
+        jLabelEmail.setBounds(x, 0, 11 * WIDTH_BASE, HEIGHT_ROW);
         jLabelEmail.setVisible(true);
         jLabelEmail.setVerticalAlignment(SwingConstants.CENTER);
         jLabelEmail.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 11 * WIDTH_BASE;
+        x += 11 * WIDTH_BASE;
         jPanelTableHeader.add(jLabelEmail);
 
         JLabel jLabelDownloadCnt = new JLabel();
         jLabelDownloadCnt.setText("下载量");
         jLabelDownloadCnt.setFont(MyFonts.TEXT_FONT_BOLD_18);
-        jLabelDownloadCnt.setBounds(y, 0, 3 * WIDTH_BASE, HEIGHT_ROW);
+        jLabelDownloadCnt.setBounds(x, 0, 3 * WIDTH_BASE, HEIGHT_ROW);
         jLabelDownloadCnt.setVisible(true);
         jLabelDownloadCnt.setVerticalAlignment(SwingConstants.CENTER);
         jLabelDownloadCnt.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 3 * WIDTH_BASE;
+        x += 3 * WIDTH_BASE;
         jPanelTableHeader.add(jLabelDownloadCnt);
 
         JLabel jLabelDate = new JLabel();
         jLabelDate.setText("最近登录时间");
         jLabelDate.setFont(MyFonts.TEXT_FONT_BOLD_18);
-        jLabelDate.setBounds(y, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
+        jLabelDate.setBounds(x, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
         jLabelDate.setVisible(true);
         jLabelDate.setVerticalAlignment(SwingConstants.CENTER);
         jLabelDate.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 10 * WIDTH_BASE;
+        x += 10 * WIDTH_BASE;
         jPanelTableHeader.add(jLabelDate);
 
         JLabel jLabelOption = new JLabel();
         jLabelOption.setText("操作选项");
         jLabelOption.setFont(MyFonts.TEXT_FONT_BOLD_18);
-        jLabelOption.setBounds(y, 0, 6 * WIDTH_BASE, HEIGHT_ROW);
+        jLabelOption.setBounds(x, 0, 6 * WIDTH_BASE, HEIGHT_ROW);
         jLabelOption.setVisible(true);
         jLabelOption.setVerticalAlignment(SwingConstants.CENTER);
         jLabelOption.setHorizontalAlignment(SwingConstants.CENTER);
@@ -185,11 +206,20 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     }
 
+    /**
+     * 用来加载整个用户信息的板块
+     */
+
     private void initBodyContent() {
 
         usersNum = adminData.getUserNum();
+        pagesNum = usersNum/10+1;
         if (usersNum == 0) {
             //TODO: 一个暂无数据的标
+            JLabel jLabel = new JLabel("暂无数据");
+            jLabel.setFont(MyFonts.TITLE_FONT_36);
+            jLabel.setBounds((WIDTH_TABLE-WIDGET_GAP)/2,HEIGHT_BODY/2+HEIGHT_ROW+TABLE_Y,WIDGET_GAP,HEIGHT_ROW*2);
+            jLabel.setVisible(true);
 
         } else {
             initDetailPanels();
@@ -218,17 +248,22 @@ public class AdminUserEditFrm extends MyInterFrame {
         }
     }
 
+    /**
+     * 用于加载详细的用户信息
+     * @param i 该信息在展示页中的行数，取值[0,9]
+     */
+
     private void addDetailMsg(int i) {
-        int y = 0;
+        int x = 0;
         JTextField jTextFieldIndex = new JTextField();
         jTextFieldIndex.setEditable(false);
         jTextFieldIndex.setOpaque(false);
         jTextFieldIndex.setText(String.valueOf((i + whichPage * 10)));
         jTextFieldIndex.setFont(MyFonts.TEXT_FONT_18);
-        jTextFieldIndex.setBounds(WIDTH_BASE, 0, y + 2 * WIDTH_BASE, HEIGHT_ROW);
+        jTextFieldIndex.setBounds(WIDTH_BASE, 0, x + 2 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldIndex.setVisible(true);
         jTextFieldIndex.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 3 * WIDTH_BASE;
+        x += 3 * WIDTH_BASE;
         jPanelsUsers[i].add(jTextFieldIndex);
 
         JTextField jTextFieldID = new JTextField();
@@ -236,11 +271,11 @@ public class AdminUserEditFrm extends MyInterFrame {
         jTextFieldID.setOpaque(false);
         jTextFieldID.setText(adminData.getUserId(i + whichPage * 10));
         jTextFieldID.setFont(MyFonts.TEXT_FONT_18);
-        jTextFieldID.setBounds(y, 0, 4 * WIDTH_BASE, HEIGHT_ROW);
+        jTextFieldID.setBounds(x, 0, 4 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldID.setVisible(true);
         //jTextFieldID.setVerticalAlignment(SwingConstants.CENTER);
         jTextFieldID.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 4 * WIDTH_BASE;
+        x += 4 * WIDTH_BASE;
         jPanelsUsers[i].add(jTextFieldID);
 
         JTextField jTextFieldName = new JTextField();
@@ -248,11 +283,11 @@ public class AdminUserEditFrm extends MyInterFrame {
         jTextFieldName.setOpaque(false);
         jTextFieldName.setText(adminData.getUserName(i + whichPage * 10));
         jTextFieldName.setFont(MyFonts.TEXT_FONT_18);
-        jTextFieldName.setBounds(y, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
+        jTextFieldName.setBounds(x, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldName.setVisible(true);
         //jTextFieldName.setVerticalAlignment(SwingConstants.CENTER);
         jTextFieldName.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 10 * WIDTH_BASE;
+        x += 10 * WIDTH_BASE;
         jPanelsUsers[i].add(jTextFieldName);
 
         JTextField jTextFieldEmail = new JTextField();
@@ -260,11 +295,11 @@ public class AdminUserEditFrm extends MyInterFrame {
         jTextFieldEmail.setOpaque(false);
         jTextFieldEmail.setText(adminData.getUserEmail(i + whichPage * 10));
         jTextFieldEmail.setFont(MyFonts.TEXT_FONT_18);
-        jTextFieldEmail.setBounds(y, 0, 11 * WIDTH_BASE, HEIGHT_ROW);
+        jTextFieldEmail.setBounds(x, 0, 11 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldEmail.setVisible(true);
         //jTextFieldEmail.setVerticalAlignment(SwingConstants.CENTER);
         jTextFieldEmail.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 11 * WIDTH_BASE;
+        x += 11 * WIDTH_BASE;
         jPanelsUsers[i].add(jTextFieldEmail);
 
         JTextField jTextFieldDownloadCnt = new JTextField();
@@ -272,10 +307,10 @@ public class AdminUserEditFrm extends MyInterFrame {
         jTextFieldDownloadCnt.setOpaque(false);
         jTextFieldDownloadCnt.setText(String.valueOf(adminData.getUserDownloadCnt(i + whichPage * 10)));
         jTextFieldDownloadCnt.setFont(MyFonts.TEXT_FONT_18);
-        jTextFieldDownloadCnt.setBounds(y, 0, 3 * WIDTH_BASE, HEIGHT_ROW);
+        jTextFieldDownloadCnt.setBounds(x, 0, 3 * WIDTH_BASE, HEIGHT_ROW);
         //jTextFieldDownloadCnt.setVerticalAlignment(SwingConstants.CENTER);
         jTextFieldDownloadCnt.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 3 * WIDTH_BASE;
+        x += 3 * WIDTH_BASE;
         jPanelsUsers[i].add(jTextFieldDownloadCnt);
         jTextFieldDownloadCnt.setVisible(true);
 
@@ -284,11 +319,11 @@ public class AdminUserEditFrm extends MyInterFrame {
         jTextFieldDate.setOpaque(false);
         jTextFieldDate.setText(adminData.getUserDate(i + whichPage * 10));
         jTextFieldDate.setFont(MyFonts.TEXT_FONT_18);
-        jTextFieldDate.setBounds(y, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
+        jTextFieldDate.setBounds(x, 0, 10 * WIDTH_BASE, HEIGHT_ROW);
         jTextFieldDate.setVisible(true);
         //jTextFieldDate.setVerticalAlignment(SwingConstants.CENTER);
         jTextFieldDate.setHorizontalAlignment(SwingConstants.CENTER);
-        y += 10 * WIDTH_BASE;
+        x += 10 * WIDTH_BASE;
         jPanelsUsers[i].add(jTextFieldDate);
 
         final String[] oldEmail = {null};
@@ -306,7 +341,7 @@ public class AdminUserEditFrm extends MyInterFrame {
 
         jButtonContinue.setVisible(false);
         jButtonContinue.setText("确认修改");
-        jButtonContinue.setBounds(y, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
+        jButtonContinue.setBounds(x, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
         jButtonContinue.setVerticalAlignment(SwingConstants.CENTER);
         jButtonContinue.addActionListener(evt -> {
             System.out.println("AdminMainFrm : Click yes button");
@@ -334,7 +369,7 @@ public class AdminUserEditFrm extends MyInterFrame {
 
         jButtonReset.setVisible(true);
         jButtonReset.setText("重置次数");
-        jButtonReset.setBounds(y, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
+        jButtonReset.setBounds(x, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
         jButtonReset.setVerticalAlignment(SwingConstants.CENTER);
         jButtonReset.addActionListener(evt -> {
             System.out.println("AdminMainFrm : Click reset button");
@@ -347,32 +382,29 @@ public class AdminUserEditFrm extends MyInterFrame {
                 OptionError();
             }
         });
-        y+=4*WIDTH_BASE;
+        x+=4*WIDTH_BASE;
         jPanelsUsers[i].add(jButtonReset);
 
 
         jButtonCancel.setVisible(false);
         jButtonCancel.setText("取消修改");
-        jButtonCancel.setBounds(y, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
+        jButtonCancel.setBounds(x, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
         jButtonCancel.setVerticalAlignment(SwingConstants.CENTER);
-        jButtonCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("AdminMainFrm : Click cancel button");
-                jButtonReset.setVisible(true);
-                jButtonChangePassword.setVisible(true);
-                jButtonContinue.setVisible(false);
-                jButtonCancel.setVisible(false);
-                jTextFieldEmail.setText(String.valueOf(oldEmail[0]));
-                jTextFieldEmail.setEditable(false);
-            }
+        jButtonCancel.addActionListener(e -> {
+            System.out.println("AdminMainFrm : Click cancel button");
+            jButtonReset.setVisible(true);
+            jButtonChangePassword.setVisible(true);
+            jButtonContinue.setVisible(false);
+            jButtonCancel.setVisible(false);
+            jTextFieldEmail.setText(String.valueOf(oldEmail[0]));
+            jTextFieldEmail.setEditable(false);
         });
         jPanelsUsers[i].add(jButtonCancel);
 
 
         jButtonChangePassword.setVisible(true);
         jButtonChangePassword.setText("修改密码");
-        jButtonChangePassword.setBounds(y, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
+        jButtonChangePassword.setBounds(x, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
         jButtonChangePassword.setVerticalAlignment(SwingConstants.CENTER);
         jButtonChangePassword.addActionListener(evt -> {
             System.out.println("AdminMainFrm : Click change password button");
@@ -384,27 +416,24 @@ public class AdminUserEditFrm extends MyInterFrame {
             jButtonNo.setVisible(true);
 
         });
-        y+=4*WIDTH_BASE;
+        x+=4*WIDTH_BASE;
         jPanelsUsers[i].add(jButtonChangePassword);
 
 
 
         jButtonChangeEmail.setVisible(true);
         jButtonChangeEmail.setText("修改邮箱");
-        jButtonChangeEmail.setBounds(y, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
+        jButtonChangeEmail.setBounds(x, 5,WIDTH_BASE*4-10, HEIGHT_DETAIL-10);
         jButtonChangeEmail.setVerticalAlignment(SwingConstants.CENTER);
         jButtonChangeEmail.setVisible(true);
-        jButtonChangeEmail.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("AdminMainFrm : Click change email button");
-                jTextFieldEmail.setEditable(true);
-                jButtonReset.setVisible(false);
-                jButtonChangePassword.setVisible(false);
-                jButtonCancel.setVisible(true);
-                jButtonContinue.setVisible(true);
-                oldEmail[0] = (jTextFieldEmail.getText());
-            }
+        jButtonChangeEmail.addActionListener(e -> {
+            System.out.println("AdminMainFrm : Click change email button");
+            jTextFieldEmail.setEditable(true);
+            jButtonReset.setVisible(false);
+            jButtonChangePassword.setVisible(false);
+            jButtonCancel.setVisible(true);
+            jButtonContinue.setVisible(true);
+            oldEmail[0] = (jTextFieldEmail.getText());
         });
         jPanelsUsers[i].add(jButtonChangeEmail);
 
@@ -460,6 +489,10 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     }
 
+    /**
+     * 用来加载管理员管理用户界面中，最下方一栏的页数提醒和换页按键
+     */
+
     private void intiBodyPage(){
         JButton jButtonLeft = new JButton();
         JButton jButtonRight = new JButton();
@@ -478,15 +511,12 @@ public class AdminUserEditFrm extends MyInterFrame {
         jButtonLeft.setHorizontalAlignment(SwingConstants.CENTER);
         jButtonLeft.setVisible(true);
         jPanelTableBody.add(jButtonLeft);
-        jButtonLeft.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(whichPage > 0){
-                    whichPage--;
-                    initBodyContent();
-                } else {
-                    OptionError();
-                }
+        jButtonLeft.addActionListener(e -> {
+            if(whichPage > 0){
+                whichPage--;
+                initBodyContent();
+            } else {
+                OptionError();
             }
         });
 
@@ -496,15 +526,12 @@ public class AdminUserEditFrm extends MyInterFrame {
         jButtonRight.setHorizontalAlignment(SwingConstants.CENTER);
         jButtonRight.setVisible(true);
         jPanelTableBody.add(jButtonRight);
-        jButtonRight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(whichPage < pagesNum - 1){
-                    whichPage++;
-                    initBodyContent();
-                } else {
-                    OptionError();
-                }
+        jButtonRight.addActionListener(e -> {
+            if(whichPage < pagesNum - 1){
+                whichPage++;
+                initBodyContent();
+            } else {
+                OptionError();
             }
         });
     }
@@ -512,17 +539,9 @@ public class AdminUserEditFrm extends MyInterFrame {
 
 
 
-    public void sendMsgNotice() {
-        msgLabel.setText("正在与数据库连接...");
-        msgLabel.setForeground(Color.YELLOW);
-        msgLabel.setVisible(true);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        msgLabel.setVisible(false);
-    }
+    /**
+     * 当服务器连接超时时，返回提示信息
+     */
 
     public void timeoutError() {
         msgLabel.setText("服务器连接超时，请稍后重试");
@@ -536,6 +555,10 @@ public class AdminUserEditFrm extends MyInterFrame {
         msgLabel.setVisible(false);
     }
 
+    /**
+     * 当邮箱或密码格式不合法时，返回提示信息
+     */
+
     public void EmailOrPasswordError(){
         msgLabel.setText("格式错误，请重新输入");
         msgLabel.setForeground(Color.RED);
@@ -548,6 +571,9 @@ public class AdminUserEditFrm extends MyInterFrame {
         msgLabel.setVisible(false);
     }
 
+    /**
+     * 用来返回操作失败的提示信息
+     */
     public void OptionError(){
         msgLabel.setText("操作失败，请重试");
         msgLabel.setForeground(Color.RED);

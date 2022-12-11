@@ -171,6 +171,12 @@ public class SearchPanel extends JPanel {
         msgLabel.setVisible(true);
     }
 
+    public void showPrepareSuggest() {
+        msgLabel.setText("正在加载推荐信息...");
+        msgLabel.setForeground(Color.WHITE);
+        msgLabel.setVisible(true);
+    }
+
     public void timeoutError() {
         msgLabel.setText("服务器连接超时，请稍后重试");
         msgLabel.setForeground(Color.RED);

@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.PrintStream;
+import java.util.Objects;
 
 public class GuestMainCtrl {
     //TODO:test
@@ -73,6 +74,9 @@ public class GuestMainCtrl {
         RegisterFrm.getInstance().setVisible(false);
         RegisterFrm.getInstance().setEnabled(false);
         mainWindow.setVisible(true);
+
+
+        trySearch("", 0, GuestSearchFrm.MAX_ELEMENT);
     }
 
     public static synchronized void trySearch(String searchText, int offset, int cnt) {
