@@ -1,5 +1,6 @@
 package message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -8,7 +9,7 @@ public class AdminUserRequestMsg extends BaseMsg {
     private ArrayList<User> userArrayList;
 
 
-    public class User {
+    public class User implements Serializable {
         private String userName;
         private String id;
         private String password;
@@ -27,7 +28,7 @@ public class AdminUserRequestMsg extends BaseMsg {
     }
 
     public AdminUserRequestMsg() {
-        super(ADMIN_USER_REQUEST);
+        super(-ADMIN_USER_REQUEST);
         this.userArrayList = new ArrayList<>();
     }
 
