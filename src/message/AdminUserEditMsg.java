@@ -12,120 +12,63 @@ import java.util.*;
  * &#064;date  : 2022/12/8 20:57
  */
 public class AdminUserEditMsg extends BaseMsg{
-    private static volatile AdminUserEditMsg instance;
-    public static final int REQUEST_INFO = 0;
+    private String userName;
+    private String id;
+    private String password;
+    private final int downloadCnt;
+    private final String date;
+    private final String email;
+    private int opCode;
 
-    private int adminUserEditCode;
-    private ArrayList<User> userArrayList = new ArrayList<>(){{
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("汉字", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-    }};
-    class User {
-        private String userName;
-        private String id;
-        private String password;
-        private int downloadCnt;
-        private String date;
-        private String email;
 
-        /**
-         * 要注释掉！
-         */
-        User(String userName, String id, String password, int downloadCnt, String date,String email){
-            this.userName = userName;
-            this.id = id;
-            this.password = password;
-            this.downloadCnt = downloadCnt;
-            this.date = date;
-            this.email = email;
-        }
+    private AdminUserEditMsg(int opCode, String userName,String id, String email, String password, int downloadCnt, String date) {
+        super(- LOGIN);
+        this.opCode = opCode;
+        this.userName = userName;
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.downloadCnt = downloadCnt;
+        this.date = date;
     }
+
 
     /**
-     * 要注释
+     * 创建LoginReturnMsg实例
+     * @param downloadCnt 用户总计下载量，这个值由客户端统计，服务器只需要记录这个值
+     * @param email 用户邮箱
      */
-
-
-    private AdminUserEditMsg() {
-        super(ADMIN_USER_EDIT);
+    public static AdminUserEditMsg createAdminUserEditMsg(int opCode, String userName,String id, String email, String password, int downloadCnt, String date) {
+        return new AdminUserEditMsg(opCode,userName,id,email,password,downloadCnt, date);
     }
 
-    public static AdminUserEditMsg createAdminUserEditMsg(){
-        if(instance == null){
-            synchronized (UserData.class){
-                if(instance == null){
-                    instance = new AdminUserEditMsg();
-                }
-            }
-        }
-        return instance;
+    public int getOpCode(){
+        return opCode;
     }
 
-    /**
-     * 在数据库上传时调用
-     * @param userArrayList
-     *
-     */
-    public void addUserMsg(ArrayList<User> userArrayList){
-        this.userArrayList = userArrayList;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void addEditCode(int adminUserEditCode){
-        this.adminUserEditCode = adminUserEditCode;
+    public String getId() {
+        return id;
     }
 
-    public void changeDownloadCnt(int i){
-        this.userArrayList.get(i).downloadCnt = 0;
+
+    public int getDownloadCnt() {
+        return downloadCnt;
     }
 
-    public void changePassword(int i, String password){
-        this.userArrayList.get(i).password = password;
+    public String getEmail() {
+        return email;
     }
 
-    public void changeEmail(int i, String email){
-        this.userArrayList.get(i).email = email;
+    public String getPassword() {
+        return password;
     }
 
-    public int getUserNum(){
-        if(userArrayList == null){
-            return 0;
-        }
-        return userArrayList.size();
-    }
-    public User getUserInfo(int i){
-        return userArrayList.get(i);
-    }
-
-    public String getUserName(User user){
-        return user.userName;
-    }
-
-    public String getUserId(User user){
-        return user.id;
-    }
-
-    public String getUserEmail(User user){
-        return user.email;
-    }
-
-    public String getUserPassword(User user){
-        return user.password;
-    }
-
-    public int getUserDownloadCnt(User user){
-        return user.downloadCnt;
-    }
-
-    public String getUserDate(User user){
-        return user.date;
+    public String getDate() {
+        return date;
     }
 }
