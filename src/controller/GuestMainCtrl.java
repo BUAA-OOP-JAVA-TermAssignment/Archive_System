@@ -86,7 +86,7 @@ public class GuestMainCtrl {
         BaseMsg retMsg = myClient.waitMsg();
         if(retMsg.getMsgCode() ==  - BaseMsg.SEARCH_ARCHIVE) {
             try{
-                searchFrm.searchSuccess((SearchReturnMsg) retMsg);
+                searchFrm.searchSuccess((SearchReturnMsg) retMsg, searchText, offset);
             }catch (Exception e ){
                 searchFrm.undefinedFailed();
             }

@@ -46,7 +46,7 @@ public class BriefPaperPanel extends JPanel {
         setAlignment(titleLabel, JLabel.CENTER, JLabel.TOP);
         setAlignment(authorLabel, JLabel.LEFT, JLabel.TOP);
         setAlignment(keywordsLabel, JLabel.LEFT, JLabel.TOP);
-        setAlignment(cntLabel, JLabel.RIGHT, JLabel.TOP);
+        setAlignment(cntLabel, JLabel.CENTER, JLabel.TOP);
 
         abstractTextArea.setOpaque(false);
         abstractTextArea.setLineWrap(true);
@@ -156,7 +156,6 @@ public class BriefPaperPanel extends JPanel {
         //∆•≈‰¥Œ ˝±Í«©
         gbc.gridx = 2;
         gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.EAST;
         this.add(cntLabel, gbc);
     }
 
