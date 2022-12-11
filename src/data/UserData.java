@@ -10,7 +10,6 @@ public class UserData {
     private String email;
     private String password;
     private int downloadCnt;
-    private Date date;
     private boolean isReady = false;
 
     private UserData(){
