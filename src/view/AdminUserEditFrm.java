@@ -215,7 +215,6 @@ public class AdminUserEditFrm extends MyInterFrame {
         usersNum = adminData.getUserNum();
         pagesNum = usersNum/10+1;
         if (usersNum == 0) {
-            //TODO: 一个暂无数据的标
             JLabel jLabel = new JLabel("暂无数据");
             jLabel.setFont(MyFonts.TITLE_FONT_36);
             jLabel.setBounds((WIDTH_TABLE-WIDGET_GAP)/2,HEIGHT_BODY/2+HEIGHT_ROW+TABLE_Y,WIDGET_GAP,HEIGHT_ROW*2);
