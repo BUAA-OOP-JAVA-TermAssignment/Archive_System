@@ -10,6 +10,8 @@ import style.StyleCtrl;
 import view.LogOnFrm;
 import view.RegisterFrm;
 
+import javax.swing.*;
+
 
 public class LogonRegisterCtrl {
     public static final int LOGON = 0, REGISTER = 1, RUNNING = 2;
@@ -31,7 +33,12 @@ public class LogonRegisterCtrl {
         logOnFrm.setVisible(true);
         //System.out.println("startGet");
         myClient = Client.getMyClient();
-        myClient.connect();
+        while(!myClient.connect()) {
+            if(JOptionPane.showConfirmDialog(logOnFrm, "网络联机建立失败，需要继续尝试吗？\n确认以再次尝试，取消以退出。", "退出确认", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) != JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
+        }
+
         System.out.println("LogonRegisterCtrl : client ready");
     }
 

@@ -23,13 +23,17 @@ public class BriefPaperPanel extends JPanel {
     private final JButton buttonDetail = new JButton("下载...");
     private final JButton buttonChangeHeight = new JButton("更多");
 
-    public BriefPaperPanel() {
+    private BriefPaperPanel() {
         this.setColor();
         this.setTextStyle();
         addButtonListener();
         this.initWidgetInGridBag();
         // 这里设置边框大小
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
+    }
+
+    public static BriefPaperPanel createBriefPaperPanel() {
+        return new BriefPaperPanel();
     }
 
     /**
@@ -222,9 +226,9 @@ public class BriefPaperPanel extends JPanel {
         MyInterFrame testInterFrame = new MyInterFrame() {
         };
 
-        BriefPaperPanel briefPaperPanel_0 = new BriefPaperPanel();
-        BriefPaperPanel briefPaperPanel_1 = new BriefPaperPanel();
-        BriefPaperPanel briefPaperPanel_2 = new BriefPaperPanel();
+        BriefPaperPanel briefPaperPanel_0 = createBriefPaperPanel();
+        BriefPaperPanel briefPaperPanel_1 = createBriefPaperPanel();
+        BriefPaperPanel briefPaperPanel_2 = createBriefPaperPanel();
 
         briefPaperPanel_0.setBounds(30, 30, 800, 200);
         briefPaperPanel_1.setBounds(30, 250, 700, 200);
