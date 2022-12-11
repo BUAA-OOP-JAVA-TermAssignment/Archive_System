@@ -71,6 +71,7 @@ public class Client {
         if (socket == null) {
             return false;
         }
+        sendMsg(new BaseMsg(BaseMsg.DIS_CONNECT));
         try {
             socket.close();
         } catch (IOException e) {

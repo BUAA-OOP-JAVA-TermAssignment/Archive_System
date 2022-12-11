@@ -3,7 +3,7 @@ package message;
 import java.io.Serializable;
 
 public class BaseMsg implements Serializable {
-    public final static int SUCCESS = 0, UNDEFINED_FAILED = -1, TIME_OUT = -2;
+    public final static int SUCCESS = 0, UNDEFINED_FAILED = -1, TIME_OUT = -2, DIS_CONNECT = -3;
     public final static int LOGIN = 1 << 3;
     public final static int REGISTER = 1 << 4;
     public final static int SUGGEST_ARCHIVE = 1 << 5;
