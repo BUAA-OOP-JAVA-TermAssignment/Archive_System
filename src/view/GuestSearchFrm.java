@@ -19,13 +19,13 @@ public class GuestSearchFrm extends MyInterFrame {
     private final static Dimension BRIEF_DIMENSION = new Dimension(0, 300);
     private final static Dimension MORE_DIMENSION = new Dimension(0, 500);
     private static volatile GuestSearchFrm guestSearchFrm = null;
-    private final static int MAX_ELEMENT = 5;
+    public final static int MAX_ELEMENT = 5;
     private final SearchPanel searchBar = SearchPanel.getInstance();
     private final BriefPaperPanel[] briefPanels = new BriefPaperPanel[MAX_ELEMENT];
     private final JScrollPane scrollPane = new JScrollPane();
     private Dimension preferredSize;
     private JPanel container;
-    private String searchText;
+    private String searchText = "";
     private int offset = 0;
 
 
@@ -34,6 +34,7 @@ public class GuestSearchFrm extends MyInterFrame {
         this.setMinimumSize(new Dimension(800, 400));
         initLayOut();
         this.setVisible(true);
+
     }
 
 
@@ -113,7 +114,7 @@ public class GuestSearchFrm extends MyInterFrame {
      * 刷新显示内容，数据条目不够的话其余项不显示。
      * @param returnMsg 从服务器返回的搜索结果消息
      */
-    public void refreshEntriesData(SearchReturnMsg returnMsg) {
+    public void refreshEntriesData(SearchReturnMsg returnMsg, boolean isSuggest) {
         int bookNum = returnMsg.getBookNum();
         for(int i = 0; i < bookNum; i++) {
             briefPanels[i].getTitleLabel().setText(returnMsg.getBookName(i));
@@ -121,7 +122,10 @@ public class GuestSearchFrm extends MyInterFrame {
             // 由于没保存关键词，此处显示文档编号
             briefPanels[i].getKeywordsLabel().setText(returnMsg.getBookId(i));
             briefPanels[i].getAbstractTextArea().setText(returnMsg.getBookMatchedText(i));
-            briefPanels[i].getCntLabel().setText("全文匹配" + returnMsg.getBookMatchedText(i) + "次");
+            if(isSuggest)
+                briefPanels[i].getCntLabel().setText("被下载" + returnMsg.getBookDownloadCnt(i) + "次");
+            else
+                briefPanels[i].getCntLabel().setText("全文匹配值：" + returnMsg.gteBookMatchedScore(i));
             briefPanels[i].getButtonDetail().setText("下载...");
 
             briefPanels[i].setVisible(true);
@@ -191,6 +195,8 @@ public class GuestSearchFrm extends MyInterFrame {
             pageDown();
         });
         searchBar.getDownButton().setEnabled(false);
+
+        searchBar.showPrepareSuggest();
     }
 
     static void makeEntryShowMore(int inx) {
@@ -315,7 +321,8 @@ public class GuestSearchFrm extends MyInterFrame {
     public void searchSuccess(SearchReturnMsg returnMsg, String searchText, int offset) {
         this.searchText = searchText;
         this.offset = offset;
-        refreshEntriesData(returnMsg);
+        // 搜索内容为空串则代表是推荐内容
+        refreshEntriesData(returnMsg, searchText.equals(""));
         searchBar.searchSuccess();
         searchBar.getTextField().setText(searchText);
     }
