@@ -32,10 +32,6 @@ public class SearchReturnMsg extends BaseMsg{
     }
 
     public int getBookNum(){return bookArrayList.size();}
-    public Book getBookInfo(int i){return bookArrayList.get(i);}
-    public String getBookId(SearchReturnMsg.Book book){return book.Id;}
-    public String getBookName(SearchReturnMsg.Book book){return book.name;}
-    public String getBookAuthor(SearchReturnMsg.Book book){return book.author;}
 
     public String getBookId(int inx) {
         return bookArrayList.get(inx).Id;
