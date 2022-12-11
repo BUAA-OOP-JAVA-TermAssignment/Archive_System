@@ -1,5 +1,6 @@
 package view;
 
+import controller.GuestMainCtrl;
 import message.SearchReturnMsg;
 import panel.BriefPaperPanel;
 import panel.SearchPanel;
@@ -93,10 +94,9 @@ public class GuestSearchFrm extends MyInterFrame {
         gbc.insets = entryInset;
         for(int i = 0; i < briefPanels.length; i++) {
             briefPanels[i] = new BriefPaperPanel();
-            //briefPanels[i].setVisible(false);
+            //briefPanels[i].setVisible(true);
 
             briefPanels[i].getButtonChangeHeight().addActionListener(new ChangeHeightListener(i));
-            briefPanels[i].getButtonDetail().addActionListener(new DetailListener(i));
             briefPanels[i].setPreferredSize(BRIEF_DIMENSION);
             gbc.gridy = i + 1;
             container.add(briefPanels[i], gbc);
@@ -109,6 +109,10 @@ public class GuestSearchFrm extends MyInterFrame {
         }
     }
 
+    /**
+     * 刷新显示内容，数据条目不够的话其余项不显示。
+     * @param returnMsg 从服务器返回的搜索结果消息
+     */
     public void refreshEntriesData(SearchReturnMsg returnMsg) {
         int bookNum = returnMsg.getBookNum();
         for(int i = 0; i < bookNum; i++) {
@@ -118,8 +122,12 @@ public class GuestSearchFrm extends MyInterFrame {
             briefPanels[i].getKeywordsLabel().setText(returnMsg.getBookId(i));
             briefPanels[i].getAbstractTextArea().setText(returnMsg.getBookMatchedText(i));
             briefPanels[i].getCntLabel().setText("全文匹配" + returnMsg.getBookMatchedText(i) + "次");
+            briefPanels[i].getButtonDetail().setText("下载...");
 
             briefPanels[i].setVisible(true);
+        }
+        for(int i = bookNum; i < briefPanels.length; i++) {
+            briefPanels[i].setVisible(false);
         }
     }
 
@@ -135,9 +143,29 @@ public class GuestSearchFrm extends MyInterFrame {
         return guestSearchFrm;
     }
 
+
+    /**
+     * 为搜索栏的各个按钮绑定按钮事件。
+     * 在搜索框中按下回车会触发搜索按钮。
+     * 对于搜索按钮，当输入框中内容与searchText相同或为空时不会触发搜索。
+     * 只有点击了搜索并成功返回之后才会更新searchText。
+     * 翻页的逻辑见下方处理翻页事件的方法。
+     */
     private void initSearchBarButton() {
+        // 搜索按钮的逻辑，只有点击了搜索并成功返回之后才会更新searchText
         searchBar.getSearchButton().addActionListener(actionEvent -> {
             System.out.println("GuestSearchFrm : search clicked");
+            if(searchBar.getTextField().getText().length() == 0) {
+                searchBar.emptySearchText();
+                return;
+            }
+
+            if(searchBar.getTextField().getText().equals(searchText)) {
+                return;
+            }
+
+            // 新搜索内容默认第一页
+            GuestMainCtrl.trySearch(searchBar.getTextField().getText(), 0, briefPanels.length);
         });
 
         searchBar.getTextField().addKeyListener(new KeyAdapter() {
@@ -150,16 +178,19 @@ public class GuestSearchFrm extends MyInterFrame {
             }
         });
 
+        // 上翻页
         searchBar.getUpButton().addActionListener(actionEvent -> {
             System.out.println("GuestSearchFrm : page up");
             pageUp();
         });
         searchBar.getUpButton().setEnabled(false);
 
+        // 下翻页
         searchBar.getDownButton().addActionListener(actionEvent -> {
             System.out.println("GuestSearchFrm : page down");
             pageDown();
         });
+        searchBar.getDownButton().setEnabled(false);
     }
 
     static void makeEntryShowMore(int inx) {
@@ -200,14 +231,34 @@ public class GuestSearchFrm extends MyInterFrame {
         //getInstance().container.setSize(getInstance().container.getPreferredSize());
     }
 
+    /**
+     * 上一页事件。
+     * 上一页和下一页按钮均不能触发searchText的更新。
+     * 单机上一页重新以不同的offset搜索。
+     */
     private void pageUp() {
-
+        if(offset == 0) {
+            System.out.println("!!!GuestMainCtrl : page up illegal offset");
+            return;
+        }
+        GuestMainCtrl.trySearch(searchText, offset -= briefPanels.length, briefPanels.length);
     }
 
+    /**
+     * 下一页事件。
+     * 上一页和下一页按钮均不能触发searchText的更新。
+     * 单机下一页重新以不同的offset搜索。
+     */
     private void pageDown() {
-
+        if(briefPanels[briefPanels.length - 1] != null && !briefPanels[briefPanels.length - 1].isVisible()) {
+            System.out.println("!!!GuestMainCtrl : page down illegal show cnt");
+        }
+        GuestMainCtrl.trySearch(searchText, offset += briefPanels.length, briefPanels.length);
     }
 
+    /**
+     * 将该页面中的各个按钮均设为不可点击。
+     */
     @Override
     public void enWaitMode() {
         searchBar.getUpButton().setEnabled(false);
@@ -221,18 +272,24 @@ public class GuestSearchFrm extends MyInterFrame {
         }
     }
 
+    /**
+     * 解除不可点击状态。
+     * 如果最后一项有内容，则认为可以使用下一页操作。
+     * 如果offset 》 0，则可以使用上一页操作。
+     */
     @Override
     public void disWaitMode() {
-        if(offset > 0)
-            searchBar.getUpButton().setEnabled(true);
-        searchBar.getDownButton().setEnabled(true);
-        searchBar.getSearchButton().setEnabled(true);
-
-        for(int i = 0; i < briefPanels.length; i++) {
-            if(briefPanels[i] != null) {
-                briefPanels[i].getButtonDetail().setEnabled(true);
+        for (BriefPaperPanel briefPanel : briefPanels) {
+            if (briefPanel != null) {
+                // 看不到的按理说应该不可点击，但反正看不到
+                briefPanel.getButtonDetail().setEnabled(true);
             }
         }
+
+        searchBar.getDownButton().setEnabled(briefPanels[briefPanels.length - 1].isVisible());
+        if(offset > 0)
+            searchBar.getUpButton().setEnabled(true);
+        searchBar.getSearchButton().setEnabled(true);
     }
 
     public void connectError() {
@@ -247,16 +304,24 @@ public class GuestSearchFrm extends MyInterFrame {
         searchBar.undefinedFailed();
     }
 
-    public void searchSuccess(SearchReturnMsg returnMsg) {
+    /**
+     * 当从服务器拿到成功返回的结果之后，将结果更新至屏幕。
+     * 同时更新保存的搜索文本以及偏移量。
+     * 将会无视搜索框内容的修改，并将当前的搜索内容在搜索框中显示。
+     * @param returnMsg 服务器返回的消息
+     * @param searchText 向服务器发送的搜索消息，成功返回后将其保存至当前搜索内容，供翻页调用。
+     * @param offset 当前结果的偏移量，代表翻页位置。
+     */
+    public void searchSuccess(SearchReturnMsg returnMsg, String searchText, int offset) {
+        this.searchText = searchText;
+        this.offset = offset;
+        refreshEntriesData(returnMsg);
         searchBar.searchSuccess();
+        searchBar.getTextField().setText(searchText);
     }
 
     public void sendMsgNotice() {
         searchBar.sendMsgNotice();
-    }
-
-    public void emptySearchText() {
-        searchBar.emptySearchText();
     }
 
     static class ChangeHeightListener implements ActionListener {
@@ -279,19 +344,6 @@ public class GuestSearchFrm extends MyInterFrame {
                     showOption = GuestSearchFrm.HEIGHT_BRIEF;
                 }
             }
-        }
-    }
-
-    static class DetailListener implements ActionListener {
-        private final int buttonInx;
-
-        public DetailListener(int buttonInx) {
-            this.buttonInx = buttonInx;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //TODO:添加点击详细信息按钮的事件响应
         }
     }
 }

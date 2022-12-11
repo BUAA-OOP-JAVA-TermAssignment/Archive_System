@@ -55,7 +55,7 @@ public class LogonRegisterCtrl {
         status = LOGON;
     }
 
-    public static void tryLogon(int userType, String id, String password) {
+    public static synchronized void tryLogon(int userType, String id, String password) {
         System.out.println("LogonRegisterCtrl : receive logon request : " + id + " " + password);
 
         // 当发送消息时连接还未就绪
@@ -119,7 +119,7 @@ public class LogonRegisterCtrl {
         System.out.println("!!!LogonRegisterCtrl : logon undefined return message");
     }
 
-    public static void tryRegister(String name, String id, String password, String email) {
+    public static synchronized void tryRegister(String name, String id, String password, String email) {
         System.out.println("LogonRegisterCtrl : receive register request : " + name + " " + id + " " + password + " " +email);
 
         // 当发送消息时连接还未就绪
