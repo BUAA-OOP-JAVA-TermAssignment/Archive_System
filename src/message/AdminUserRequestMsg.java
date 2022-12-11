@@ -1,25 +1,11 @@
 package message;
 
-import data.UserData;
-
 import java.util.ArrayList;
 
-public class AdminUserRequestMsg extends BaseMsg{
-    public static final int REQUEST_INFO = 0;
 
-    private ArrayList<User> userArrayList = new ArrayList<>(){{
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-        add(new User("ºº×Ö", "12345678", "wefwe", 3, "123//33", "cdcdcd@qwe"));
-    }};
+public class AdminUserRequestMsg extends BaseMsg{
+
+    public ArrayList<User> userArrayList;
 
 
     public class User {
@@ -43,19 +29,12 @@ public class AdminUserRequestMsg extends BaseMsg{
         }
     }
 
-    private AdminUserRequestMsg(ArrayList<User> userArrayList) {
+    public AdminUserRequestMsg(ArrayList<User> userArrayList) {
         super(ADMIN_USER_REQUEST);
         this.userArrayList = userArrayList;
     }
 
-    public static AdminUserRequestMsg createAdminUserRequestMsg(ArrayList<User> userArrayList){
-        return new AdminUserRequestMsg(userArrayList);
-    }
-
-
-
-
-    public  int getUserNum(){
+    public int getUserNum(){
         if(userArrayList == null){
             return 0;
         }
