@@ -10,6 +10,7 @@ public abstract class MyInterFrame extends JInternalFrame implements WaitModeAbl
         super();
         // 设置小窗可以关闭，并将关闭默认操作设置为隐藏
         this.setClosable(true);
+        this.setFrameIcon(null);
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         // 设置内部采用绝对布局模式，之后如果有自适应的需求，可以修改
         this.setLayout(null);

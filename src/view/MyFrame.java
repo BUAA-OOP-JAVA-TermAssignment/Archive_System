@@ -25,6 +25,7 @@ abstract public class MyFrame extends JFrame implements WaitModeAble{
     public MyFrame() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("北航文献管理系统");
+        this.setIconImage(new ImageIcon("./resource/icon.png").getImage());
         this.setResizable(true);
         this.setMinimumSize(new Dimension(1000, 600));
 

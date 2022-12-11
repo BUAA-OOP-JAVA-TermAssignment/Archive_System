@@ -31,6 +31,7 @@ public class GuestSearchFrm extends MyInterFrame {
 
     private GuestSearchFrm() {
         this.setSize(1000, 800);
+        this.setTitle("ËÑË÷");
         this.setMinimumSize(new Dimension(800, 400));
         initLayOut();
         this.setVisible(true);
