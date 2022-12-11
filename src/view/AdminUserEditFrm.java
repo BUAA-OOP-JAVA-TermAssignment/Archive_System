@@ -140,19 +140,19 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     private void initComponents() {
        adminData = AdminData.getInstance();
-        adminData.add("zzq1","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq2","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq3","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq4","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq5","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq6","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq7","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq8","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq9","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq10","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        System.out.println(adminData.getUserNum());
+//        adminData.add("zzq1","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq2","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq3","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq4","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq5","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq6","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq7","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq8","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq9","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq10","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        System.out.println(adminData.getUserNum());
         initTitle();
         initFrame();
         initTableHeader();
@@ -160,19 +160,19 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     }
 
-//    public void Load(){
-//        boolean isLoad = AdminMainCtrl.tryLoad();
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//        if(isLoad){
-//            initTableBody();
-//        } else {
-//            System.out.println("没有数据");
-//        }
-//    }
+    public void Load(){
+        boolean isLoad = AdminMainCtrl.tryLoad();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if(isLoad){
+            initTableBody();
+        } else {
+            System.out.println("没有数据");
+        }
+    }
 
     /**
      * 初始化管理员主界面最上方的标题
