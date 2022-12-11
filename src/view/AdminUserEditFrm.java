@@ -339,8 +339,13 @@ public class AdminUserEditFrm extends MyInterFrame {
             jPanelsUsers[i].setLocation(70,  i * HEIGHT_DETAIL);
 
             jButtonsDelete[i].setBounds(10,i * HEIGHT_DETAIL,70,HEIGHT_DETAIL);
-            jButtonsDelete[i].setVisible(true);
             jPanelTableBody.add(jButtonsDelete[i]);
+            jButtonsDelete[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
             int finalI = i;
             jButtonsDelete[i].addActionListener(new ActionListener() {
                 @Override

@@ -104,5 +104,23 @@ public class AdminMainCtrl {
         }
     }
 
+    public static synchronized boolean Delete(String userName,String id, String email, String password, int downloadCnt, String date){
+        adminMainFrm.enWaitMode();
+        System.out.println("AdminMainCtrl : adminUserEdit delete request");
+        if(myClient == null) {
+            adminMainFrm.disWaitMode();
+            return false;
+        }
+        int ret = myClient.sendMsg(AdminUserEditMsg.createAdminUserEditMsg(AdminUserEditMsg.DELETE,userName,id,email,password,downloadCnt,date));
+
+        if(ret == Client.SUCCESS){
+            adminMainFrm.disWaitMode();
+            return true;
+        } else {
+            adminMainFrm.disWaitMode();
+            return false;
+        }
+    }
+
 
 }
