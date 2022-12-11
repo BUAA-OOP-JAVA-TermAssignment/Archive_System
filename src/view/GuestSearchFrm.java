@@ -174,12 +174,9 @@ public class GuestSearchFrm extends MyInterFrame {
         // 搜索按钮的逻辑，只有点击了搜索并成功返回之后才会更新searchText
         searchBar.getSearchButton().addActionListener(actionEvent -> {
             System.out.println("GuestSearchFrm : search clicked");
-            if(searchBar.getTextField().getText().length() == 0) {
-                searchBar.emptySearchText();
-                return;
-            }
-
             if(searchBar.getTextField().getText().equals(searchText)) {
+                if(searchText.length() != 0)
+                    searchBar.sameSearchText();
                 return;
             }
 
@@ -187,15 +184,6 @@ public class GuestSearchFrm extends MyInterFrame {
             GuestMainCtrl.trySearch(searchBar.getTextField().getText(), 0, briefPanels.length);
         });
 
-        searchBar.getTextField().addKeyListener(new KeyAdapter() {
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    searchBar.getSearchButton().doClick();
-                }
-            }
-        });
 
         // 上翻页
         searchBar.getUpButton().addActionListener(actionEvent -> {
@@ -337,7 +325,12 @@ public class GuestSearchFrm extends MyInterFrame {
         this.searchText = searchText;
         this.offset = offset;
         // 搜索内容为空串则代表是推荐内容
-        refreshEntriesData(returnMsg, searchText.equals(""));
+        if(searchText.length() == 0) {
+            refreshEntriesData(returnMsg, true);
+            searchBar.showSuggest();
+        }else {
+            refreshEntriesData(returnMsg, false);
+        }
         searchBar.searchSuccess();
         searchBar.getTextField().setText(searchText);
     }
