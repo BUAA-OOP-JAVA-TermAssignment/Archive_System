@@ -1,5 +1,6 @@
 package panel;
 
+import style.MyColors;
 import style.MyFonts;
 import style.StyleCtrl;
 import view.MyFrame;
@@ -16,6 +17,7 @@ public class SearchPanel extends JPanel {
     private final JButton searchButton = new JButton("搜索");
     private final JButton upButton = new JButton("上一页");
     private final JButton downButton = new JButton("下一页");
+    private final JLabel msgLabel = new JLabel("请输入搜索内容");
     private SearchPanel(){
         initTextField();
         initSearchButton();
@@ -66,6 +68,11 @@ public class SearchPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(textField, gbc);
 
+        // 消息提示
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        this.add(msgLabel, gbc);
+
         // 按钮
         gbc.gridx = 3;
         gbc.gridy = 0;
@@ -108,6 +115,8 @@ public class SearchPanel extends JPanel {
         this.add(upButton, gbc);
         gbc.gridx = 4;
         this.add(downButton, gbc);
+
+
     }
 
     public static SearchPanel getInstance() {
@@ -151,5 +160,55 @@ public class SearchPanel extends JPanel {
         testFrame.getTable().add(testInterFrame);
         testFrame.setVisible(true);
         testInterFrame.setVisible(true);
+    }
+
+    public void connectError() {
+        msgLabel.setText("搜索请求发送失败，请稍后重试");
+        msgLabel.setForeground(Color.RED);
+        msgLabel.setVisible(true);
+    }
+
+    public void timeoutError() {
+        msgLabel.setText("服务器连接超时，请稍后重试");
+        msgLabel.setForeground(Color.RED);
+        msgLabel.setVisible(true);
+    }
+
+    public void undefinedFailed() {
+        msgLabel.setText("搜索发生未知错误");
+        msgLabel.setForeground(Color.RED);
+        msgLabel.setVisible(true);
+    }
+
+    public void searchSuccess() {
+        msgLabel.setVisible(false);
+    }
+
+    public void sendMsgNotice() {
+        msgLabel.setText("等待服务器响应...");
+        msgLabel.setForeground(Color.YELLOW);
+        msgLabel.setVisible(true);
+    }
+
+    public void emptySearchText() {
+        msgLabel.setText("请输入搜索内容");
+        msgLabel.setForeground(Color.YELLOW);
+        msgLabel.setVisible(true);
+    }
+
+    public JTextField getTextField() {
+        return textField;
+    }
+
+    public JButton getSearchButton() {
+        return searchButton;
+    }
+
+    public JButton getUpButton() {
+        return upButton;
+    }
+
+    public JButton getDownButton() {
+        return downButton;
     }
 }

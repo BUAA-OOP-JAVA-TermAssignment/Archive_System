@@ -24,6 +24,8 @@ public class GuestSearchFrm extends MyInterFrame {
     private final JScrollPane scrollPane = new JScrollPane();
     private Dimension preferredSize;
     private JPanel container;
+    private String searchText;
+    private int offset = 0;
 
 
     private GuestSearchFrm() {
@@ -68,6 +70,7 @@ public class GuestSearchFrm extends MyInterFrame {
 
         GridBagConstraints gbc = new GridBagConstraints();
 
+        initSearchBarButton();
 
         // 设定搜索框的参数，并将搜索框加入
         gbc.gridx = 0;
@@ -132,6 +135,33 @@ public class GuestSearchFrm extends MyInterFrame {
         return guestSearchFrm;
     }
 
+    private void initSearchBarButton() {
+        searchBar.getSearchButton().addActionListener(actionEvent -> {
+            System.out.println("GuestSearchFrm : search clicked");
+        });
+
+        searchBar.getTextField().addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    searchBar.getSearchButton().doClick();
+                }
+            }
+        });
+
+        searchBar.getUpButton().addActionListener(actionEvent -> {
+            System.out.println("GuestSearchFrm : page up");
+            pageUp();
+        });
+        searchBar.getUpButton().setEnabled(false);
+
+        searchBar.getDownButton().addActionListener(actionEvent -> {
+            System.out.println("GuestSearchFrm : page down");
+            pageDown();
+        });
+    }
+
     static void makeEntryShowMore(int inx) {
         getInstance().briefPanels[inx].setPreferredSize(MORE_DIMENSION);
         getInstance().briefPanels[inx].getButtonChangeHeight().setText("收起");
@@ -180,6 +210,10 @@ public class GuestSearchFrm extends MyInterFrame {
 
     @Override
     public void enWaitMode() {
+        searchBar.getUpButton().setEnabled(false);
+        searchBar.getDownButton().setEnabled(false);
+        searchBar.getSearchButton().setEnabled(false);
+
         for(int i = 0; i < briefPanels.length; i++) {
             if(briefPanels[i] != null) {
                 briefPanels[i].getButtonDetail().setEnabled(false);
@@ -189,6 +223,11 @@ public class GuestSearchFrm extends MyInterFrame {
 
     @Override
     public void disWaitMode() {
+        if(offset > 0)
+            searchBar.getUpButton().setEnabled(true);
+        searchBar.getDownButton().setEnabled(true);
+        searchBar.getSearchButton().setEnabled(true);
+
         for(int i = 0; i < briefPanels.length; i++) {
             if(briefPanels[i] != null) {
                 briefPanels[i].getButtonDetail().setEnabled(true);
@@ -196,7 +235,31 @@ public class GuestSearchFrm extends MyInterFrame {
         }
     }
 
-    class ChangeHeightListener implements ActionListener {
+    public void connectError() {
+        searchBar.connectError();
+    }
+
+    public void timeoutError() {
+        searchBar.timeoutError();
+    }
+
+    public void undefinedFailed() {
+        searchBar.undefinedFailed();
+    }
+
+    public void searchSuccess(SearchReturnMsg returnMsg) {
+        searchBar.searchSuccess();
+    }
+
+    public void sendMsgNotice() {
+        searchBar.sendMsgNotice();
+    }
+
+    public void emptySearchText() {
+        searchBar.emptySearchText();
+    }
+
+    static class ChangeHeightListener implements ActionListener {
         private final int buttonInx;
         private int showOption = GuestSearchFrm.HEIGHT_BRIEF;
 
@@ -219,7 +282,7 @@ public class GuestSearchFrm extends MyInterFrame {
         }
     }
 
-    class DetailListener implements ActionListener {
+    static class DetailListener implements ActionListener {
         private final int buttonInx;
 
         public DetailListener(int buttonInx) {
