@@ -4,8 +4,6 @@ import controller.GuestMainCtrl;
 import style.MyColors;
 import style.MyFonts;
 import style.StyleCtrl;
-import view.GuestMainFrm;
-import view.GuestSearchFrm;
 import view.MyFrame;
 import view.MyInterFrame;
 
@@ -33,11 +31,19 @@ public class BriefPaperPanel extends JPanel {
         // 这里设置边框大小
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
+
+    /**
+     * 根据当前的风格设置背景颜色
+     */
     private void setColor() {
         // 根据当前的风格选择设置背景颜色
         this.setBackground(MyColors.getPaperInfoPaneColor());
     }
 
+    /**
+     * 设置各文本显示的字体，边框以及透明度。
+     * 开启abstractTextArea的自动换行。
+     */
     private void setTextStyle() {
         final Font titleFont = MyFonts.TITLE_FONT_24;
         final Font keywordFont = MyFonts.SUB_TITLE_FONT_18;
@@ -63,6 +69,12 @@ public class BriefPaperPanel extends JPanel {
         abstractTextArea.setEditable(false);
     }
 
+    /**
+     * 设置文本显示组件中的文本对齐方式。
+     * @param label 传入的文本载体
+     * @param horizontal 水平布局方式
+     * @param vertical 垂直布局方式
+     */
     private void setAlignment(JLabel label, int horizontal, int vertical) {
         label.setHorizontalAlignment(horizontal);
         label.setVerticalAlignment(vertical);
@@ -74,6 +86,9 @@ public class BriefPaperPanel extends JPanel {
         imageLabel.setIcon(new ImageIcon(new ImageIcon(".//resource//book_init.png").getImage().getScaledInstance(200, 276, Image.SCALE_FAST)));
     }
 
+    /**
+     * 为下载按钮添加按钮监听，发送尝试下载的请求
+     */
     private void addButtonListener() {
         buttonDetail.addActionListener(new ActionListener() {
             @Override

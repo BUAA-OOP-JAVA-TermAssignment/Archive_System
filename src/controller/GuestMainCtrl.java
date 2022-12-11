@@ -1,6 +1,8 @@
 package controller;
 
 import client.Client;
+import data.AdminData;
+import data.UserData;
 import message.BaseMsg;
 import message.SearchRequestMsg;
 import message.SearchReturnMsg;
@@ -17,18 +19,15 @@ import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class GuestMainCtrl {
-    //TODO:test
-    static {
-        StyleCtrl.setStyle(StyleCtrl.DARCULA);
-    }
 
-    private static Client myClient = Client.getMyClient();
+    private static final Client myClient = Client.getMyClient();
     // 主窗口直接加载
-    private static MyFrame mainWindow = GuestMainFrm.getInstance();
+    private static final MyFrame mainWindow = GuestMainFrm.getInstance();
     // 默认首先显示的小窗口，直接加载
-    private static GuestSearchFrm searchFrm = GuestSearchFrm.getInstance();
+    private static final GuestSearchFrm searchFrm = GuestSearchFrm.getInstance();
     private static UserCentreFrm centreFrm = null;
     private static JFileChooser fileChooser = null;
 
@@ -147,6 +146,12 @@ public class GuestMainCtrl {
 
         if(result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+            String fileName = selectedFile.getName();
+            String filePath = selectedFile.getParentFile().getPath();
+            if(!fileName.matches("\\.pdf$")) {
+                fileName += ".pdf";
+                selectedFile = new File(filePath + File.separator + fileName);
+            }
             if(selectedFile.exists()) {
                 if(JOptionPane.showConfirmDialog(searchFrm, "选中的文件已经存在，要覆盖它吗？", "警告", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) != JOptionPane.OK_OPTION) {
                     source.setText("下载...");
@@ -155,10 +160,12 @@ public class GuestMainCtrl {
                 }
             }
             source.setText("正在下载...");
-            boolean ret = DownloadCtrl.downloadFile(id, selectedFile.getPath(), selectedFile.getName());
+            boolean ret = DownloadCtrl.downloadFile(id, filePath, fileName);
 
-            if(ret)
+            if(ret) {
+                UserData.getInstance().addDownloadNum();
                 source.setText("下载成功");
+            }
             else
                 source.setText("下载失败");
 
@@ -176,7 +183,8 @@ public class GuestMainCtrl {
     private static void initFileChooser() {
         fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PDF files", "pdf"));
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("PDF files", "pdf"));
     }
 
     private static void makeAllWait() {
