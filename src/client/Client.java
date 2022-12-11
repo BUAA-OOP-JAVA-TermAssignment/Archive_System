@@ -40,6 +40,8 @@ public class Client {
      */
     private Socket socket = null;
 
+    private boolean isDataChanging = false;
+
     /**
      * 连接到服务器
      *
@@ -67,7 +69,7 @@ public class Client {
      */
     public boolean disConnect() {
         if (socket == null) {
-            return true;
+            return false;
         }
         try {
             socket.close();
@@ -87,12 +89,14 @@ public class Client {
      * @param msg
      */
     public int sendMsg(BaseMsg msg) {
+        isDataChanging = true;
         // TODO:test
         System.out.println("Client : send message");
         //return SUCCESS;
 
 
         if (!isConnected) {
+            isDataChanging = false;
             return DISCONNECT;
         }
         try {
@@ -102,30 +106,36 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Send Message Failed!");
+            isDataChanging = false;
             return EXCEPTION;
         }
-
+        isDataChanging = false;
         return SUCCESS;
 
     }
 
     public BaseMsg waitMsg() {
+        isDataChanging = true;
         System.out.println("Client : wait message");
         // TODO:阻塞等待主机返回的消息，不判断返回消息类型，交由调用的方法处理，超时自动返回一个超时的消息
         try {
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             BaseMsg msg = (BaseMsg) ois.readObject();
+            isDataChanging = false;
             return msg;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            isDataChanging = false;
             return new BaseMsg(BaseMsg.UNDEFINED_FAILED);
         } catch (SocketTimeoutException e) {
+            isDataChanging = false;
             return new BaseMsg(BaseMsg.TIME_OUT);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Lost connection!");
         }
         //return LoginReturnMsg.createLoginReturnMsg("菜菜", "20374249", "20374249@buaa.edu.cn", "123456789", 5, "2022-12-11 01:20:05");
+        isDataChanging = false;
         return new BaseMsg(BaseMsg.TIME_OUT);
     }
 
@@ -157,4 +167,7 @@ public class Client {
         }
     }
 
+    public boolean isDataChanging() {
+        return isDataChanging;
+    }
 }

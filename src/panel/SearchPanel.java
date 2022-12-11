@@ -177,7 +177,7 @@ public class SearchPanel extends JPanel {
      * 在搜索栏下方显示连接中断错误
      */
     public void connectError() {
-        msgLabel.setText("套接字链接异常");
+        msgLabel.setText("网络链接异常");
         msgLabel.setForeground(Color.RED);
         msgLabel.setVisible(true);
     }

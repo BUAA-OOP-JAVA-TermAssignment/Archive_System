@@ -340,8 +340,8 @@ public class GuestSearchFrm extends MyInterFrame {
             searchBar.showSuggest();
         }else {
             refreshEntriesData(returnMsg, false);
+            searchBar.searchSuccess();
         }
-        searchBar.searchSuccess();
         searchBar.getTextField().setText(searchText);
     }
 
