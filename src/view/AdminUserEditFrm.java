@@ -43,6 +43,7 @@ public class AdminUserEditFrm extends MyInterFrame {
     private int pagesNum = 0;
     private int whichPage = 0;
 
+
     private static volatile AdminUserEditFrm adminEditFrm = null;
     private static Container container;
 
