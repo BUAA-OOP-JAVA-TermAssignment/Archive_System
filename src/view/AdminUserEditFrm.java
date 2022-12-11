@@ -1,5 +1,6 @@
 package view;
 
+import controller.AdminMainCtrl;
 import message.AdminUserRequestMsg;
 import style.MyColors;
 import style.MyFonts;
@@ -22,7 +23,7 @@ public class AdminUserEditFrm extends MyInterFrame {
     public final static int TABLE_X = 100;
     public final static int TABLE_Y = 100;
 
-
+    public final JLabel msgLabel = new JLabel();
     private JPanel jPanelTableHeader = new JPanel();
     private JPanel jPanelTableBody = new JPanel();
     private JPanel[] jPanelsUsers = new JPanel[]{
@@ -67,8 +68,12 @@ public class AdminUserEditFrm extends MyInterFrame {
         initTitle();
         initFrame();
         initTableHeader();
-        initTableBody();
-
+        if(AdminMainCtrl.tryLoad()){
+            initTableBody();
+        } else {
+            System.out.println("没有数据");
+            //TODO:暂无数据
+        }
     }
 
     private void initTitle() {
@@ -376,6 +381,18 @@ public class AdminUserEditFrm extends MyInterFrame {
 //        jPanelsUsers[i].add(jTextFieldOption);
     }
 
+
+    public void sendMsgNotice() {
+        msgLabel.setText("正在与数据库连接...");
+        msgLabel.setForeground(Color.YELLOW);
+        msgLabel.setVisible(true);
+    }
+
+    public void timeoutError() {
+        msgLabel.setText("服务器连接超时，请稍后重试");
+        msgLabel.setForeground(Color.RED);
+        msgLabel.setVisible(true);
+    }
 
     public static void main(String[] args) {
         StyleCtrl.setStyle(StyleCtrl.DARCULA);
