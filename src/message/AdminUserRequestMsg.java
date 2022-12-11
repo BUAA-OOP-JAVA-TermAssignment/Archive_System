@@ -29,9 +29,9 @@ public class AdminUserRequestMsg extends BaseMsg{
         }
     }
 
-    public AdminUserRequestMsg(ArrayList<User> userArrayList) {
+    public AdminUserRequestMsg() {
         super(ADMIN_USER_REQUEST);
-        this.userArrayList = userArrayList;
+        this.userArrayList = new ArrayList<>();
     }
 
     public int getUserNum(){
