@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class AdminUserRequestMsg extends BaseMsg{
 
-    public ArrayList<User> userArrayList;
+    private ArrayList<User> userArrayList;
 
 
     public class User {
