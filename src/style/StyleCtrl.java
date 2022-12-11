@@ -24,7 +24,7 @@ public class StyleCtrl {
      * 使用预设值初始化风格。
      */
     public static void init() {
-        setStyle(INTELLIJ);
+        setStyle(DARCULA);
     }
 
     /**
