@@ -212,7 +212,7 @@ public class AdminUserEditFrm extends MyInterFrame {
         adminData = AdminData.getInstance();
         jPanelTableBody.setVisible(true);
         jPanelTableBody.setLayout(null);
-        jPanelTableBody.setBackground(Color.PINK);
+        //jPanelTableBody.setBackground(Color.PINK);
         jPanelTableBody.setSize(WIDTH_TABLE, HEIGHT_BODY);
         jPanelTableBody.setLocation(TABLE_X-70, TABLE_Y + HEIGHT_ROW);
         initBodyContent();
@@ -584,6 +584,7 @@ public class AdminUserEditFrm extends MyInterFrame {
             jButtonCancel[j].setVisible(false);
             jButtonChangePassword[j].setVisible(false);
             jButtonChangeEmail[j].setVisible(false);
+            jButtonsDelete[j].setVisible(false);
         }
         for(int j = 0; j < 10 && j < usersNum-10*whichPage; j++){
             jTextFieldIndex[j].setText(String.valueOf((j + whichPage * 10 + 1)));
@@ -603,6 +604,7 @@ public class AdminUserEditFrm extends MyInterFrame {
             jButtonCancel[j].setVisible(false);
             jButtonChangePassword[j].setVisible(true);
             jButtonChangeEmail[j].setVisible(true);
+            jButtonsDelete[j].setVisible(true);
         }
 
     }
