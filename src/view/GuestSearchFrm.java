@@ -338,11 +338,11 @@ public class GuestSearchFrm extends MyInterFrame {
         this.offset = offset;
         // 搜索内容为空串则代表是推荐内容
         if(searchText.length() == 0) {
-            refreshEntriesData(returnMsg, true);
             searchBar.showSuggest();
+            refreshEntriesData(returnMsg, true);
         }else {
-            refreshEntriesData(returnMsg, false);
             searchBar.searchSuccess();
+            refreshEntriesData(returnMsg, false);
         }
         searchBar.getTextField().setText(searchText);
     }
