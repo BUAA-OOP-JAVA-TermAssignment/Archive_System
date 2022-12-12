@@ -33,12 +33,14 @@ public class UserCentreFrm extends MyInterFrame{
         UserData userData = UserData.getInstance();
         if(userData.getUserName().equals("这里要写十个字差三个")){
             //TODO:一个提示未加载完成的函数，洲：我觉得不用提示就等加载完了再显示就行
+            System.out.println("没显示成功");
         } else{
             this.userName = userData.getUserName();
             this.id = userData.getId();
             this.email = userData.getEmail();
             this.password = userData.getPassword();
             this.downloadNum = userData.getDownloadNum();
+            this.date = userData.getDate();
         initComponents();
         }
     }
