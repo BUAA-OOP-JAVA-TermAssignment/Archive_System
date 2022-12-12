@@ -348,20 +348,13 @@ public class AdminUserEditFrm extends MyInterFrame {
                             adminData.getUserEmail(finalI1 + whichPage * 10), adminData.getUserPassword(finalI1 + whichPage * 10),
                             adminData.getUserDownloadCnt(finalI1 + whichPage * 10), adminData.getUserDate(finalI1 + whichPage * 10))){
                         adminData.DeleteUser(finalI1 + whichPage * 10);
+                        usersNum--;
                         changeDetailMsg();
                     }
 
                 }
             });
-            int finalI = i;
-            jButtonsDelete[i].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    jButtonsDelete[finalI].setVisible(false);
-                    jButtonsYes[finalI].setVisible(true);
-                }
-            });
-            jButtonsYes[i].setBounds(TABLE_X/2,TABLE_Y + HEIGHT_ROW + i * HEIGHT_DETAIL,TABLE_X/4,HEIGHT_DETAIL);
+
         }
     }
 
