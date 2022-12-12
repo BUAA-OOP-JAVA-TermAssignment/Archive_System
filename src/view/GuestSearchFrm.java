@@ -119,8 +119,8 @@ public class GuestSearchFrm extends MyInterFrame {
     }
 
     private void hideAllEntries() {
-        for(int i = 0; i < briefPanels.length; i++) {
-            briefPanels[i].setVisible(false);
+        for (BriefPaperPanel briefPanel : briefPanels) {
+            briefPanel.setVisible(false);
         }
     }
 
@@ -276,9 +276,9 @@ public class GuestSearchFrm extends MyInterFrame {
         searchBar.getDownButton().setEnabled(false);
         searchBar.getSearchButton().setEnabled(false);
 
-        for(int i = 0; i < briefPanels.length; i++) {
-            if(briefPanels[i] != null) {
-                briefPanels[i].getButtonDetail().setEnabled(false);
+        for (BriefPaperPanel briefPanel : briefPanels) {
+            if (briefPanel != null) {
+                briefPanel.getButtonDetail().setEnabled(false);
             }
         }
     }
