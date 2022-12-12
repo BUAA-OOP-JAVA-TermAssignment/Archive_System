@@ -176,7 +176,7 @@ public class AdminUserEditFrm extends MyInterFrame {
     private void initTitle() {
         JLabel jLabelTitle = new JLabel("用户管理中心");
         jLabelTitle.setFont(MyFonts.TITLE_FONT_36);
-        jLabelTitle.setBounds(WIDGET_X+WIDTH_TABLE/2-WIDGET_GAP/2,20,WIDGET_GAP,60);
+        jLabelTitle.setBounds(WIDGET_X+WIDTH_TABLE/2-WIDGET_GAP/4,20,WIDGET_GAP,60);
         jLabelTitle.setVisible(true);
         container.add(jLabelTitle);
         //TODO:有一个主页面最上方的title捏
