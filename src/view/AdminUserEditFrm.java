@@ -89,6 +89,10 @@ public class AdminUserEditFrm extends MyInterFrame {
             new JButton("修改邮箱"),new JButton("修改邮箱"),new JButton("修改邮箱"),new JButton("修改邮箱"),new JButton("修改邮箱"),
             new JButton("修改邮箱"),new JButton("修改邮箱"),new JButton("修改邮箱"),new JButton("修改邮箱"),new JButton("修改邮箱")
     };
+    JLabel[] jLabelsErrorEmail = new JLabel[]{
+            new JLabel("邮箱格式错误"),new JLabel("邮箱格式错误"),new JLabel("邮箱格式错误"),new JLabel("邮箱格式错误"),new JLabel("邮箱格式错误"),
+            new JLabel("邮箱格式错误"),new JLabel("邮箱格式错误"),new JLabel("邮箱格式错误"),new JLabel("邮箱格式错误"),new JLabel("邮箱格式错误"),
+    };
     JFrame passwordWin = new JFrame();
     JLabel jLabelInput = new JLabel();
     JPasswordField jPasswordField = new JPasswordField();
@@ -136,19 +140,19 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     private void initComponents() {
        adminData = AdminData.getInstance();
-        adminData.add("zzq1","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq2","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq3","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq4","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq5","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq6","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq7","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq8","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq9","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq10","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
-        System.out.println(adminData.getUserNum());
+//        adminData.add("zzq1","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq2","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq3","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq4","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq5","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq6","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq7","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq8","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq9","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq10","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
+//        System.out.println(adminData.getUserNum());
         initFrame();
         initTitle();
         initTableHeader();
@@ -156,19 +160,19 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     }
 
-//    public void Load(){
-//        boolean isLoad = AdminMainCtrl.tryLoad();
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//        if(isLoad){
-//            initTableBody();
-//        } else {
-//            System.out.println("没有数据");
-//        }
-//    }
+    public void Load(){
+        boolean isLoad = AdminMainCtrl.tryLoad();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if(isLoad){
+            initTableBody();
+        } else {
+            System.out.println("没有数据");
+        }
+    }
 
     /**
      * 初始化管理员主界面最上方的标题
@@ -392,6 +396,11 @@ public class AdminUserEditFrm extends MyInterFrame {
             x += 10 * WIDTH_BASE;
             jPanelsUsers[j].add(jTextFieldName[j]);
 
+            jLabelsErrorEmail[j].setVisible(false);
+            jLabelsErrorEmail[j].setForeground(Color.RED);
+            jLabelsErrorEmail[j].setBounds(x,0,3*WIDTH_BASE,10);
+            jPanelsUsers[j].add(jLabelsErrorEmail[j]);
+
             jTextFieldEmail[j].setEditable(false);
             jTextFieldEmail[j].setOpaque(false);
             jTextFieldEmail[j].setFont(MyFonts.TEXT_FONT_18);
@@ -436,13 +445,12 @@ public class AdminUserEditFrm extends MyInterFrame {
                         jTextFieldEmail[finalJ].setText(newEmail);
                         jTextFieldEmail[finalJ].setEditable(false);
                         adminData.ChangeEmail(finalJ4 + whichPage * 10,newEmail);
-                        jTextFieldEmail[finalJ].setBackground(MyColors.getSpecialButtonBackColor());
-                        jTextFieldEmail[finalJ].setForeground(Color.lightGray);
+                        jLabelsErrorEmail[finalJ].setVisible(false);
                     } else {
                         OptionError();
                     }
                 } else {
-                    jTextFieldEmail[finalJ].setBackground(Color.PINK);
+                    jLabelsErrorEmail[finalJ].setVisible(true);
                 }
             });
             jPanelsUsers[j].add(jButtonContinue[j]);
@@ -473,8 +481,9 @@ public class AdminUserEditFrm extends MyInterFrame {
             int finalJ1 = j;
             jButtonCancel[j].addActionListener(e -> {
                 System.out.println("AdminMainFrm : Click cancel button");
-                jTextFieldEmail[finalJ1].setBackground(MyColors.getPaperInfoPaneColor());
-                jTextFieldEmail[finalJ1].setForeground(Color.lightGray);
+//                jTextFieldEmail[finalJ1].setBackground(MyColors.getPaperInfoPaneColor());
+//                jTextFieldEmail[finalJ1].setForeground(Color.lightGray);
+                jLabelsErrorEmail[finalJ1].setVisible(false);
                 jButtonReset[finalJ1].setVisible(true);
                 jButtonChangePassword[finalJ1].setVisible(true);
                 jButtonContinue[finalJ1].setVisible(false);
@@ -509,8 +518,8 @@ public class AdminUserEditFrm extends MyInterFrame {
             jButtonChangeEmail[j].addActionListener(e -> {
                 System.out.println("AdminMainFrm : Click change email button");
                 jTextFieldEmail[finalJ2].setEditable(true);
-                jTextFieldEmail[finalJ2].setBackground(MyColors.getSpecialButtonBackColor());
-                jTextFieldEmail[finalJ2].setForeground(Color.BLACK);
+//                jTextFieldEmail[finalJ2].setBackground(MyColors.getSpecialButtonBackColor());
+//                jTextFieldEmail[finalJ2].setForeground(Color.BLACK);
                 jButtonReset[finalJ2].setVisible(false);
                 jButtonChangePassword[finalJ2].setVisible(false);
                 jButtonCancel[finalJ2].setVisible(true);
@@ -518,6 +527,7 @@ public class AdminUserEditFrm extends MyInterFrame {
                 oldEmail[0] = (jTextFieldEmail[finalJ2].getText());
             });
             jPanelsUsers[j].add(jButtonChangeEmail[j]);
+
 
 
 
@@ -704,7 +714,7 @@ public class AdminUserEditFrm extends MyInterFrame {
     }
 
     public static void main(String[] args) {
-        StyleCtrl.setStyle(StyleCtrl.DARCULA);
+        StyleCtrl.setStyle(StyleCtrl.LIGHT);
         MyFrame myFrameTest = new MyFrame() {
         };
         AdminUserEditFrm adminMainFrm1 = AdminUserEditFrm.getInstance();
