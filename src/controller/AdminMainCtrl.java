@@ -36,7 +36,9 @@ public class AdminMainCtrl {
     private static final AdminMainFrm mainWindow = AdminMainFrm.getInstance();
     private static final AdminUserEditFrm adminUserEditFrm = AdminUserEditFrm.getInstance();
 
-
+    /**
+     * 在登录成功后，加载管理端主界面
+     */
     public static void startMainWindow() {
         LogOnFrm.getInstance().setVisible(false);
         LogOnFrm.getInstance().setEnabled(false);
@@ -45,6 +47,11 @@ public class AdminMainCtrl {
         mainWindow.setVisible(true);
         adminUserEditFrm.Load();
     }
+
+    /**
+     * 尝试向服务端请求所有的用户信息，并返回到管理员客户端
+     * @return boolean类型的返回值，当成功获取到用户信息返回true，否则返回false
+     */
 
     public static synchronized boolean tryLoad() {
         adminMainFrm.enWaitMode();
@@ -82,13 +89,24 @@ public class AdminMainCtrl {
             adminMainFrm.disWaitMode();
             return true;
         }
-
+        adminMainFrm.disWaitMode();
         return false;
     }
 
+    /**
+     * 用来向服务端发送修改用户信息的消息
+     * @param userName 用户的姓名
+     * @param id 用户的学工号
+     * @param email 用户的邮箱
+     * @param password 用户的密码
+     * @param downloadCnt 用户的下载数量
+     * @param date 用户最近登录的时间
+     * @return boolean类型的返回值，如果服务端成功修改，返回true，否则返回false
+     */
     public static synchronized boolean Change(String userName,String id, String email, String password, int downloadCnt, String date){
         adminMainFrm.enWaitMode();
         System.out.println("AdminMainCtrl : adminUserEdit reset downloadCnt request");
+        myClient = Client.getMyClient();
         if(myClient == null) {
             adminMainFrm.disWaitMode();
             return false;
@@ -97,13 +115,30 @@ public class AdminMainCtrl {
 
         if(ret == Client.SUCCESS){
             adminMainFrm.disWaitMode();
-            return true;
         } else {
             adminMainFrm.disWaitMode();
             return false;
         }
+
+        BaseMsg retMsg = myClient.waitMsg();
+        if(retMsg.getMsgCode() == - BaseMsg.ADMIN_USER_EDIT) {
+            adminMainFrm.disWaitMode();
+            return true;
+        }
+        adminMainFrm.disWaitMode();
+        return false;
     }
 
+    /**
+     * 用来向服务端发送删除用户信息的消息
+     * @param userName 用户的姓名
+     * @param id 用户的学工号
+     * @param email 用户的邮箱
+     * @param password 用户的密码
+     * @param downloadCnt 用户的下载数量
+     * @param date 用户最近登录的时间
+     * @return boolean类型的返回值，如果服务端成功删除，返回true，否则返回false
+     */
     public static synchronized boolean Delete(String userName,String id, String email, String password, int downloadCnt, String date){
         adminMainFrm.enWaitMode();
         System.out.println("AdminMainCtrl : adminUserEdit delete request");
@@ -115,11 +150,17 @@ public class AdminMainCtrl {
 
         if(ret == Client.SUCCESS){
             adminMainFrm.disWaitMode();
-            return true;
         } else {
             adminMainFrm.disWaitMode();
             return false;
         }
+        BaseMsg retMsg = myClient.waitMsg();
+        if(retMsg.getMsgCode() == - BaseMsg.ADMIN_USER_EDIT) {
+            adminMainFrm.disWaitMode();
+            return true;
+        }
+        adminMainFrm.disWaitMode();
+        return false;
     }
 
 

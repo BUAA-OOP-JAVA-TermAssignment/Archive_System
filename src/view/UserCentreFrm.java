@@ -32,7 +32,6 @@ public class UserCentreFrm extends MyInterFrame{
     private UserCentreFrm(){
         UserData userData = UserData.getInstance();
         if(userData.getUserName().equals("这里要写十个字差三个")){
-            //TODO:一个提示未加载完成的函数，洲：我觉得不用提示就等加载完了再显示就行
             System.out.println("没显示成功");
         } else{
             this.userName = userData.getUserName();
@@ -45,7 +44,9 @@ public class UserCentreFrm extends MyInterFrame{
         }
     }
 
-
+    /**
+     * 用来加载初始化的模块
+     */
     private void initComponents(){
 
         this.setTitle("个人信息");
@@ -262,6 +263,11 @@ public class UserCentreFrm extends MyInterFrame{
 
     }
 
+    /**
+     * 单例模式，用来构建 UserCentreFrm 的对象
+     * @return 返回 UserCentreFrm 类型的单例对象
+     */
+
     public static UserCentreFrm getInstance() {
         if(userCentreFrm == null) {
             synchronized (UserCentreFrm.class) {
@@ -274,13 +280,21 @@ public class UserCentreFrm extends MyInterFrame{
         return userCentreFrm;
     }
 
-
+    /**
+     * MyInterFrame 中方法的重写
+     * 由于使用单通道的通信，不能同时发送并处理两个及以上的消息。
+     * 除了在业务逻辑中使用互斥锁，来保证不会同时有两个方法尝试与服务器通信。
+     * 在一个按钮激活之后，会由控制器调用各个窗口的该方法，来将各个按钮设置为不可点击状态。
+     */
 
     public void enWaitMode() {
         this.setEnabled(false);
     }
 
-
+    /**
+     * MyInterFrame 中方法的重写
+     * 解除对界面中其它按键的禁用
+     */
     public void disWaitMode() {
         this.setEnabled(true);
     }

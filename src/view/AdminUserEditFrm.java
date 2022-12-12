@@ -97,15 +97,6 @@ public class AdminUserEditFrm extends MyInterFrame {
             new JButton("删除"),new JButton("删除"),new JButton("删除"),new JButton("删除"),new JButton("删除"),
             new JButton("删除"),new JButton("删除"),new JButton("删除"),new JButton("删除"),new JButton("删除")
     };
-    private final JButton[] jButtonsYes = new JButton[]{
-            new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定"),
-            new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定"),new JButton("确定")
-    };
-
-    private final JButton[] jButtonsNo = new JButton[]{
-            new JButton("取消"),new JButton("取消"),new JButton("取消"),new JButton("取消"),new JButton("取消"),
-            new JButton("取消"),new JButton("取消"),new JButton("取消"),new JButton("取消"),new JButton("取消")
-    };
 
     private int usersNum = 0;
     private int pagesNum = 0;
@@ -122,6 +113,10 @@ public class AdminUserEditFrm extends MyInterFrame {
         initComponents();
     }
 
+    /**
+     * 用来构造 AdminUserEditFrm 模块的单例
+     * @return 返回 AdminUserEditFrm 类型的对象
+     */
     public static AdminUserEditFrm getInstance() {
         if (adminEditFrm == null) {
             synchronized (AdminUserEditFrm.class) {
@@ -153,8 +148,8 @@ public class AdminUserEditFrm extends MyInterFrame {
 //        adminData.add("zzq11","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
 //        adminData.add("zzq12","20374265","2020202020",8,"asdhu@buaa.edu.cn","2020-2020-2020");
         System.out.println(adminData.getUserNum());
-        initTitle();
         initFrame();
+        initTitle();
         initTableHeader();
         initTableBody();
 
@@ -179,6 +174,11 @@ public class AdminUserEditFrm extends MyInterFrame {
      */
 
     private void initTitle() {
+        JLabel jLabelTitle = new JLabel("用户管理中心");
+        jLabelTitle.setFont(MyFonts.TITLE_FONT_36);
+        jLabelTitle.setBounds(WIDGET_X+WIDTH_TABLE/2-WIDGET_GAP/2,20,WIDGET_GAP,60);
+        jLabelTitle.setVisible(true);
+        container.add(jLabelTitle);
         //TODO:有一个主页面最上方的title捏
     }
 
@@ -359,7 +359,7 @@ public class AdminUserEditFrm extends MyInterFrame {
     }
 
     /**
-     * 用于加载详细的用户信息
+     * 用于初次加载详细的用户信息，此时不填充内容
      */
 
     private void initDetailMsg() {
@@ -564,6 +564,9 @@ public class AdminUserEditFrm extends MyInterFrame {
 
     }
 
+    /**
+     * 当每次刷新时，重新显示当前界面的详细信息
+     */
     private void changeDetailMsg(){
         for(int j = usersNum-10*whichPage;j < 10; j++){
             jTextFieldIndex[j].setVisible(false);

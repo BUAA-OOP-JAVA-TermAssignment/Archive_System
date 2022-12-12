@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public class AdminData {
     private static volatile AdminData instance;
-    /**
-     * 删掉static！！！！和下面的User一起删
-     */
     private static ArrayList<User> userArrayList = new ArrayList<>();
 
     private AdminData(){
