@@ -121,7 +121,7 @@ public class AdminMainCtrl {
         }
 
         BaseMsg retMsg = myClient.waitMsg();
-        if(retMsg.getMsgCode() == - BaseMsg.ADMIN_USER_EDIT) {
+        if(retMsg.getMsgCode() == - BaseMsg.SUCCESS) {
             adminMainFrm.disWaitMode();
             return true;
         }
@@ -155,7 +155,7 @@ public class AdminMainCtrl {
             return false;
         }
         BaseMsg retMsg = myClient.waitMsg();
-        if(retMsg.getMsgCode() == - BaseMsg.ADMIN_USER_EDIT) {
+        if(retMsg.getMsgCode() ==  BaseMsg.SUCCESS) {
             adminMainFrm.disWaitMode();
             return true;
         }
